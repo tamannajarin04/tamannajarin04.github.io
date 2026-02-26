@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tamanna Jarin Tima — AI Researcher & Software Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    [data-theme="dark"] {
+      --bg: #080e1a;
+      --bg2: #0b1220;
+      --bg3: #0e1728;
+      --card: #111d30;
+      --card2: #142038;
+      --primary: #2dd4bf;
+      --primary2: #5eead4;
+      --primary3: #99f6e4;
+      --accent: #fb7185;
+      --accent2: #fda4af;
+      --text: #f0f4f8;
+      --text2: #94a3b8;
+      --text3: #4a5a72;
+      --border: rgba(45,212,191,0.12);
+      --border2: rgba(45,212,191,0.25);
+      --shadow: rgba(0,0,0,0.5);
+      --glow: rgba(45,212,191,0.07);
+      --nav-bg: rgba(8,14,26,0.92);
+      --grid-color: rgba(45,212,191,0.025);
+      --star-opacity: 1;
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e8eef6;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --primary: #0d9488;
+      --primary2: #0f766e;
+      --primary3: #134e4a;
+      --accent: #e11d48;
+      --accent2: #f43f5e;
+      --text: #0f172a;
+      --text2: #334155;
+      --text3: #94a3b8;
+      --border: rgba(13,148,136,0.15);
+      --border2: rgba(13,148,136,0.32);
+      --shadow: rgba(15,23,42,0.1);
+      --glow: rgba(13,148,136,0.05);
+      --nav-bg: rgba(248,250,252,0.95);
+      --grid-color: rgba(13,148,136,0.04);
+      --star-opacity: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    .cursor { position: fixed; width: 10px; height: 10px; background: var(--primary); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--primary); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.5; transition: all 0.12s ease; }
+    .cursor-ring.hov { transform: translate(-50%,-50%) scale(1.7); opacity: 1; border-color: var(--accent); }
+    @media (max-width: 991px) { .cursor, .cursor-ring { display: none; } body { cursor: auto; } }
+
+    .stars { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity: var(--star-opacity); transition: opacity 0.4s; }
+    .star { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.8); animation: twinkle var(--dur) ease-in-out infinite; opacity: 0; }
+    @keyframes twinkle { 0%,100%{opacity:0} 50%{opacity:var(--op)} }
+    .grid-bg { position: fixed; top:0; left:0; width:100%; height:100%; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 64px 64px; z-index:0; pointer-events:none; transition: background-image 0.4s; }
+    .page-progress { position: fixed; top:0; left:0; height:2.5px; background: linear-gradient(90deg, var(--primary), var(--accent)); z-index:9999; box-shadow: 0 0 8px var(--primary); transition: width 0.1s; }
+
+    /* NAV */
+    nav { position: fixed; top:0; left:0; right:0; z-index:1000; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); transition: all 0.3s; }
+    nav.scrolled { padding: 14px 48px; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 0.04em; }
+    .nav-logo span { color: var(--text); font-weight: 300; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; position: relative; transition: color 0.3s; }
+    .nav-links a::after { content:''; position: absolute; bottom:-4px; left:0; width:0; height:1.5px; background: var(--primary); transition: width 0.3s; border-radius: 2px; }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    /* THEME TOGGLE */
+    .toggle-wrap { display: flex; align-items: center; gap: 8px; }
+    .toggle-icon { font-size: 0.85rem; color: var(--text3); transition: color 0.3s; }
+    [data-theme="dark"] .icon-moon { color: var(--primary); }
+    [data-theme="light"] .icon-sun { color: var(--accent); }
+    .t-btn { position: relative; width: 52px; height: 26px; border-radius: 13px; border: 1.5px solid var(--border2); background: var(--card); cursor: pointer; outline: none; transition: all 0.3s; }
+    .t-btn::before { content:''; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--primary); top: 3px; left: 3px; transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 0 8px var(--primary); }
+    [data-theme="light"] .t-btn::before { left: 27px; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--primary); border-radius: 2px; transition: 0.3s; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding: 120px 0 80px; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; opacity: 0.45; }
+    .blob.b1 { width: 520px; height: 520px; background: radial-gradient(circle, rgba(45,212,191,0.18), transparent 70%); top:-80px; right:-60px; animation: bf1 9s ease-in-out infinite; }
+    .blob.b2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(251,113,133,0.12), transparent 70%); bottom:0; left:-80px; animation: bf2 11s ease-in-out infinite; }
+    .blob.b3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(45,212,191,0.09), transparent 70%); top:45%; left:42%; animation: bf3 7s ease-in-out infinite; }
+    @keyframes bf1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-22px,22px)} }
+    @keyframes bf2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(18px,-18px)} }
+    @keyframes bf3 { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--primary); letter-spacing: 0.22em; text-transform: uppercase; border: 1px solid var(--border); padding: 7px 18px; border-radius: 100px; margin-bottom: 28px; background: var(--glow); animation: fadeUp 0.7s ease both; }
+    .hero-eyebrow::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--primary); animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    h1.hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,7.5vw,6.4rem); font-weight: 700; line-height: 0.92; margin-bottom: 24px; animation: fadeUp 0.7s 0.1s ease both; }
+    .hero-name .fn { display: block; color: var(--text); }
+    .hero-name .ln { display: block; color: var(--primary); font-style: italic; }
+    .hero-name .sub { display: block; font-family: 'Outfit', sans-serif; font-size: 0.28em; font-weight: 300; letter-spacing: 0.35em; color: var(--text3); font-style: normal; margin-top: 10px; text-transform: uppercase; }
+
+    .hero-desc { font-size: 1rem; color: var(--text2); max-width: 500px; line-height: 1.85; margin-bottom: 40px; animation: fadeUp 0.7s 0.2s ease both; }
+    .hero-desc em { color: var(--accent2); font-style: normal; font-weight: 500; }
+    .hero-desc strong { color: var(--primary2); font-weight: 500; }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+    .btn-teal { background: var(--primary); color: #0a0a0a; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 30px; border: none; border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+    .btn-teal:hover { background: var(--primary2); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,212,191,0.25); color: #0a0a0a; }
+    .btn-ghost { background: transparent; color: var(--text2); font-size: 0.76rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; padding: 12px 30px; border: 1.5px solid var(--border2); border-radius: 100px; text-decoration: none; transition: all 0.3s; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats { display: flex; gap: 40px; margin-top: 52px; animation: fadeUp 0.7s 0.4s ease both; padding-top: 36px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 700; color: var(--primary); line-height: 1; }
+    .stat-num sup, .stat-num span { font-size: 1.2rem; }
+    .stat-label { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+    /* Hero frame */
+    .hero-visual { position: relative; animation: fadeIn 1s 0.2s both; }
+    .hframe { position: relative; width: 290px; height: 350px; margin: auto; }
+    .hframe::before { content:''; position: absolute; inset: -2px; background: conic-gradient(from 180deg, var(--primary), var(--accent), var(--primary2), var(--primary)); border-radius: 24px; animation: spin 7s linear infinite; z-index: 0; }
+    .hframe-inner { position: absolute; inset: 3px; background: var(--card); border-radius: 21px; z-index: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .h-initials { font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.22; }
+    .h-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(8,14,26,0.88); backdrop-filter: blur(12px); padding: 14px 18px; z-index: 2; border-top: 1px solid var(--border); }
+    [data-theme="light"] .h-label { background: rgba(248,250,252,0.92); }
+    .h-label strong { display: block; color: var(--primary); font-size: 0.84rem; font-weight: 500; margin-bottom: 2px; }
+    .h-label p { font-size: 0.66rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin: 0; }
+    .fbadge { position: absolute; background: var(--card); border: 1px solid var(--border); padding: 11px 15px; border-radius: 14px; backdrop-filter: blur(12px); z-index: 3; }
+    .fbadge.f1 { top:22px; right:-52px; animation: flt 4s ease-in-out infinite; }
+    .fbadge.f2 { bottom:66px; left:-56px; animation: flt 4s 2s ease-in-out infinite; }
+    @keyframes flt { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .fbadge .fi { font-size: 1.1rem; margin-bottom: 3px; }
+    .fbadge strong { display: block; font-size: 0.76rem; color: var(--primary); font-weight: 500; }
+    .fbadge p { font-size: 0.61rem; color: var(--text3); margin: 0; text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; }
+
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
+    .sp { padding: 110px 0; }
+    .bg2 { background: var(--bg2); transition: background 0.4s; }
+
+    .s-kicker { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--primary); letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
+    .s-kicker::before { content:''; display: block; width: 28px; height: 1.5px; background: var(--primary); border-radius: 2px; }
+    .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem,3.8vw,3rem); font-weight: 700; color: var(--text); line-height: 1.1; margin-bottom: 54px; }
+    .s-title em { color: var(--primary); font-style: italic; }
+    .s-title .rose { color: var(--accent); font-style: italic; }
+
+    .cbase { background: var(--card); border: 1px solid var(--border); border-radius: 16px; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background 0.4s; }
+    .cbase:hover { border-color: var(--border2); box-shadow: 0 16px 48px var(--shadow); }
+
+    /* ABOUT */
+    .abt-text { font-size: 0.98rem; line-height: 1.9; color: var(--text2); }
+    .abt-text p { margin-bottom: 18px; }
+    .abt-text strong { color: var(--primary); font-weight: 500; }
+    .ski-chip { display: inline-flex; align-items: center; gap: 7px; background: var(--glow); border: 1px solid var(--border); padding: 8px 14px; border-radius: 100px; font-size: 0.76rem; color: var(--text2); margin: 4px; transition: all 0.3s; }
+    .ski-chip:hover { background: rgba(45,212,191,0.12); border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+    .ski-chip i { color: var(--primary); font-size: 0.72rem; }
+    .aic { padding: 26px 28px; border-radius: 16px; }
+    .aic-top { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--primary); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .aic-bod { font-size: 0.83rem; color: var(--text2); line-height: 1.7; }
+
+    /* EDUCATION */
+    .tline { position: relative; padding-left: 34px; }
+    .tline::before { content:''; position: absolute; left: 4px; top:6px; bottom:6px; width: 1.5px; background: linear-gradient(180deg, var(--primary), var(--accent), transparent); border-radius: 2px; }
+    .titem { position: relative; margin-bottom: 42px; }
+    .titem::before { content:''; position: absolute; left: -35px; top: 8px; width: 11px; height: 11px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 4px var(--glow), 0 0 10px var(--primary); }
+    .titem:hover::before { box-shadow: 0 0 0 6px rgba(45,212,191,0.15), 0 0 16px var(--primary); }
+    .t-date { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--primary); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 8px; }
+    .tcard { padding: 22px 26px; border-radius: 14px; }
+    .tcard:hover { transform: translateX(5px); border-color: var(--border2); }
+    .t-deg { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .t-sch { color: var(--text3); font-size: 0.8rem; margin-bottom: 12px; }
+    .gpill { display: inline-flex; align-items: center; gap: 8px; background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2); padding: 5px 14px; border-radius: 100px; }
+    .gpill span { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--primary); font-weight: 500; }
+    .gpill small { font-size: 0.62rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
+    .scard { padding: 30px; border-radius: 16px; text-align: center; }
+    .big-n { font-family: 'Cormorant Garamond', serif; font-size: 4.2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .big-lbl { font-size: 0.7rem; color: var(--text3); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 4px; }
+    .srow { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .srow:last-child { border: none; }
+    .srow span { font-size: 0.8rem; color: var(--text2); }
+    .srow strong { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--primary); }
+
+    /* RESEARCH */
+    .rcard { padding: 38px; border-radius: 18px; position: relative; overflow: hidden; }
+    .rcard::before { content:''; position: absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(90deg, var(--primary), var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.5s; }
+    .rcard:hover::before { transform: scaleX(1); }
+    .rcard:hover { transform: translateY(-4px); box-shadow: 0 24px 64px var(--shadow); }
+    .stpill { display: inline-flex; align-items: center; gap: 7px; font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--primary); letter-spacing: 0.14em; text-transform: uppercase; background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2); padding: 5px 14px; border-radius: 100px; margin-bottom: 18px; }
+    .stpill::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--primary); animation: blink 2s infinite; }
+    .r-ttl { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 18px; line-height: 1.3; }
+    .rpts { list-style: none; }
+    .rpts li { color: var(--text2); font-size: 0.86rem; line-height: 1.7; padding: 8px 0 8px 22px; border-bottom: 1px solid var(--border); position: relative; }
+    .rpts li:last-child { border: none; }
+    .rpts li::before { content:'▸'; position: absolute; left:0; color: var(--primary); }
+    .ttags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px; }
+    .ttag { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text3); border: 1px solid var(--border); padding: 4px 11px; border-radius: 100px; letter-spacing: 0.07em; transition: all 0.2s; cursor: default; }
+    .ttag:hover { color: var(--primary); border-color: var(--border2); background: var(--glow); }
+
+    /* PROJECTS */
+    .pcard { padding: 30px; border-radius: 18px; height: 100%; }
+    .pcard:hover { transform: translateY(-6px); box-shadow: 0 28px 60px var(--shadow); border-color: var(--border2); }
+    .pnum { font-family: 'Cormorant Garamond', serif; font-size: 3.4rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.2; line-height: 1; margin-bottom: -8px; }
+    .p-ttl { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 11px; line-height: 1.3; }
+    .p-desc { color: var(--text2); font-size: 0.84rem; line-height: 1.75; margin-bottom: 16px; }
+    .p-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .p-tech span { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--primary); background: rgba(45,212,191,0.07); border: 1px solid rgba(45,212,191,0.18); padding: 3px 10px; border-radius: 100px; }
+    .p-list { list-style: none; }
+    .p-list li { font-size: 0.79rem; color: var(--text3); padding: 5px 0 5px 18px; position: relative; line-height: 1.5; }
+    .p-list li::before { content:'—'; position: absolute; left:0; color: var(--accent); font-size: 0.7rem; }
+
+    /* AWARDS */
+    .awrap { background: linear-gradient(135deg, rgba(45,212,191,0.06), rgba(251,113,133,0.03)); border: 1px solid var(--border2); border-radius: 20px; padding: 42px 50px; display: flex; align-items: center; gap: 36px; transition: all 0.3s; }
+    .awrap:hover { box-shadow: 0 20px 56px var(--shadow); border-color: var(--primary); }
+    .aico { width: 74px; height: 74px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .aico i { font-size: 1.6rem; color: #fff; }
+    .a-nm { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+    .a-dsc { color: var(--text2); font-size: 0.87rem; line-height: 1.7; }
+    .a-met { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 8px; }
+
+    /* ACTIVITIES */
+    .accard { padding: 26px; border-radius: 14px; }
+    .accard:hover { border-color: var(--border2); transform: translateY(-4px); }
+    .ac-role { font-family: 'DM Mono', monospace; font-size: 0.61rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .ac-nm { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ac-org { font-size: 0.77rem; color: var(--text3); margin-bottom: 11px; }
+    .ac-dsc { font-size: 0.81rem; color: var(--text2); line-height: 1.7; }
+
+    /* SKILLS */
+    .scat-hd { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--primary); letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .scat-hd::after { content:''; flex:1; height:1px; background:var(--border); }
+    .spills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+    .spl { display: inline-flex; align-items: center; gap: 8px; background: var(--card); border: 1px solid var(--border); padding: 8px 17px; border-radius: 100px; font-size: 0.78rem; color: var(--text2); cursor: default; transition: all 0.3s; }
+    .spl:hover { background: var(--card2); border-color: var(--border2); color: var(--text); transform: translateY(-2px); }
+    .spl i { color: var(--primary); font-size: 0.78rem; }
+    .spl .ds { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); opacity: 0.7; }
+
+    /* CONTACT */
+    .cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 700px; margin: 0 auto; }
+    .citem { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px 28px; display: flex; align-items: center; gap: 16px; text-decoration: none; transition: all 0.3s; }
+    .citem:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 14px 40px var(--shadow); }
+    .ci-ico { width: 44px; height: 44px; background: rgba(45,212,191,0.08); border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s; }
+    .citem:hover .ci-ico { background: var(--primary); border-color: var(--primary); }
+    .ci-ico i { color: var(--primary); font-size: 0.9rem; transition: color 0.3s; }
+    .citem:hover .ci-ico i { color: #fff; }
+    .ci-lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3px; }
+    .ci-val { color: var(--text2); font-size: 0.86rem; transition: color 0.3s; }
+    .citem:hover .ci-val { color: var(--primary); }
+
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 28px 0; text-align: center; transition: background 0.4s; }
+    footer p { font-size: 0.74rem; color: var(--text3); }
+    footer strong { color: var(--primary); font-weight: 500; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .reveal { opacity:0; transform:translateY(34px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.vis { opacity:1; transform:translateY(0); }
+    .reveal-l { opacity:0; transform:translateX(-34px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-l.vis { opacity:1; transform:translateX(0); }
+    .reveal-r { opacity:0; transform:translateX(34px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-r.vis { opacity:1; transform:translateX(0); }
+
+    .scroll-ind { position: absolute; bottom:34px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; animation: fadeIn 1s 1.2s both; }
+    .scroll-ind span { font-family:'DM Mono',monospace; font-size:0.58rem; color:var(--text3); letter-spacing:0.22em; text-transform:uppercase; }
+    .smouse { width:20px; height:32px; border:1.5px solid var(--border2); border-radius:10px; display:flex; justify-content:center; padding-top:5px; }
+    .sdot { width:3px; height:5px; background:var(--primary); border-radius:2px; animation: sdrop 2s ease-in-out infinite; }
+    @keyframes sdrop { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(10px)} }
+
+    @media (max-width: 991px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top:100%; left:0; right:0; background: var(--nav-bg); padding: 20px; gap:18px; border-bottom:1px solid var(--border); backdrop-filter:blur(18px); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      .hero-visual { display: none; }
+      .cgrid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 18px; }
+      .awrap { flex-direction: column; text-align: center; padding: 30px 24px; }
+    }
+    @media (max-width: 576px) {
+      .hero-stats { flex-wrap: wrap; }
+      .sp { padding: 80px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="page-progress" id="pageProgress"></div>
+<div class="stars" id="stars"></div>
+<div class="grid-bg"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">Tamanna<span> Jarin Tima</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="toggle-wrap">
+      <i class="fas fa-moon toggle-icon icon-moon"></i>
+      <button class="t-btn" id="themeToggle" aria-label="Toggle theme"></button>
+      <i class="fas fa-sun toggle-icon icon-sun"></i>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div class="hero-eyebrow">AI Researcher · Data Scientist · Software Engineer</div>
+        <h1 class="hero-name">
+          <span class="fn">Tamanna</span>
+          <span class="ln">Jarin Tima</span>
+          <span class="sub">Dhaka, Bangladesh</span>
+        </h1>
+        <p class="hero-desc">Undergraduate researcher at Daffodil International University, working at the intersection of <em>Trustworthy AI</em>, <em>Explainable ML</em>, and <strong>Medical Imaging</strong> — building transparent systems that truly matter.</p>
+        <div class="hero-btns">
+          <a href="#research" class="btn-teal">View Research</a>
+          <a href="#contact" class="btn-ghost">Get In Touch</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">3.99<sup>/4</sup></div><div class="stat-label">CGPA Score</div></div>
+          <div class="stat-item"><div class="stat-num">3<span>+</span></div><div class="stat-label">AI Projects</div></div>
+          <div class="stat-item"><div class="stat-num">94<span>%</span></div><div class="stat-label">Model Accuracy</div></div>
+          <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">Dean's Award</div></div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-center">
+        <div class="hero-visual">
+          <div class="hframe">
+            <div class="hframe-inner">
+              <div class="h-initials">TJT</div>
+              <div class="h-label"><strong>Tamanna Jarin Tima</strong><p>BSC Student · AI &amp; Data Science</p></div>
+            </div>
+          </div>
+          <div class="fbadge f1"><div class="fi">🧠</div><strong>XAI Research</strong><p>Brain Tumor Classification</p></div>
+          <div class="fbadge f2"><div class="fi">🏅</div><strong>Dean's Award</strong><p>Spring 2025</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="smouse"><div class="sdot"></div></div><span>Scroll</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sp bg2">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-6 reveal-l">
+        <div class="s-kicker">About Me</div>
+        <h2 class="s-title">Crafting <em>Trustworthy</em> AI for a Better World</h2>
+        <div class="abt-text">
+          <p>I'm a <strong>Software Engineering undergraduate</strong> majoring in Data Science at Daffodil International University, with a near-perfect CGPA of <strong>3.995/4.00</strong>. My passion lies in making AI that is not just accurate — but interpretable, reliable, and socially responsible.</p>
+          <p>My current thesis, <strong>TruBrain-XAI</strong>, focuses on multimodal deep learning for brain tumor classification, integrating uncertainty quantification and explainable AI to support transparent clinical decision-making.</p>
+          <p>I believe the most important AI breakthroughs are tools that give people the clarity to act with confidence and dignity.</p>
+        </div>
+        <div style="margin-top:22px;">
+          <span class="ski-chip"><i class="fas fa-brain"></i> Explainable AI</span>
+          <span class="ski-chip"><i class="fas fa-microchip"></i> Deep Learning</span>
+          <span class="ski-chip"><i class="fas fa-chart-bar"></i> Data Science</span>
+          <span class="ski-chip"><i class="fas fa-eye"></i> Computer Vision</span>
+          <span class="ski-chip"><i class="fas fa-comment-dots"></i> NLP</span>
+          <span class="ski-chip"><i class="fas fa-code"></i> Full-Stack Dev</span>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal-r">
+        <div class="row g-3">
+          <div class="col-12"><div class="cbase aic"><div class="aic-top">🎓 Academic Profile</div><p class="aic-bod">BSE student with a perfect academic record — Dean's Award (Spring 2025), Executive Member of the Data Science Club, and active organizer of national events including DIU Data Summit 2025 and National Robo Spark 2024.</p></div></div>
+          <div class="col-12"><div class="cbase aic"><div class="aic-top">🔬 Research Focus</div><p class="aic-bod">Currently pursuing an undergraduate thesis on trustworthy AI for medical imaging. Deeply invested in uncertainty-aware deep learning and Grad-CAM based explainability frameworks for clinical AI applications.</p></div></div>
+          <div class="col-12"><div class="cbase aic"><div class="aic-top">🌱 Current Training</div><p class="aic-bod">Enrolled in the government-supported BDSET Center training covering AI/ML, deep learning, emerging technologies (AR/VR/XR), and professional English communication skills.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="sp">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Academic Journey</div><h2 class="s-title">Education &amp; <em>Academic Excellence</em></h2></div>
+    <div class="row g-5">
+      <div class="col-lg-8 reveal-l">
+        <div class="tline">
+          <div class="titem">
+            <div class="t-date">2023 — Present</div>
+            <div class="cbase tcard"><div class="t-deg">Bachelor of Software Engineering</div><div class="t-sch">Daffodil International University · Major: Data Science</div><div class="gpill"><span>3.995 / 4.00</span><small>CGPA</small></div><p style="color:var(--text3);font-size:0.77rem;margin-top:12px;line-height:1.6;">Undergraduate thesis in Trustworthy AI · Dean's Award (Spring 2025) · Active researcher in explainable deep learning and medical AI systems.</p></div>
+          </div>
+          <div class="titem">
+            <div class="t-date">2018 — 2020</div>
+            <div class="cbase tcard"><div class="t-deg">Higher Secondary Certificate (HSC)</div><div class="t-sch">Shaheed Police Smrity College · Science</div><div class="gpill"><span>5.00 / 5.00</span><small>GPA · Perfect</small></div></div>
+          </div>
+          <div class="titem">
+            <div class="t-date">2016 — 2018</div>
+            <div class="cbase tcard"><div class="t-deg">Secondary School Certificate (SSC)</div><div class="t-sch">Rupnagar Model High School and College · Science</div><div class="gpill"><span>5.00 / 5.00</span><small>GPA · Perfect</small></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 reveal-r">
+        <div class="cbase scard">
+          <div class="s-kicker" style="justify-content:center;margin-bottom:16px;">Summary</div>
+          <div class="big-n">3.99<sup style="font-size:1.6rem;">/4</sup></div>
+          <div class="big-lbl">Current CGPA</div>
+          <div style="margin-top:24px;">
+            <div class="srow"><span>BSE (University)</span><strong>3.995/4</strong></div>
+            <div class="srow"><span>HSC (Science)</span><strong>5.00/5</strong></div>
+            <div class="srow"><span>SSC (Science)</span><strong>5.00/5</strong></div>
+          </div>
+          <div style="margin-top:22px;padding:14px;background:rgba(45,212,191,0.06);border-radius:12px;border:1px solid var(--border);">
+            <p style="font-size:0.76rem;color:var(--text2);line-height:1.6;margin:0;text-align:center;">🏅 <strong style="color:var(--primary);">Dean's Award</strong> — Spring 2025<br>Daffodil International University</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research" class="sp bg2">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Research</div><h2 class="s-title">Undergraduate <em>Thesis</em> Work</h2></div>
+    <div class="reveal">
+      <div class="cbase rcard">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px;">
+          <div class="stpill">Ongoing · 2026–Present</div>
+          <span style="font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;">Undergraduate Thesis</span>
+        </div>
+        <h3 class="r-ttl">TruBrain-XAI: A Trustworthy Multimodal Deep Learning Approach for Brain Tumor Classification with Integrated Uncertainty Quantification and Explainability</h3>
+        <div class="row g-4 mt-1">
+          <div class="col-md-6">
+            <p style="font-family:'DM Mono',monospace;font-size:0.61rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px;">Research Objectives</p>
+            <ul class="rpts">
+              <li>Investigating multimodal deep learning for medical image–based brain tumor classification</li>
+              <li>Incorporating uncertainty-aware modeling to improve predictive reliability</li>
+              <li>Integrating XAI techniques for transparent clinical decision support</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <p style="font-family:'DM Mono',monospace;font-size:0.61rem;color:var(--text3);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:12px;">Key Focus Areas</p>
+            <ul class="rpts">
+              <li>Trustworthy AI in healthcare — bridging model performance and clinical trust</li>
+              <li>Multimodal data fusion for robust diagnostic predictions</li>
+              <li>Grad-CAM &amp; uncertainty quantification for interpretable imaging</li>
+            </ul>
+          </div>
+        </div>
+        <div class="ttags"><span class="ttag">Python</span><span class="ttag">TensorFlow</span><span class="ttag">PyTorch</span><span class="ttag">Grad-CAM</span><span class="ttag">Bayesian Deep Learning</span><span class="ttag">Medical Imaging</span><span class="ttag">Uncertainty Quantification</span><span class="ttag">XAI</span><span class="ttag">Google Colab</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="sp">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Projects</div><h2 class="s-title">Selected <em>Work</em> &amp; <span class="rose">Applications</span></h2></div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6 reveal">
+        <div class="cbase pcard"><div class="pnum">01</div><h4 class="p-ttl">NutriConnect: AI-Driven Personalized Nutrition System</h4><p class="p-desc">A full-stack AI-enabled platform for personalized nutrition tracking, dietary analytics, and intelligent meal management with explainable AI-driven recommendations.</p><div class="p-tech"><span>Python</span><span>Flask</span><span>SQLAlchemy</span><span>MySQL</span><span>OpenAI API</span><span>Chart.js</span></div><ul class="p-list"><li>Role-based access control &amp; RESTful backend</li><li>Normalized relational database design</li><li>XAI-driven dietary recommendation engine</li><li>Interactive nutrition analytics dashboards</li></ul></div>
+      </div>
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.1s">
+        <div class="cbase pcard"><div class="pnum">02</div><h4 class="p-ttl">SMS Phishing Detection via NLP &amp; Machine Learning</h4><p class="p-desc">An NLP-based web application for real-time SMS classification using an optimized SVM classifier with TF-IDF vectorization and a clean prediction interface.</p><div class="p-tech"><span>Python</span><span>Scikit-learn</span><span>TF-IDF</span><span>SVM</span><span>Pandas</span><span>NumPy</span></div><ul class="p-list"><li>Evaluated multiple ML models, deployed optimized SVM</li><li>TF-IDF vectorization &amp; text preprocessing</li><li>Real-time web prediction interface</li><li>Standard classification metrics evaluation</li></ul></div>
+      </div>
+      <div class="col-lg-4 col-md-6 reveal" style="transition-delay:0.2s">
+        <div class="cbase pcard"><div class="pnum">03</div><h4 class="p-ttl">AuroraLeaf: Vision–Language System for Rice Leaf Disease</h4><p class="p-desc">An interpretable vision–language framework for rice leaf disease detection with bilingual farmer advisories, combining CNN accuracy with LLM guidance.</p><div class="p-tech"><span>CNN</span><span>TinyLlama 1.1B</span><span>LoRA</span><span>Grad-CAM</span><span>PyTorch</span></div><ul class="p-list"><li>94% accuracy &amp; 0.94 weighted F1-score</li><li>Grad-CAM for model explainability</li><li>Fine-tuned TinyLlama with LoRA</li><li>Bilingual: Bangla &amp; English recommendations</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="sp bg2">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Honors</div><h2 class="s-title">Awards &amp; <em>Recognition</em></h2></div>
+    <div class="awrap reveal">
+      <div class="aico"><i class="fas fa-medal"></i></div>
+      <div>
+        <div class="a-nm">Dean's Award — Spring 2025</div>
+        <div class="a-dsc">Awarded by Daffodil International University for outstanding academic performance during the Spring 2025 semester, recognizing exceptional dedication and scholarly achievement in Software Engineering and Data Science.</div>
+        <div class="a-met">Daffodil International University · Spring Semester 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="sp">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Technical Skills</div><h2 class="s-title">Tools, Languages &amp; <em>Frameworks</em></h2></div>
+    <div class="row g-4">
+      <div class="col-lg-6 reveal-l">
+        <div class="scat-hd">Programming Languages</div>
+        <div class="spills"><div class="spl"><i class="fab fa-python"></i> Python</div><div class="spl"><i class="fab fa-java"></i> Java</div><div class="spl"><div class="ds"></div> C</div><div class="spl"><i class="fab fa-php"></i> PHP</div><div class="spl"><i class="fab fa-js"></i> JavaScript</div></div>
+        <div class="scat-hd">Web Technologies</div>
+        <div class="spills"><div class="spl"><i class="fab fa-html5"></i> HTML5</div><div class="spl"><i class="fab fa-css3-alt"></i> CSS3</div><div class="spl"><div class="ds"></div> Flask</div><div class="spl"><i class="fab fa-bootstrap"></i> Bootstrap</div></div>
+        <div class="scat-hd">Database Systems</div>
+        <div class="spills"><div class="spl"><i class="fas fa-database"></i> MySQL</div><div class="spl"><i class="fas fa-database"></i> PostgreSQL</div><div class="spl"><div class="ds"></div> SQLite</div></div>
+      </div>
+      <div class="col-lg-6 reveal-r">
+        <div class="scat-hd">AI / ML / Data Science</div>
+        <div class="spills"><div class="spl"><div class="ds"></div> TensorFlow</div><div class="spl"><div class="ds"></div> PyTorch</div><div class="spl"><div class="ds"></div> Scikit-learn</div><div class="spl"><div class="ds"></div> NumPy</div><div class="spl"><div class="ds"></div> Pandas</div><div class="spl"><div class="ds"></div> Matplotlib</div><div class="spl"><div class="ds"></div> Seaborn</div></div>
+        <div class="scat-hd">Tools &amp; Platforms</div>
+        <div class="spills"><div class="spl"><i class="fab fa-github"></i> Git / GitHub</div><div class="spl"><div class="ds"></div> Jupyter Notebook</div><div class="spl"><div class="ds"></div> Google Colab</div><div class="spl"><div class="ds"></div> VS Code</div><div class="spl"><div class="ds"></div> Power BI</div><div class="spl"><div class="ds"></div> Postman</div></div>
+        <div class="scat-hd">Specialized</div>
+        <div class="spills"><div class="spl"><div class="ds"></div> NLP / Text Processing</div><div class="spl"><div class="ds"></div> Grad-CAM / XAI</div><div class="spl"><div class="ds"></div> Computer Vision</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities" class="sp bg2">
+  <div class="container">
+    <div class="reveal"><div class="s-kicker">Beyond the Classroom</div><h2 class="s-title">Extracurricular &amp; <em>Leadership</em></h2></div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal"><div class="cbase accard"><div class="ac-role">Executive Member</div><div class="ac-nm">Data Science Club</div><div class="ac-org">Daffodil International University</div><div class="ac-dsc">Organizing academic events, workshops, and peer-learning sessions focused on data science and machine learning — fostering a community of student researchers.</div></div></div>
+      <div class="col-md-4 reveal" style="transition-delay:0.1s"><div class="cbase accard"><div class="ac-role">Organizing Team</div><div class="ac-nm">DIU Data Summit 2025</div><div class="ac-org">Daffodil International University · National Event</div><div class="ac-dsc">Supported event coordination, participant management, and technical session logistics for a national-level data science summit in Bangladesh.</div></div></div>
+      <div class="col-md-4 reveal" style="transition-delay:0.2s"><div class="cbase accard"><div class="ac-role">Organizing Team</div><div class="ac-nm">National Robo Spark 2024</div><div class="ac-org">National Robotics Competition · 2024</div><div class="ac-dsc">Assisted in organizing a national robotics competition — managing participant registration, coordinating logistics, and ensuring seamless on-site operations.</div></div></div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 reveal">
+        <div class="cbase rcard mt-2">
+          <div class="stpill">Ongoing Training</div>
+          <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--text);margin:12px 0 10px;">BDSET Center Training on AI, ML, DL &amp; Emerging Technologies</h4>
+          <p style="color:var(--text2);font-size:0.85rem;line-height:1.8;margin-bottom:18px;">Government-supported professional development under the Bangladesh Digital Service and Employment Training (BDSET) Center Project — a prestigious national initiative equipping future tech professionals.</p>
+          <div class="ttags"><span class="ttag">AI &amp; Machine Learning</span><span class="ttag">Deep Learning Fundamentals</span><span class="ttag">AR / VR / MR / XR</span><span class="ttag">Emerging Technologies</span><span class="ttag">Communicative English</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sp">
+  <div class="container">
+    <div class="reveal text-center" style="margin-bottom:44px;">
+      <div class="s-kicker" style="justify-content:center;">Get In Touch</div>
+      <h2 class="s-title" style="margin-bottom:12px;">Let's <em>Connect</em></h2>
+      <p style="color:var(--text2);font-size:0.93rem;max-width:450px;margin:0 auto;line-height:1.85;">Open to research collaborations, scholarship opportunities, and conversations about trustworthy AI. Reach out anytime!</p>
+    </div>
+    <div class="cgrid reveal">
+      <a href="mailto:tamanna.jarintima@gmail.com" class="citem"><div class="ci-ico"><i class="fas fa-envelope"></i></div><div><div class="ci-lbl">Email</div><div class="ci-val">tamanna.jarintima@gmail.com</div></div></a>
+      <a href="tel:+8801909266015" class="citem"><div class="ci-ico"><i class="fas fa-phone"></i></div><div><div class="ci-lbl">Phone</div><div class="ci-val">+880 1909266015</div></div></a>
+      <a href="https://www.linkedin.com/in/tamannajarintima/" target="_blank" class="citem"><div class="ci-ico"><i class="fab fa-linkedin-in"></i></div><div><div class="ci-lbl">LinkedIn</div><div class="ci-val">Connect on LinkedIn</div></div></a>
+      <a href="https://github.com/tamannajarin04" target="_blank" class="citem"><div class="ci-ico"><i class="fab fa-github"></i></div><div><div class="ci-lbl">GitHub</div><div class="ci-val">View Code &amp; Projects</div></div></a>
+    </div>
+    <div class="reveal text-center" style="margin-top:40px;">
+      <a href="mailto:tamanna.jarintima@gmail.com" class="btn-teal">Send Me a Message</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Designed &amp;<strong>Tamanna Jarin Tima</strong> · BSC Student &amp; AI Researcher · Dhaka, Bangladesh</p>
+    <p style="margin-top:6px;font-size:0.68rem;">© 2025 All Rights Reserved · tamanna.jarintima@gmail.com</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // THEME
+  const html = document.documentElement;
+  const saved = localStorage.getItem('pf-theme') || 'dark';
+  html.setAttribute('data-theme', saved);
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('pf-theme', next);
+  });
+
+  // STARS
+  const SE = document.getElementById('stars');
+  for (let i = 0; i < 180; i++) {
+    const s = document.createElement('div'); s.className = 'star';
+    const sz = Math.random() < 0.08 ? 2 : 1;
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${sz}px;height:${sz}px;--dur:${2+Math.random()*5}s;--op:${0.25+Math.random()*0.75};animation-delay:${Math.random()*7}s;`;
+    SE.appendChild(s);
+  }
+
+  // CURSOR
+  const cur = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+  (function ar() { rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(ar); })();
+  document.querySelectorAll('a,button,.cbase,.pcard').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hov'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hov'));
+  });
+
+  // PROGRESS + NAVBAR + ACTIVE NAV
+  const prog = document.getElementById('pageProgress');
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    prog.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+    let cur2 = '';
+    document.querySelectorAll('section[id]').forEach(s => { if (window.scrollY >= s.offsetTop - 200) cur2 = s.id; });
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur2));
+  });
+
+  // SCROLL REVEAL
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('vis'), i * 55); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+  // MOBILE NAV
+  document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+</script>
+</body>
+</html>
