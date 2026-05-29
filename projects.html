@@ -9,31 +9,304 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="variables.css"/>
 <style>
-/* ── PROJECT-SPECIFIC STYLES ── */
-.proj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-.proj-card { border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s; border: 1px solid var(--border); background: var(--bg-card); backdrop-filter: blur(20px); }
-.proj-card:hover { transform: translateY(-8px); box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 0 40px rgba(79,142,247,0.1); border-color: var(--border-hover); }
-.proj-image { position: relative; height: 210px; overflow: hidden; }
-.proj-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s ease; filter: brightness(0.82) saturate(1.1); }
-.proj-card:hover .proj-image img { transform: scale(1.07); filter: brightness(0.95) saturate(1.2); }
-.proj-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,12,24,0.95) 0%, rgba(8,12,24,0.25) 65%, transparent 100%); }
-.proj-badges { position: absolute; top: 12px; left: 12px; right: 12px; z-index: 2; display: flex; justify-content: space-between; align-items: center; }
-.proj-num { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; font-weight: 600; color: rgba(255,255,255,0.6); background: rgba(0,0,0,0.45); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; letter-spacing: 0.1em; }
-.proj-cat { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
-.cat-fs { color: var(--accent-gold); background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.25); }
-.cat-ml { color: var(--accent-purple); background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.25); }
-.cat-ai { color: var(--accent-cyan); background: rgba(34,211,238,0.15); border: 1px solid rgba(34,211,238,0.25); }
-.proj-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
-.proj-title { font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
-.proj-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.9; margin-bottom: 14px; flex: 1; font-weight: 300; }
-.proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
-.proj-stack span { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; color: var(--accent-blue); background: rgba(79,142,247,0.07); border: 1px solid rgba(79,142,247,0.18); padding: 3px 9px; border-radius: 4px; font-weight: 500; }
-.proj-bullets { list-style: none; }
-.proj-bullets li { font-size: 0.74rem; color: var(--text-muted); padding: 3px 0 3px 14px; position: relative; line-height: 1.65; font-weight: 300; }
-.proj-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent-blue); font-size: 0.62rem; top: 6px; }
+/* ── PROJECT GRID ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
 
-@media (max-width: 1000px) { .proj-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 580px) { .proj-grid { grid-template-columns: 1fr; } .proj-image { height: 180px; } }
+/* ── CARD BASE ── */
+.proj-card {
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  position: relative;
+  min-width: 0;
+  background: rgba(10, 18, 38, 0.82);
+}
+.proj-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 0 40px rgba(79,142,247,0.12);
+  border-color: rgba(255,255,255,0.22);
+}
+
+[data-theme="light"] .proj-card {
+  background: rgba(255,255,255,0.94);
+  border-color: rgba(79,142,247,0.13);
+  box-shadow: 0 4px 24px rgba(79,142,247,0.07);
+}
+[data-theme="light"] .proj-card:hover {
+  background: #fff;
+  border-color: rgba(79,142,247,0.35);
+  box-shadow: 0 16px 48px rgba(79,142,247,0.15);
+  transform: translateY(-8px);
+}
+
+/* ── IMAGE ── */
+.proj-image { position: relative; height: 210px; overflow: hidden; flex-shrink: 0; }
+.proj-image img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 0.55s ease;
+  filter: brightness(0.82) saturate(1.1);
+}
+.proj-card:hover .proj-image img { transform: scale(1.07); filter: brightness(0.95) saturate(1.2); }
+.proj-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,10,22,0.97) 0%, rgba(6,10,22,0.35) 55%, transparent 100%);
+}
+
+/* ── HOVER QUICK LINKS ── */
+.proj-quick-links {
+  position: absolute; bottom: 14px; right: 14px; z-index: 3;
+  display: flex; gap: 6px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.proj-card:hover .proj-quick-links { opacity: 1; transform: translateY(0); }
+.proj-quick-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 10px; border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.06em; text-decoration: none; border: 1px solid;
+  transition: all 0.2s ease; white-space: nowrap;
+  backdrop-filter: blur(14px);
+}
+.proj-quick-link i { font-size: 0.65rem; }
+.proj-quick-link:hover { transform: translateY(-2px); }
+.ql-github  { background: rgba(15,15,20,0.75); border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.88); }
+.ql-github:hover  { background: rgba(40,40,55,0.9); color: #fff; }
+.ql-live    { background: rgba(6,182,212,0.2); border-color: rgba(6,182,212,0.5); color: #22d3ee; }
+.ql-live:hover    { background: rgba(6,182,212,0.32); color: #67e8f9; }
+.ql-youtube { background: rgba(220,38,38,0.2); border-color: rgba(220,38,38,0.45); color: #f87171; }
+.ql-youtube:hover { background: rgba(220,38,38,0.32); color: #fca5a5; }
+
+/* ── TOP BADGES ── */
+.proj-badges {
+  position: absolute; top: 12px; left: 12px; right: 12px; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.proj-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; font-weight: 600;
+  color: rgba(255,255,255,0.65); background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12);
+  padding: 4px 10px; border-radius: 6px; letter-spacing: 0.1em;
+}
+.proj-cat {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.1em; padding: 4px 10px; border-radius: 6px; font-weight: 600;
+}
+.cat-fs { color: var(--accent-gold);   background: rgba(251,191,36,0.18);  border: 1px solid rgba(251,191,36,0.35); }
+.cat-ml { color: var(--accent-purple); background: rgba(167,139,250,0.18); border: 1px solid rgba(167,139,250,0.35); }
+.cat-ai { color: var(--accent-cyan);   background: rgba(34,211,238,0.18);  border: 1px solid rgba(34,211,238,0.35); }
+
+/* ── CARD BODY ── */
+.proj-body {
+  padding: 20px 22px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.proj-title {
+  font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 9px; line-height: 1.4;
+}
+[data-theme="dark"] .proj-title { color: #eef2ff; }
+[data-theme="light"] .proj-title { color: #0f172a; }
+
+.proj-desc {
+  font-size: 0.78rem; color: var(--text-secondary); line-height: 1.9;
+  margin-bottom: 13px; flex: 1; font-weight: 300;
+}
+[data-theme="dark"] .proj-desc { color: #94a3b8; }
+[data-theme="light"] .proj-desc { color: #334155; }
+
+.proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.proj-stack span {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  padding: 3px 9px; border-radius: 4px; font-weight: 500;
+}
+[data-theme="dark"] .proj-stack span {
+  color: #7ab3fa;
+  background: rgba(79,142,247,0.1);
+  border: 1px solid rgba(79,142,247,0.22);
+}
+[data-theme="light"] .proj-stack span {
+  color: #185fa5;
+  background: rgba(79,142,247,0.07);
+  border: 1px solid rgba(79,142,247,0.2);
+}
+
+.proj-bullets { list-style: none; margin-bottom: 0; padding: 0; }
+.proj-bullets li {
+  font-size: 0.74rem; padding: 3px 0 3px 14px;
+  position: relative; line-height: 1.65; font-weight: 300;
+}
+[data-theme="dark"] .proj-bullets li { color: #64748b; }
+[data-theme="light"] .proj-bullets li { color: #475569; }
+.proj-bullets li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--accent-blue); font-size: 0.62rem; top: 6px;
+}
+
+/* ══ BOTTOM LINK ROW ══ */
+.proj-links-row {
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+[data-theme="dark"] .proj-links-row {
+  border-top-color: rgba(255,255,255,0.07);
+  background: rgba(5,10,24,0.4);
+}
+[data-theme="light"] .proj-links-row {
+  border-top-color: rgba(79,142,247,0.1);
+  background: rgba(240,244,255,0.5);
+}
+
+/* Top row: GitHub + Live App */
+.proj-links-top {
+  display: flex;
+  gap: 8px;
+}
+.proj-links-top .proj-link-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Bottom row: Demo Video full width */
+.proj-links-bottom .proj-link-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Base button ── */
+.proj-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.proj-link-btn i { font-size: 0.82rem; line-height: 1; }
+.proj-link-btn:hover { transform: translateY(-2px); }
+
+/* GitHub */
+[data-theme="dark"] .plb-github {
+  color: #c8d6f0;
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.12);
+}
+[data-theme="dark"] .plb-github:hover {
+  background: rgba(79,142,247,0.1);
+  border-color: rgba(79,142,247,0.4);
+  color: #7ab3fa;
+}
+[data-theme="light"] .plb-github {
+  color: #1e293b;
+  background: #fff;
+  border-color: rgba(79,142,247,0.2);
+}
+[data-theme="light"] .plb-github:hover {
+  background: rgba(79,142,247,0.06);
+  border-color: rgba(79,142,247,0.42);
+  color: #185fa5;
+}
+
+/* Live App */
+[data-theme="dark"] .plb-live {
+  color: #22d3ee;
+  background: rgba(34,211,238,0.07);
+  border-color: rgba(34,211,238,0.28);
+}
+[data-theme="dark"] .plb-live:hover {
+  background: rgba(34,211,238,0.15);
+  border-color: rgba(34,211,238,0.55);
+  color: #67e8f9;
+}
+[data-theme="light"] .plb-live {
+  color: #0891b2;
+  background: rgba(8,145,178,0.06);
+  border-color: rgba(8,145,178,0.28);
+}
+[data-theme="light"] .plb-live:hover {
+  background: rgba(8,145,178,0.13);
+  border-color: rgba(8,145,178,0.5);
+  color: #0e7490;
+}
+
+/* Demo Video */
+[data-theme="dark"] .plb-youtube {
+  color: #f87171;
+  background: rgba(248,113,113,0.07);
+  border-color: rgba(248,113,113,0.26);
+}
+[data-theme="dark"] .plb-youtube:hover {
+  background: rgba(248,113,113,0.15);
+  border-color: rgba(248,113,113,0.5);
+  color: #fca5a5;
+}
+[data-theme="light"] .plb-youtube {
+  color: #dc2626;
+  background: rgba(220,38,38,0.06);
+  border-color: rgba(220,38,38,0.24);
+}
+[data-theme="light"] .plb-youtube:hover {
+  background: rgba(220,38,38,0.12);
+  border-color: rgba(220,38,38,0.48);
+  color: #b91c1c;
+}
+
+/* ── Ghost (disabled) ── */
+.plb-ghost {
+  display: inline-flex !important;
+  flex: 1 !important;
+  opacity: 0.32;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+[data-theme="dark"] .plb-ghost {
+  color: #475569;
+  background: transparent;
+  border-color: rgba(255,255,255,0.07);
+}
+[data-theme="light"] .plb-ghost {
+  color: #94a3b8;
+  background: transparent;
+  border-color: rgba(79,142,247,0.1);
+}
+.proj-links-bottom .plb-ghost {
+  width: 100% !important;
+  flex: unset !important;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1060px) {
+  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .proj-grid { grid-template-columns: minmax(0, 1fr); }
+  .proj-image { height: 180px; }
+  .proj-quick-links { display: none; }
+}
 </style>
 </head>
 <body>
@@ -57,15 +330,14 @@
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
     <div class="nav-right">
-  <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <div class="toggle-thumb">
-      <i class="fas fa-moon tj-icon"></i>
+      <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <div class="toggle-thumb"><i class="fas fa-moon tj-icon"></i></div>
+      </button>
+      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </button>
-  <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</div>
+  </div>
 </nav>
 <div class="mob-nav" id="mob-nav">
   <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
@@ -77,20 +349,29 @@
   <a href="contact.html"><i class="fas fa-envelope" style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ══ PROJECTS SECTION ══ -->
 <section id="projects" class="section">
   <div class="container-main">
     <div class="reveal">
       <div class="kicker">Projects</div>
       <h2 class="section-title">Selected <em>Work</em> &amp; <span class="pu">Applications</span></h2>
     </div>
+
     <div class="proj-grid">
-      <!-- Project 1 -->
+
+      <!-- PROJECT 1 -->
       <div class="proj-card reveal">
         <div class="proj-image">
           <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop&q=80" alt="NutriConnect" loading="lazy"/>
           <div class="proj-img-overlay"></div>
-          <div class="proj-badges"><span class="proj-num">01 / 03</span><span class="proj-cat cat-fs">Full-Stack · AI</span></div>
+          <div class="proj-badges">
+            <span class="proj-num">01 / 03</span>
+            <span class="proj-cat cat-fs">Full-Stack · AI</span>
+          </div>
+          <div class="proj-quick-links">
+            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+            <a href="#" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">NutriConnect — AI-Driven Nutrition System</div>
@@ -102,13 +383,30 @@
             <li>Real-time analytics dashboards with Chart.js</li>
           </ul>
         </div>
+        <div class="proj-links-row">
+          <div class="proj-links-top">
+            <a href="https://github.com/tamannajarin04/NutriConnect" target="_blank" rel="noopener" class="proj-link-btn plb-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://nutriconnect-69ww.onrender.com" target="_blank" rel="noopener" class="proj-link-btn plb-live"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
+          </div>
+          <div class="proj-links-bottom">
+            <a href="https://youtu.be/TX4KEq-VgJ0" target="_blank" rel="noopener" class="proj-link-btn plb-youtube"><i class="fab fa-youtube"></i> Demo Video</a>
+          </div>
+        </div>
       </div>
-      <!-- Project 2 -->
+
+      <!-- PROJECT 2 -->
       <div class="proj-card reveal" style="transition-delay:.08s">
         <div class="proj-image">
           <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80" alt="SMS Phishing" loading="lazy"/>
           <div class="proj-img-overlay"></div>
-          <div class="proj-badges"><span class="proj-num">02 / 03</span><span class="proj-cat cat-ml">NLP · ML</span></div>
+          <div class="proj-badges">
+            <span class="proj-num">02 / 03</span>
+            <span class="proj-cat cat-ml">NLP · ML</span>
+          </div>
+          <div class="proj-quick-links">
+            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">SMS Phishing Detection via NLP &amp; ML</div>
@@ -120,13 +418,30 @@
             <li>Real-time web prediction interface · 98.6% accuracy</li>
           </ul>
         </div>
+        <div class="proj-links-row">
+          <div class="proj-links-top">
+            <a href="https://github.com/tamannajarin04/sms_web_app" target="_blank" rel="noopener" class="proj-link-btn plb-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://smishguard-ai.onrender.com/" target="_blank" rel="noopener" class="proj-link-btn plb-live"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
+          </div>
+          <div class="proj-links-bottom">
+            <a class="proj-link-btn plb-youtube plb-ghost" tabindex="-1" aria-disabled="true" title="Demo video coming soon"><i class="fab fa-youtube"></i> Demo Video</a>
+          </div>
+        </div>
       </div>
-      <!-- Project 3 -->
+
+      <!-- PROJECT 3 -->
       <div class="proj-card reveal" style="transition-delay:.16s">
         <div class="proj-image">
           <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&auto=format&fit=crop&q=80" alt="AuroraLeaf" loading="lazy"/>
           <div class="proj-img-overlay"></div>
-          <div class="proj-badges"><span class="proj-num">03 / 03</span><span class="proj-cat cat-ai">Vision · LLM</span></div>
+          <div class="proj-badges">
+            <span class="proj-num">03 / 03</span>
+            <span class="proj-cat cat-ai">Vision · LLM</span>
+          </div>
+          <div class="proj-quick-links">
+            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="#" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
+          </div>
         </div>
         <div class="proj-body">
           <div class="proj-title">AuroraLeaf — Vision-Language Disease Detection</div>
@@ -138,7 +453,17 @@
             <li>Bilingual advisory output in Bangla &amp; English</li>
           </ul>
         </div>
+        <div class="proj-links-row">
+          <div class="proj-links-top">
+            <a href="https://github.com/tamannajarin04/AuroraLeaf-Rice-Disease-Vision-Language-AI" target="_blank" rel="noopener" class="proj-link-btn plb-github"><i class="fab fa-github"></i> GitHub</a>
+            <a class="proj-link-btn plb-live plb-ghost" tabindex="-1" aria-disabled="true" title="Live app coming soon"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
+          </div>
+          <div class="proj-links-bottom">
+            <a href="https://youtube.com/watch?v=YOUR_ID" target="_blank" rel="noopener" class="proj-link-btn plb-youtube"><i class="fab fa-youtube"></i> Demo Video</a>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
