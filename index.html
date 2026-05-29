@@ -5,11 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tamanna Jarin Tima — AI Researcher</title>
 
-<!--
-  ▶ THEME ANTI-FLICKER — must be first script in <head>, before any CSS.
-    Reads localStorage synchronously and sets data-theme before the browser
-    paints a single pixel. This eliminates the white flash completely.
--->
+<!-- Anti-flicker: set theme before any paint -->
 <script>
 (function(){var t;try{t=localStorage.getItem('tj-theme');}catch(e){}if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}})();
 </script>
@@ -17,7 +13,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="_variables.css"/>
+
+<!-- variables.css — no underscore prefix so GitHub Pages serves it -->
+<link rel="stylesheet" href="variables.css"/>
 
 <style>
 /* ── HERO ── */
@@ -31,7 +29,6 @@
   display: flex; flex-direction: column; align-items: center;
   text-align: center; max-width: 680px; margin: 0 auto; padding: 0 24px;
 }
-
 .status-badge {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
@@ -40,10 +37,7 @@
   padding: 9px 20px; border-radius: 4px; margin-bottom: 32px;
   animation: fadeUp 0.5s ease both;
 }
-.status-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent-gold); animation: pulse 2s infinite;
-}
+.status-dot { width:6px; height:6px; border-radius:50%; background:var(--accent-gold); animation:pulse 2s infinite; }
 
 .photo-ring-wrap {
   position: relative; width: 174px; height: 174px; margin-bottom: 32px;
@@ -58,125 +52,70 @@
   border: 1px solid rgba(79,142,247,0.18); z-index: 0;
 }
 .photo-ring-inner {
-  position: relative; z-index: 1; width: 174px; height: 174px;
-  border-radius: 50%; border: 3px solid var(--bg-primary);
-  overflow: hidden; background: var(--bg-secondary);
+  position: relative; z-index: 1; width: 174px; height: 174px; border-radius: 50%;
+  border: 3px solid var(--bg-primary); overflow: hidden; background: var(--bg-secondary);
 }
 .photo-ring-inner img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  border-radius: 50%; display: block; filter: saturate(0.92); transition: filter 0.4s;
+  width:100%; height:100%; object-fit:cover; object-position:top center;
+  border-radius:50%; display:block; filter:saturate(0.92); transition:filter 0.4s;
 }
 .photo-ring-inner img:hover { filter: saturate(1.08); }
 
-.hero-name { font-family: 'DM Serif Display', serif; margin-bottom: 6px; animation: fadeUp 0.5s 0.1s ease both; }
-.name-first {
-  display: block; font-size: clamp(2.2rem,6vw,3.4rem);
-  color: var(--text-primary); line-height: 1; letter-spacing: -0.03em;
-}
-.name-last {
-  display: block; font-size: clamp(2.2rem,6vw,3.4rem);
-  background: var(--grad-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1; letter-spacing: -0.03em;
-}
-.name-uni {
-  display: block; margin-top: 14px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(0.5rem,1.3vw,0.58rem);
-  color: var(--text-muted); letter-spacing: 0.2em; text-transform: uppercase;
-}
+.hero-name { font-family:'DM Serif Display',serif; margin-bottom:6px; animation:fadeUp 0.5s 0.1s ease both; }
+.name-first { display:block; font-size:clamp(2.2rem,6vw,3.4rem); color:var(--text-primary); line-height:1; letter-spacing:-0.03em; }
+.name-last  { display:block; font-size:clamp(2.2rem,6vw,3.4rem); background:var(--grad-1); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; letter-spacing:-0.03em; }
+.name-uni   { display:block; margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:clamp(0.5rem,1.3vw,0.58rem); color:var(--text-muted); letter-spacing:0.2em; text-transform:uppercase; }
 
-.hero-divider {
-  width: 54px; height: 2px; background: var(--grad-1); border-radius: 2px;
-  margin: 24px auto; animation: fadeUp 0.5s 0.18s ease both;
-  box-shadow: 0 0 20px rgba(79,142,247,0.5);
-}
+.hero-divider { width:54px; height:2px; background:var(--grad-1); border-radius:2px; margin:24px auto; animation:fadeUp 0.5s 0.18s ease both; box-shadow:0 0 20px rgba(79,142,247,0.5); }
 
-.hero-tagline {
-  font-size: clamp(0.88rem,2vw,1rem); color: var(--text-secondary);
-  line-height: 1.8; max-width: 480px; font-weight: 300;
-  animation: fadeUp 0.5s 0.22s ease both;
-}
-.hero-tagline strong { color: var(--text-primary); font-weight: 600; }
+.hero-tagline { font-size:clamp(0.88rem,2vw,1rem); color:var(--text-secondary); line-height:1.8; max-width:480px; font-weight:300; animation:fadeUp 0.5s 0.22s ease both; }
+.hero-tagline strong { color:var(--text-primary); font-weight:600; }
 
-.hero-location {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.1em; color: var(--accent-cyan);
-  border-bottom: 1px solid rgba(34,211,238,0.3); padding-bottom: 2px;
-  margin: 20px 0 28px; animation: fadeUp 0.5s 0.26s ease both;
-  display: inline-block;
-}
+.hero-location { font-family:'JetBrains Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; color:var(--accent-cyan); border-bottom:1px solid rgba(34,211,238,0.3); padding-bottom:2px; margin:20px 0 28px; animation:fadeUp 0.5s 0.26s ease both; display:inline-block; }
 
-.social-row {
-  display: flex; gap: 10px; margin-bottom: 30px;
-  animation: fadeUp 0.5s 0.3s ease both;
-  flex-wrap: wrap; justify-content: center;
-}
-.soc-btn {
-  width: 42px; height: 42px; border-radius: 8px;
-  border: 1px solid var(--border); background: var(--bg-card);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted); font-size: 15px;
-  transition: all 0.2s; cursor: pointer;
-}
-.soc-btn:hover {
-  background: rgba(79,142,247,0.1); border-color: rgba(79,142,247,0.35);
-  color: var(--accent-cyan); transform: translateY(-2px);
-}
+.social-row { display:flex; gap:10px; margin-bottom:30px; animation:fadeUp 0.5s 0.3s ease both; flex-wrap:wrap; justify-content:center; }
+.soc-btn { width:42px; height:42px; border-radius:8px; border:1px solid var(--border); background:var(--bg-card); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:15px; transition:all 0.2s; cursor:pointer; }
+.soc-btn:hover { background:rgba(79,142,247,0.1); border-color:rgba(79,142,247,0.35); color:var(--accent-cyan); transform:translateY(-2px); }
 
-.hero-card {
-  width: 100%; background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--r); padding: 24px 28px;
-  animation: fadeUp 0.5s 0.38s ease both; text-align: left;
-  backdrop-filter: blur(20px); transition: border-color 0.3s;
-}
-.hero-card:hover { border-color: var(--border-hover); }
+.hero-card { width:100%; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r); padding:24px 28px; animation:fadeUp 0.5s 0.38s ease both; text-align:left; backdrop-filter:blur(20px); transition:border-color 0.3s; }
+.hero-card:hover { border-color:var(--border-hover); }
 
-.hc-header {
-  display: flex; align-items: center;
-  justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 10px;
-}
-.hc-title { display: flex; align-items: center; gap: 9px; font-size: 0.85rem; color: var(--text-secondary); font-weight: 500; }
-.hc-badge {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--accent-cyan);
-  border: 1px dashed rgba(34,211,238,0.28); border-radius: 20px; padding: 3px 10px; letter-spacing: 0.08em;
-}
-.hc-theme { display: flex; align-items: center; gap: 7px; font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--text-muted); }
-.hc-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--text-muted); letter-spacing: 0.08em; margin-bottom: 10px; }
-.hc-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; margin-bottom: 18px; }
-.hc-desc strong { color: var(--text-primary); font-weight: 600; }
-.hc-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; }
+.hc-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; flex-wrap:wrap; gap:10px; }
+.hc-title  { display:flex; align-items:center; gap:9px; font-size:0.85rem; color:var(--text-secondary); font-weight:500; }
+.hc-badge  { font-family:'JetBrains Mono',monospace; font-size:0.54rem; color:var(--accent-cyan); border:1px dashed rgba(34,211,238,0.28); border-radius:20px; padding:3px 10px; letter-spacing:0.08em; }
+.hc-theme  { display:flex; align-items:center; gap:7px; font-family:'JetBrains Mono',monospace; font-size:0.54rem; color:var(--text-muted); }
+.hc-sub    { font-family:'JetBrains Mono',monospace; font-size:0.55rem; color:var(--text-muted); letter-spacing:0.08em; margin-bottom:10px; }
+.hc-desc   { font-size:0.88rem; color:var(--text-secondary); line-height:1.75; font-weight:300; margin-bottom:18px; }
+.hc-desc strong { color:var(--text-primary); font-weight:600; }
+.hc-btns   { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; }
 
-.hero-stats { display: flex; gap: 0; padding-top: 20px; border-top: 1px solid var(--border); }
-.stat-item { flex: 1; text-align: center; }
-.stat-item + .stat-item { border-left: 1px solid var(--border); }
-.stat-num { font-family: 'DM Serif Display', serif; font-size: clamp(1.6rem,3.5vw,2rem); color: var(--accent-blue); line-height: 1; }
-.stat-num sup { font-size: 0.7em; }
-.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; margin-top: 5px; }
+.hero-stats { display:flex; gap:0; padding-top:20px; border-top:1px solid var(--border); }
+.stat-item  { flex:1; text-align:center; }
+.stat-item + .stat-item { border-left:1px solid var(--border); }
+.stat-num   { font-family:'DM Serif Display',serif; font-size:clamp(1.6rem,3.5vw,2rem); color:var(--accent-blue); line-height:1; }
+.stat-num sup { font-size:0.7em; }
+.stat-label { font-family:'JetBrains Mono',monospace; font-size:0.48rem; color:var(--text-muted); letter-spacing:0.14em; text-transform:uppercase; margin-top:5px; }
 
-@media (max-width: 560px) {
-  .hc-btns .btn-primary-custom,
-  .hc-btns .btn-ghost-custom { font-size: 0.55rem; padding: 11px 18px; }
-  .hero-stats { flex-wrap: wrap; }
-  .stat-item { min-width: 50%; border-left: none !important; border-top: 1px solid var(--border); }
-  .stat-item:nth-child(2n) { border-left: 1px solid var(--border) !important; }
+@media (max-width:560px) {
+  .hc-btns .btn-primary-custom, .hc-btns .btn-ghost-custom { font-size:0.55rem; padding:11px 18px; }
+  .hero-stats { flex-wrap:wrap; }
+  .stat-item  { min-width:50%; border-left:none !important; border-top:1px solid var(--border); }
+  .stat-item:nth-child(2n) { border-left:1px solid var(--border) !important; }
 }
 </style>
 </head>
 <body>
 
 <div class="bg-scene" aria-hidden="true">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 </div>
 <div class="bg-dots" aria-hidden="true"></div>
 <div id="scroll-progress"></div>
 
-<!-- ══ NAVBAR ══ -->
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
-
     <div class="nav-links-wrap">
       <a href="about.html"      class="nav-link-item">About</a>
       <a href="education.html"  class="nav-link-item">Education</a>
@@ -186,16 +125,9 @@
       <a href="activities.html" class="nav-link-item">Activities</a>
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
-
     <div class="nav-right">
-      <!--
-        tj-toggle  → picked up by _shared.js to toggle theme
-        tj-icon    → icon inside synced by _shared.js
-      -->
       <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <div class="toggle-thumb">
-          <i class="fas fa-moon tj-icon"></i>
-        </div>
+        <div class="toggle-thumb"><i class="fas fa-moon tj-icon"></i></div>
       </button>
       <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -204,68 +136,56 @@
   </div>
 </nav>
 
-<!-- Mobile nav — display:none in CSS, .open added by _shared.js -->
-<div class="mob-nav" id="mob-nav" role="navigation" aria-label="Mobile navigation">
-  <a href="about.html">      <i class="fas fa-user-circle"  style="width:16px;color:var(--accent-blue)"></i>About</a>
+<!-- Mobile nav — hidden by CSS, shown by JS when hamburger clicked -->
+<div class="mob-nav" id="mob-nav">
+  <a href="about.html">      <i class="fas fa-user-circle"    style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html">  <i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
-  <a href="research.html">   <i class="fas fa-flask"         style="width:16px;color:var(--accent-blue)"></i>Research</a>
-  <a href="projects.html">   <i class="fas fa-code"          style="width:16px;color:var(--accent-blue)"></i>Projects</a>
-  <a href="skills.html">     <i class="fas fa-tools"         style="width:16px;color:var(--accent-blue)"></i>Skills</a>
-  <a href="activities.html"> <i class="fas fa-star"          style="width:16px;color:var(--accent-blue)"></i>Activities</a>
-  <a href="contact.html">    <i class="fas fa-envelope"      style="width:16px;color:var(--accent-blue)"></i>Contact</a>
+  <a href="research.html">   <i class="fas fa-flask"           style="width:16px;color:var(--accent-blue)"></i>Research</a>
+  <a href="projects.html">   <i class="fas fa-code"            style="width:16px;color:var(--accent-blue)"></i>Projects</a>
+  <a href="skills.html">     <i class="fas fa-tools"           style="width:16px;color:var(--accent-blue)"></i>Skills</a>
+  <a href="activities.html"> <i class="fas fa-star"            style="width:16px;color:var(--accent-blue)"></i>Activities</a>
+  <a href="contact.html">    <i class="fas fa-envelope"        style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-center">
-
     <div class="status-badge">
       <div class="status-dot"></div>BSc Software Engineering · AI Researcher
     </div>
-
     <div class="photo-ring-wrap">
       <div class="photo-ring-inner">
         <img src="images/profile.jpeg" alt="Tamanna Jarin Tima"/>
       </div>
     </div>
-
     <h1 class="hero-name">
       <span class="name-first">Tamanna Jarin</span>
       <span class="name-last">Tima</span>
       <span class="name-uni">Daffodil International University · Dhaka, Bangladesh</span>
     </h1>
-
     <div class="hero-divider"></div>
-
     <p class="hero-tagline">
       Building <strong>trustworthy AI</strong> at the intersection of explainability,
       deep learning &amp; medical imaging.
     </p>
-
     <span class="hero-location">📍 Dhaka, Bangladesh</span>
-
     <div class="social-row">
-      <a href="#"                  class="soc-btn" title="GitHub"      aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="#"                  class="soc-btn" title="LinkedIn"    aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="mailto:"            class="soc-btn" title="Email"       aria-label="Email"><i class="fas fa-envelope"></i></a>
-      <a href="CV_TIMA_2026.pdf"   class="soc-btn" title="Download CV" aria-label="Download CV" download><i class="fas fa-download"></i></a>
-      <a href="research.html"      class="soc-btn" title="Research"    aria-label="Research"><i class="fas fa-flask"></i></a>
-      <!-- Second theme toggle in social row — same tj-toggle + tj-icon classes -->
+      <a href="#"                  class="soc-btn" title="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#"                  class="soc-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:"            class="soc-btn" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="CV_TIMA_2026.pdf"   class="soc-btn" title="Download CV" download><i class="fas fa-download"></i></a>
+      <a href="research.html"      class="soc-btn" title="Research"><i class="fas fa-flask"></i></a>
       <button class="soc-btn tj-toggle" title="Toggle Theme" aria-label="Toggle theme">
         <i class="fas fa-moon tj-icon"></i>
       </button>
     </div>
-
     <div class="hero-card">
       <div class="hc-header">
         <div class="hc-title">
           <i class="fas fa-brain" style="color:var(--accent-cyan);font-size:16px;"></i>
-          XAI Research
-          <span class="hc-badge">Brain Tumor · MRI</span>
+          XAI Research <span class="hc-badge">Brain Tumor · MRI</span>
         </div>
-        <div class="hc-theme">
-          Theme <span class="hc-badge" id="theme-label">Dark</span>
-        </div>
+        <div class="hc-theme">Theme <span class="hc-badge" id="theme-label">Dark</span></div>
       </div>
       <div class="hc-sub">Grad-CAM · SHAP · Uncertainty Quantification · Multimodal Classification</div>
       <p class="hc-desc">
@@ -275,8 +195,8 @@
       </p>
       <div class="hc-btns">
         <a href="research.html"    class="btn-primary-custom"><i class="fas fa-flask"></i> View Research</a>
-        <a href="contact.html"     class="btn-ghost-custom"  ><i class="fas fa-paper-plane"></i> Get in Touch</a>
-        <a href="CV_TIMA_2026.pdf" class="btn-ghost-custom"  download><i class="fas fa-download"></i> Download CV</a>
+        <a href="contact.html"     class="btn-ghost-custom"><i class="fas fa-paper-plane"></i> Get in Touch</a>
+        <a href="CV_TIMA_2026.pdf" class="btn-ghost-custom" download><i class="fas fa-download"></i> Download CV</a>
       </div>
       <div class="hero-stats">
         <div class="stat-item"><div class="stat-num">3.99<sup>/4</sup></div><div class="stat-label">CGPA</div></div>
@@ -285,7 +205,6 @@
         <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">Dean's Award</div></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -298,6 +217,7 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="_shared.js"></script>
+<!-- shared.js — no underscore prefix so GitHub Pages serves it -->
+<script src="shared.js"></script>
 </body>
 </html>

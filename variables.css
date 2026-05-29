@@ -1,5 +1,7 @@
 /* ══════════════════════════════════════════════
-   _variables.css  — shared design tokens
+   variables.css  — shared design tokens
+   NOTE: No underscore prefix — GitHub Pages Jekyll
+   silently hides any file starting with _
 ══════════════════════════════════════════════ */
 
 :root {
@@ -118,10 +120,8 @@ img { max-width: 100%; display: block; }
 .nav-brand {
   font-family: 'DM Serif Display', serif; font-size: 1.15rem;
   background: var(--grad-1);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  white-space: nowrap;
-  flex-shrink: 0;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  white-space: nowrap; flex-shrink: 0;
 }
 .nav-links-wrap { display: flex; align-items: center; gap: 4px; }
 .nav-link-item {
@@ -135,10 +135,9 @@ img { max-width: 100%; display: block; }
 }
 .nav-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
-/* Theme toggle pill */
 #theme-toggle {
   width: 42px; height: 24px; background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 30px; cursor: pointer; position: relative;
+  border-radius: 30px; cursor: pointer;
   display: flex; align-items: center; padding: 2px 3px; flex-shrink: 0;
   transition: border-color 0.3s;
 }
@@ -152,10 +151,8 @@ img { max-width: 100%; display: block; }
 }
 [data-theme="light"] .toggle-thumb { transform: translateX(18px); }
 
-/* Hamburger — hidden on desktop */
 .nav-ham {
-  display: none;
-  flex-direction: column; gap: 4px;
+  display: none; flex-direction: column; gap: 4px;
   background: none; border: none; cursor: pointer; padding: 8px;
 }
 .nav-ham span {
@@ -166,26 +163,17 @@ img { max-width: 100%; display: block; }
 .nav-ham.open span:nth-child(2) { opacity: 0; }
 .nav-ham.open span:nth-child(3) { transform: rotate(-45deg) translate(4px,-4px); }
 
-/* ─── MOBILE NAV ─── 
-   CRITICAL: display:none by default. Only flex when .open is added by JS.
-   On desktop (>820px) it is ALWAYS none, even with .open.              */
+/* ─── MOBILE NAV ─── */
 .mob-nav {
   display: none;
-  position: fixed;
-  top: 60px; left: 16px; right: 16px;
+  position: fixed; top: 60px; left: 16px; right: 16px;
   background: var(--nav-bg);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 12px;
-  z-index: 998;
-  flex-direction: column;
-  gap: 4px;
+  backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--border); border-radius: 16px;
+  padding: 12px; z-index: 998; flex-direction: column; gap: 4px;
   box-shadow: var(--shadow);
 }
 .mob-nav.open { display: flex; }
-
 .mob-nav a {
   font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);
@@ -194,20 +182,19 @@ img { max-width: 100%; display: block; }
 }
 .mob-nav a:hover { color: var(--accent-blue); background: rgba(79,142,247,0.08); }
 
-/* ─── RESPONSIVE NAV BREAKPOINT ─── */
+/* ─── BREAKPOINTS ─── */
 @media (max-width: 820px) {
   .nav-links-wrap { display: none; }
   .nav-ham        { display: flex; }
 }
 @media (min-width: 821px) {
-  /* Hard-lock: mob-nav can NEVER show on desktop */
   .mob-nav,
   .mob-nav.open { display: none !important; }
   .nav-ham      { display: none !important; }
 }
 @media (max-width: 480px) { .nav-inner { padding: 0 16px; } }
 
-/* ─── LAYOUT HELPERS ─── */
+/* ─── LAYOUT ─── */
 .section { position: relative; z-index: 1; padding: 110px 0; }
 .container-main { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
 
@@ -219,8 +206,7 @@ img { max-width: 100%; display: block; }
 .kicker::before { content: ''; width: 22px; height: 1.5px; background: var(--accent-cyan); }
 
 .section-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-family: 'DM Serif Display', serif; font-size: clamp(2rem,5vw,3.2rem);
   color: var(--text-primary); line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 56px;
 }
 .section-title em {
@@ -230,18 +216,15 @@ img { max-width: 100%; display: block; }
 
 .glass-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r);
-  backdrop-filter: blur(24px);
-  transition: border-color 0.3s, background 0.3s;
+  backdrop-filter: blur(24px); transition: border-color 0.3s, background 0.3s;
 }
 .glass-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
 
-/* Reveal animations */
 .reveal     { opacity: 0; transform: translateY(28px);  transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal-l   { opacity: 0; transform: translateX(-28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal-r   { opacity: 0; transform: translateX(28px);  transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.vis, .reveal-l.vis, .reveal-r.vis { opacity: 1; transform: none; }
 
-/* Buttons */
 .btn-primary-custom {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em;
@@ -261,11 +244,9 @@ img { max-width: 100%; display: block; }
 }
 .btn-ghost-custom:hover { border-color: var(--border-hover); color: var(--text-primary); transform: translateY(-2px); }
 
-/* Keyframes */
 @keyframes pulse  { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:none;} }
 
-/* Footer */
 footer {
   background: rgba(0,0,0,0.25); border-top: 1px solid var(--border);
   padding: clamp(24px,5vw,32px) 0; text-align: center;
