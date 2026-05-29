@@ -7,48 +7,675 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="variables.css"/>
+
 <style>
-/* ── EDUCATION-SPECIFIC STYLES ── */
-.edu-layout { display: grid; grid-template-columns: 1fr 240px; gap: 60px; align-items: start; }
+/* ══════════════════════════════════════
+   DESIGN TOKENS  (mirrors variables.css)
+══════════════════════════════════════ */
+:root {
+  --bg-primary:    #070d1a;
+  --bg-secondary:  #0c1428;
+  --bg-card:       rgba(255,255,255,0.05);
+  --bg-card-hover: rgba(255,255,255,0.08);
+  --border:        rgba(255,255,255,0.08);
+  --border-hover:  rgba(255,255,255,0.22);
+  --text-primary:  #eef2ff;
+  --text-secondary:#94a3b8;
+  --text-muted:    #475569;
+  --accent-blue:   #4f8ef7;
+  --accent-cyan:   #22d3ee;
+  --accent-purple: #818cf8;
+  --accent-gold:   #fbbf24;
+  --accent-green:  #34d399;
+  --grad-1: linear-gradient(135deg,#4f8ef7,#22d3ee);
+  --grad-2: linear-gradient(135deg,#818cf8,#4f8ef7);
+  --grad-3: linear-gradient(135deg,#fbbf24,#fb923c);
+  --nav-bg: rgba(7,13,26,0.88);
+  --shadow:    0 24px 64px rgba(0,0,0,0.6);
+  --shadow-sm: 0 8px 32px rgba(0,0,0,0.35);
+  --r:  16px; --rs: 10px;
+}
+[data-theme="light"] {
+  --bg-primary:#f0f4ff; --bg-secondary:#e4ecff;
+  --bg-card:rgba(255,255,255,0.85); --bg-card-hover:rgba(255,255,255,0.98);
+  --border:rgba(79,142,247,0.1); --border-hover:rgba(79,142,247,0.35);
+  --text-primary:#0f172a; --text-secondary:#334155; --text-muted:#64748b;
+  --nav-bg:rgba(240,244,255,0.92);
+  --shadow:0 24px 64px rgba(79,142,247,0.12);
+  --shadow-sm:0 8px 32px rgba(79,142,247,0.08);
+}
 
-.timeline { padding-left: 32px; position: relative; }
-.timeline::before { content: ''; position: absolute; left: 5px; top: 14px; bottom: 14px; width: 1px; background: linear-gradient(to bottom, var(--accent-blue), rgba(79,142,247,0.08)); }
-.tl-item { position: relative; margin-bottom: 28px; }
-.tl-item::before { content: ''; position: absolute; left: -37px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-blue); box-shadow: 0 0 0 3px var(--bg-primary), 0 0 0 5px rgba(79,142,247,0.3), 0 0 18px rgba(79,142,247,0.6); }
-.tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; color: var(--accent-blue); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
-.tl-card { padding: 22px 26px; border-radius: var(--rs); transition: transform 0.28s; }
-.tl-card:hover { transform: translateX(5px); }
-.tl-degree { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.015em; }
-.tl-inst { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-muted); margin-bottom: 14px; }
-.gpa-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.2); padding: 5px 14px; border-radius: var(--rs); }
-.gpa-num { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--accent-blue); }
-.gpa-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--text-muted); letter-spacing: 0.1em; }
-.tl-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; line-height: 1.8; font-weight: 300; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg-primary); color:var(--text-primary);
+  overflow-x:hidden; line-height:1.7;
+}
+body.theme-ready{transition:background .4s,color .4s;}
+::selection{background:rgba(79,142,247,.3);color:var(--text-primary);}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-thumb{background:var(--accent-blue);border-radius:4px;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
 
-.edu-summary { padding: 30px; border-radius: var(--r); text-align: center; }
-.big-gpa-num { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 8vw, 4.8rem); line-height: 1; letter-spacing: -0.04em; background: var(--grad-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.big-gpa-label { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px; }
-.score-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
-.score-row:last-child { border: none; }
-.score-row span { color: var(--text-secondary); font-weight: 300; }
-.score-row strong { font-family: 'JetBrains Mono', monospace; color: var(--accent-blue); font-size: 0.72rem; }
-.award-mini-card { margin-top: 18px; padding: 14px; background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.22); border-radius: var(--rs); }
-.award-mini-card p { font-size: 0.74rem; color: var(--text-secondary); margin: 0; line-height: 1.7; font-weight: 300; }
-.award-mini-card strong { color: var(--accent-gold); }
+/* ── BG ── */
+.bg-scene{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+[data-theme="light"] .bg-scene{opacity:.3;}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;}
+.orb-1{width:900px;height:900px;background:radial-gradient(circle,#4f8ef7,transparent 65%);top:-350px;right:-200px;animation:floatA 22s ease-in-out infinite alternate;}
+.orb-2{width:700px;height:700px;background:radial-gradient(circle,#22d3ee,transparent 65%);bottom:-250px;left:-180px;animation:floatB 19s ease-in-out infinite alternate;}
+.orb-3{width:500px;height:500px;background:radial-gradient(circle,#818cf8,transparent 65%);top:50%;left:38%;animation:floatC 25s ease-in-out infinite alternate;}
+@keyframes floatA{to{transform:translate(-100px,120px) scale(1.1);}}
+@keyframes floatB{to{transform:translate(80px,-90px) scale(1.08);}}
+@keyframes floatC{to{transform:translate(-70px,70px) scale(.9);}}
+.bg-dots{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);background-size:36px 36px;}
+[data-theme="light"] .bg-dots{opacity:.6;}
 
-@media (max-width: 900px) { .edu-layout { grid-template-columns: 1fr; gap: 40px; } }
-@media (max-width: 600px) { .timeline { padding-left: 26px; } .tl-item::before { left: -31px; } }
+/* ── SCROLL PROGRESS ── */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--grad-1);z-index:9999;transition:width .1s linear;}
+
+/* ── NAVBAR ── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav-bg);backdrop-filter:blur(28px) saturate(180%);border-bottom:1px solid var(--border);}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{font-family:'DM Serif Display',serif;font-weight:700;font-size:1.15rem;background:var(--grad-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap;flex-shrink:0;}
+.nav-links-wrap{display:flex;align-items:center;gap:2px;}
+.nav-link-item{font-size:.78rem;font-weight:500;letter-spacing:.02em;color:var(--text-muted);padding:7px 14px;border-radius:30px;transition:all .2s;white-space:nowrap;}
+.nav-link-item:hover,.nav-link-item.active{color:var(--accent-blue);background:rgba(79,142,247,.1);}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+#theme-toggle{width:44px;height:25px;background:var(--bg-card);border:1px solid var(--border);border-radius:30px;cursor:pointer;display:flex;align-items:center;padding:2px 3px;flex-shrink:0;transition:border-color .3s;}
+#theme-toggle:hover{border-color:var(--accent-blue);}
+.toggle-thumb{width:19px;height:19px;border-radius:50%;background:var(--grad-1);transition:transform .3s;display:flex;align-items:center;justify-content:center;font-size:.55rem;color:#fff;box-shadow:0 2px 8px rgba(79,142,247,.5);}
+[data-theme="light"] .toggle-thumb{transform:translateX(19px);}
+.nav-ham{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:8px;}
+.nav-ham span{display:block;width:20px;height:2px;background:var(--text-secondary);border-radius:2px;transition:.3s;}
+.nav-ham.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px);}
+.nav-ham.open span:nth-child(2){opacity:0;}
+.nav-ham.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px);}
+.mob-nav{display:none;position:fixed;top:62px;left:16px;right:16px;background:var(--nav-bg);backdrop-filter:blur(32px);border:1px solid var(--border);border-radius:16px;padding:12px;z-index:998;flex-direction:column;gap:4px;box-shadow:var(--shadow);}
+.mob-nav.open{display:flex;}
+.mob-nav a{font-size:.82rem;font-weight:500;color:var(--text-secondary);padding:12px 16px;border-radius:10px;transition:all .2s;display:flex;align-items:center;gap:10px;}
+.mob-nav a:hover{color:var(--accent-blue);background:rgba(79,142,247,.08);}
+@media(max-width:820px){.nav-links-wrap{display:none;}.nav-ham{display:flex;}}
+@media(min-width:821px){.mob-nav,.mob-nav.open{display:none!important;}.nav-ham{display:none!important;}}
+@media(max-width:480px){.nav-inner{padding:0 16px;}}
+
+/* ── LAYOUT ── */
+.section{position:relative;z-index:1;padding:110px 0 80px;}
+.container-main{max-width:1140px;margin:0 auto;padding:0 32px;}
+.glass-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);backdrop-filter:blur(24px);transition:border-color .3s,background .3s;}
+.glass-card:hover{border-color:var(--border-hover);background:var(--bg-card-hover);}
+.kicker{font-size:.68rem;font-weight:600;color:var(--accent-cyan);letter-spacing:.2em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;}
+.kicker::before{content:'';width:22px;height:1.5px;background:var(--accent-cyan);}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.2rem);color:var(--text-primary);line-height:1.1;letter-spacing:-.03em;margin-bottom:56px;}
+.section-title em{font-style:italic;background:var(--grad-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s;}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .7s,transform .7s;}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .7s,transform .7s;}
+.reveal.vis,.reveal-l.vis,.reveal-r.vis{opacity:1;transform:none;}
+footer{background:rgba(0,0,0,.2);border-top:1px solid var(--border);padding:clamp(24px,5vw,36px) 0;text-align:center;position:relative;z-index:1;}
+[data-theme="light"] footer{background:rgba(255,255,255,.5);}
+.footer-name{font-family:'DM Serif Display',serif;font-size:1.05rem;background:var(--grad-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+.footer-meta{font-size:.7rem;color:var(--text-muted);letter-spacing:.04em;}
+@media(max-width:768px){.section{padding:80px 0 60px;}.container-main{padding:0 20px;}}
+@media(max-width:480px){.section{padding:60px 0;}.container-main{padding:0 16px;}}
+
+/* ══════════════════════════════════════
+   EDUCATION — SCHOLARSHIP ENHANCED STYLES
+══════════════════════════════════════ */
+
+/* ── Hero stat bar ── */
+.edu-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 64px;
+}
+.hero-stat-card {
+  position: relative;
+  padding: 24px 20px 22px;
+  border-radius: var(--r);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(24px);
+  text-align: center;
+  overflow: hidden;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  cursor: default;
+}
+.hero-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, var(--grad-1));
+}
+.hero-stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hover);
+  box-shadow: 0 20px 60px rgba(79,142,247,.15);
+}
+.hero-stat-card .stat-icon {
+  width: 40px; height: 40px;
+  margin: 0 auto 12px;
+  border-radius: 12px;
+  background: var(--card-icon-bg, rgba(79,142,247,.1));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.hero-stat-card .stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+  background: var(--card-accent, var(--grad-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+.hero-stat-card .stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .5rem;
+  color: var(--text-muted);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.hero-stat-card .stat-sub {
+  font-size: .68rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-top: 4px;
+}
+
+/* ── Two-column main layout ── */
+.edu-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 52px;
+  align-items: start;
+}
+
+/* ── Timeline ── */
+.timeline-wrap { position: relative; }
+.timeline-track {
+  position: absolute;
+  left: 18px; top: 20px; bottom: 20px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent-blue), rgba(79,142,247,.05));
+}
+.tl-entry { position: relative; padding-left: 52px; margin-bottom: 36px; }
+.tl-dot {
+  position: absolute;
+  left: 11px; top: 18px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2.5px solid var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(79,142,247,.12), 0 0 20px rgba(79,142,247,.4);
+  transition: transform .3s, box-shadow .3s;
+  z-index: 2;
+}
+.tl-entry:hover .tl-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 6px rgba(79,142,247,.18), 0 0 30px rgba(79,142,247,.6);
+}
+.tl-dot.active {
+  background: var(--accent-blue);
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100% { box-shadow: 0 0 0 4px rgba(79,142,247,.2), 0 0 20px rgba(79,142,247,.5); }
+  50%      { box-shadow: 0 0 0 8px rgba(79,142,247,.08), 0 0 36px rgba(79,142,247,.7); }
+}
+.tl-year-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  color: var(--accent-cyan);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tl-year-tag .status-pip {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  animation: pipBlink 2s ease-in-out infinite;
+}
+@keyframes pipBlink {
+  0%,100%{opacity:1;} 50%{opacity:.3;}
+}
+
+/* ── Degree card ── */
+.degree-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  backdrop-filter: blur(24px);
+  padding: 28px 30px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+.degree-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r);
+  opacity: 0;
+  background: linear-gradient(135deg, rgba(79,142,247,.04), rgba(34,211,238,.04));
+  transition: opacity .3s;
+}
+.degree-card:hover {
+  transform: translateX(6px);
+  border-color: rgba(79,142,247,.3);
+  box-shadow: 0 12px 48px rgba(79,142,247,.1);
+}
+.degree-card:hover::after { opacity: 1; }
+
+.degree-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.degree-title-block {}
+.degree-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.18rem;
+  color: var(--text-primary);
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.degree-inst {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.degree-inst i { color: var(--accent-blue); font-size: .6rem; }
+
+.gpa-chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(79,142,247,.08);
+  border: 1px solid rgba(79,142,247,.2);
+  border-radius: 12px;
+  padding: 10px 16px;
+  min-width: 80px;
+}
+.gpa-chip .gpa-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  line-height: 1;
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -.03em;
+}
+.gpa-chip .gpa-denom {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .42rem;
+  color: var(--text-muted);
+  letter-spacing: .1em;
+  margin-top: 3px;
+}
+
+/* ── Tag pills ── */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .08em;
+  padding: 5px 11px;
+  border-radius: 30px;
+  border: 1px solid;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background .2s, transform .2s;
+}
+.tag:hover { transform: translateY(-1px); }
+.tag-blue   { color: var(--accent-blue);   border-color: rgba(79,142,247,.3);  background: rgba(79,142,247,.06);  }
+.tag-cyan   { color: var(--accent-cyan);   border-color: rgba(34,211,238,.3);  background: rgba(34,211,238,.06);  }
+.tag-purple { color: var(--accent-purple); border-color: rgba(129,140,248,.3); background: rgba(129,140,248,.06); }
+.tag-gold   { color: var(--accent-gold);   border-color: rgba(251,191,36,.3);  background: rgba(251,191,36,.06);  }
+.tag-green  { color: var(--accent-green);  border-color: rgba(52,211,153,.3);  background: rgba(52,211,153,.06);  }
+
+/* ── Highlight bullets inside card ── */
+.degree-highlights { list-style: none; margin: 14px 0 0; }
+.degree-highlights li {
+  font-size: .76rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.7;
+}
+.degree-highlights li:last-child { border-bottom: none; }
+.degree-highlights li .hi-dot {
+  width: 5px; height: 5px;
+  background: var(--accent-blue);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* ── Progress bar for GPA ── */
+.gpa-bar-wrap { margin-top: 14px; }
+.gpa-bar-label {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .5rem;
+  color: var(--text-muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.gpa-bar {
+  height: 4px;
+  background: rgba(255,255,255,.05);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.gpa-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--grad-1);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.gpa-bar-fill.animated { transform: scaleX(1); }
+
+/* ══════════════════════════════════
+   RIGHT SIDEBAR
+══════════════════════════════════ */
+.edu-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── Big GPA panel ── */
+.cgpa-panel {
+  padding: 32px 28px;
+  border-radius: var(--r);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cgpa-panel::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--r);
+  background: linear-gradient(135deg,rgba(79,142,247,.25),rgba(34,211,238,.15),rgba(129,140,248,.15));
+  z-index: -1;
+}
+.cgpa-ring {
+  position: relative;
+  width: 120px; height: 120px;
+  margin: 0 auto 20px;
+}
+.cgpa-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-track { fill: none; stroke: rgba(255,255,255,.05); stroke-width: 6; }
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 339.3;
+  stroke-dashoffset: 339.3;
+  transition: stroke-dashoffset 1.6s cubic-bezier(.22,1,.36,1);
+}
+.ring-fill.animated { stroke-dashoffset: 1.7; } /* 339.3 * (1 - 0.99875) = ~0.42 → nearly full */
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ring-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  line-height: 1;
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -.04em;
+}
+.ring-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .38rem;
+  color: var(--text-muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.cgpa-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.cgpa-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .48rem;
+  color: var(--text-muted);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.score-table { margin: 20px 0 0; text-align: left; }
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .76rem;
+}
+.score-row:last-child { border-bottom: none; }
+.score-row .sr-label { color: var(--text-secondary); font-weight: 300; }
+.score-row .sr-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem;
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+}
+
+/* ── Award panel ── */
+.award-panel {
+  padding: 22px 24px;
+  border-radius: var(--rs);
+  background: rgba(251,191,36,.05);
+  border: 1px solid rgba(251,191,36,.2);
+  position: relative;
+  overflow: hidden;
+}
+.award-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad-3);
+}
+.award-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+}
+.award-body {
+  font-size: .72rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.8;
+}
+.award-body strong { color: var(--accent-gold); font-weight: 500; }
+
+/* ── Scholarship readiness ── */
+.readiness-panel {
+  padding: 22px 24px;
+  border-radius: var(--rs);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.readiness-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.readiness-title i { font-size: .6rem; }
+.readiness-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .72rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+.readiness-item:last-child { border-bottom: none; padding-bottom: 0; }
+.ri-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .55rem;
+}
+.ri-check.green { background: rgba(52,211,153,.12); color: var(--accent-green); border: 1px solid rgba(52,211,153,.3); }
+.ri-check.blue  { background: rgba(79,142,247,.12); color: var(--accent-blue);  border: 1px solid rgba(79,142,247,.3); }
+.ri-check.gold  { background: rgba(251,191,36,.12);  color: var(--accent-gold);  border: 1px solid rgba(251,191,36,.3);  }
+.ri-check.purple{ background: rgba(129,140,248,.12);color: var(--accent-purple);border: 1px solid rgba(129,140,248,.3);}
+
+/* ── Country flags interest bar ── */
+.interest-panel {
+  padding: 22px 24px;
+  border-radius: var(--rs);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.interest-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.flag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.flag-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 30px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  font-size: .66rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  transition: border-color .2s, background .2s, transform .2s;
+  cursor: default;
+}
+.flag-pill:hover {
+  border-color: rgba(79,142,247,.4);
+  background: rgba(79,142,247,.07);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+.flag-pill .flag { font-size: .9rem; }
+
+/* ── Research focus badge ── */
+.research-tag-section {
+  margin-top: 0;
+  padding: 22px 24px;
+  border-radius: var(--rs);
+  background: rgba(129,140,248,.05);
+  border: 1px solid rgba(129,140,248,.18);
+}
+.research-tag-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.rtag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 4px 4px;
+  font-size: .64rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(129,140,248,.08);
+  border: 1px solid rgba(129,140,248,.2);
+  color: var(--accent-purple);
+  font-weight: 400;
+  transition: background .2s, transform .2s;
+  cursor: default;
+}
+.rtag:hover { background: rgba(129,140,248,.15); transform: translateY(-2px); }
+.rtag i { font-size: .55rem; }
+
+/* ── Responsive ── */
+@media(max-width:1020px) {
+  .edu-main-grid { grid-template-columns: 1fr 280px; gap: 36px; }
+  .edu-hero-stats { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:820px) {
+  .edu-main-grid { grid-template-columns: 1fr; }
+  .edu-hero-stats { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:500px) {
+  .edu-hero-stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .degree-header { flex-direction: column; }
+  .gpa-chip { align-self: flex-start; }
+}
 </style>
 </head>
 <body>
 
+<!-- BG -->
 <div class="bg-scene" aria-hidden="true">
   <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 </div>
 <div class="bg-dots" aria-hidden="true"></div>
-
 <div id="scroll-progress"></div>
+
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -62,15 +689,16 @@
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
     <div class="nav-right">
-  <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <div class="toggle-thumb">
-      <i class="fas fa-moon tj-icon"></i>
+      <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <div class="toggle-thumb">
+          <i class="fas fa-moon tj-icon"></i>
+        </div>
+      </button>
+      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </button>
-  <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</div>
+  </div>
 </nav>
 <div class="mob-nav" id="mob-nav">
   <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
@@ -85,52 +713,271 @@
 <!-- ══ EDUCATION SECTION ══ -->
 <section id="education" class="section">
   <div class="container-main">
+
+    <!-- Section heading -->
     <div class="reveal">
       <div class="kicker">Academic Journey</div>
-      <h2 class="section-title">Education &amp; <em>Excellence</em></h2>
+      <h2 class="section-title">Education &amp; <em>Academic Excellence</em></h2>
     </div>
-    <div class="edu-layout">
-      <div class="timeline reveal-l">
-        <div class="tl-item">
-          <div class="tl-year">2023 — Present</div>
-          <div class="glass-card tl-card">
-            <div class="tl-degree">Bachelor of Software Engineering</div>
-            <div class="tl-inst">Daffodil International University · Major: Data Science</div>
-            <div class="gpa-badge"><span class="gpa-num">3.995</span><span class="gpa-sub">/ 4.00 · CGPA</span></div>
-            <p class="tl-note">Undergraduate thesis in Trustworthy AI · Dean's Award Spring 2025 · Actively researching explainable deep learning and medical AI.</p>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2018 — 2020</div>
-          <div class="glass-card tl-card">
-            <div class="tl-degree">Higher Secondary Certificate (HSC)</div>
-            <div class="tl-inst">Shaheed Police Smrity College · Science</div>
-            <div class="gpa-badge"><span class="gpa-num">5.00</span><span class="gpa-sub">/ 5.00 · Perfect GPA</span></div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-year">2016 — 2018</div>
-          <div class="glass-card tl-card">
-            <div class="tl-degree">Secondary School Certificate (SSC)</div>
-            <div class="tl-inst">Rupnagar Model High School and College · Science</div>
-            <div class="gpa-badge"><span class="gpa-num">5.00</span><span class="gpa-sub">/ 5.00 · Perfect GPA</span></div>
-          </div>
-        </div>
+
+    <!-- ── Hero stat bar ── -->
+    <div class="edu-hero-stats reveal">
+      <div class="hero-stat-card" style="--card-accent:var(--grad-1);--card-icon-bg:rgba(79,142,247,.1);">
+        <div class="stat-icon"><i class="fas fa-star" style="color:var(--accent-blue)"></i></div>
+        <div class="stat-num" data-count="3.995" data-decimals="3">3.995</div>
+        <div class="stat-label">University CGPA</div>
+        <div class="stat-sub">out of 4.00 scale</div>
       </div>
-      <div class="reveal-r">
-        <div class="glass-card edu-summary">
-          <div class="kicker" style="justify-content:center;margin-bottom:14px;">Summary</div>
-          <div class="big-gpa-num">3.99</div>
-          <div class="big-gpa-label">University CGPA</div>
-          <div style="margin-top:22px;">
-            <div class="score-row"><span>BSE · University</span><strong>3.995 / 4.00</strong></div>
-            <div class="score-row"><span>HSC · Science</span><strong>5.00 / 5.00</strong></div>
-            <div class="score-row"><span>SSC · Science</span><strong>5.00 / 5.00</strong></div>
-          </div>
-          <div class="award-mini-card"><p>🏅 <strong>Dean's Award</strong> — Spring 2025<br>Daffodil International University</p></div>
-        </div>
+      <div class="hero-stat-card" style="--card-accent:var(--grad-3);--card-icon-bg:rgba(251,191,36,.1);">
+        <div class="stat-icon"><i class="fas fa-trophy" style="color:var(--accent-gold)"></i></div>
+        <div class="stat-num" style="background:var(--grad-3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;" data-count="2" data-decimals="0">2×</div>
+        <div class="stat-label">Perfect GPA</div>
+        <div class="stat-sub">HSC &amp; SSC — 5.00/5.00</div>
+      </div>
+      <div class="hero-stat-card" style="--card-accent:linear-gradient(135deg,#818cf8,#22d3ee);--card-icon-bg:rgba(129,140,248,.1);">
+        <div class="stat-icon"><i class="fas fa-flask" style="color:var(--accent-purple)"></i></div>
+        <div class="stat-num" style="background:linear-gradient(135deg,#818cf8,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI</div>
+        <div class="stat-label">Research Focus</div>
+        <div class="stat-sub">Explainable &amp; Trustworthy AI</div>
+      </div>
+      <div class="hero-stat-card" style="--card-accent:linear-gradient(135deg,#34d399,#22d3ee);--card-icon-bg:rgba(52,211,153,.1);">
+        <div class="stat-icon"><i class="fas fa-medal" style="color:var(--accent-green)"></i></div>
+        <div class="stat-num" style="background:linear-gradient(135deg,#34d399,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">🏅</div>
+        <div class="stat-label">Dean's Award</div>
+        <div class="stat-sub">Spring 2025 · DIU</div>
       </div>
     </div>
+
+    <!-- ── Main grid ── -->
+    <div class="edu-main-grid">
+
+      <!-- LEFT: Timeline -->
+      <div class="timeline-wrap reveal-l">
+        <div class="timeline-track"></div>
+
+        <!-- BSE -->
+        <div class="tl-entry">
+          <div class="tl-dot active"></div>
+          <div class="tl-year-tag">
+            <span class="status-pip"></span>
+            2023 — Present · In Progress
+          </div>
+          <div class="degree-card">
+            <div class="degree-header">
+              <div class="degree-title-block">
+                <div class="degree-name">Bachelor of Software Engineering</div>
+                <div class="degree-inst">
+                  <i class="fas fa-university"></i>
+                  Daffodil International University · Major: Data Science
+                </div>
+              </div>
+              <div class="gpa-chip">
+                <span class="gpa-num">3.995</span>
+                <span class="gpa-denom">/ 4.00 CGPA</span>
+              </div>
+            </div>
+
+            <div class="tag-row">
+              <span class="tag tag-blue">Software Engineering</span>
+              <span class="tag tag-cyan">Data Science</span>
+              <span class="tag tag-purple">Trustworthy AI</span>
+              <span class="tag tag-green">Dean's Award</span>
+            </div>
+
+            <div class="gpa-bar-wrap">
+              <div class="gpa-bar-label">
+                <span>Academic Performance</span>
+                <span>3.995 / 4.00 — Top of Class</span>
+              </div>
+              <div class="gpa-bar"><div class="gpa-bar-fill" data-width="0.99875"></div></div>
+            </div>
+
+            <ul class="degree-highlights" style="margin-top:18px;">
+              <li><div class="hi-dot"></div>Undergraduate thesis: <strong style="color:var(--text-primary);font-weight:500;">Trustworthy AI</strong> — explainability in deep learning systems applied to medical diagnosis.</li>
+              <li><div class="hi-dot"></div><strong style="color:var(--accent-gold);font-weight:500;">🏅 Dean's Award</strong> Spring 2025 — awarded for outstanding academic achievement.</li>
+              <li><div class="hi-dot"></div>Active researcher in <strong style="color:var(--text-primary);font-weight:500;">Explainable AI, Medical Imaging &amp; NLP</strong> targeting high-impact international publication.</li>
+              <li><div class="hi-dot"></div>Consistent academic record with near-perfect CGPA across all semesters — placing in the <strong style="color:var(--text-primary);font-weight:500;">top 1%</strong> of the department.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- HSC -->
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-year-tag">2018 — 2020 · Completed</div>
+          <div class="degree-card">
+            <div class="degree-header">
+              <div class="degree-title-block">
+                <div class="degree-name">Higher Secondary Certificate (HSC)</div>
+                <div class="degree-inst">
+                  <i class="fas fa-school"></i>
+                  Shaheed Police Smrity College · Science
+                </div>
+              </div>
+              <div class="gpa-chip" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);">
+                <span class="gpa-num" style="background:var(--grad-3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">5.00</span>
+                <span class="gpa-denom">/ 5.00 · Perfect</span>
+              </div>
+            </div>
+            <div class="tag-row">
+              <span class="tag tag-gold">Perfect GPA</span>
+              <span class="tag tag-blue">Science Stream</span>
+            </div>
+            <div class="gpa-bar-wrap">
+              <div class="gpa-bar-label">
+                <span>National Board Score</span>
+                <span>5.00 / 5.00 — Perfect</span>
+              </div>
+              <div class="gpa-bar">
+                <div class="gpa-bar-fill" data-width="1.0" style="background:var(--grad-3);"></div>
+              </div>
+            </div>
+            <ul class="degree-highlights" style="margin-top:14px;">
+              <li><div class="hi-dot" style="background:var(--accent-gold);"></div>Achieved <strong style="color:var(--accent-gold);font-weight:500;">perfect national board score</strong> — 5.00/5.00 in Science discipline.</li>
+              <li><div class="hi-dot" style="background:var(--accent-gold);"></div>Strong foundation in Mathematics, Physics, Chemistry &amp; Biology — directly feeding into AI and Data Science research aptitude.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SSC -->
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-dot"></div>
+          <div class="tl-year-tag">2016 — 2018 · Completed</div>
+          <div class="degree-card">
+            <div class="degree-header">
+              <div class="degree-title-block">
+                <div class="degree-name">Secondary School Certificate (SSC)</div>
+                <div class="degree-inst">
+                  <i class="fas fa-school"></i>
+                  Rupnagar Model High School and College · Science
+                </div>
+              </div>
+              <div class="gpa-chip" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);">
+                <span class="gpa-num" style="background:var(--grad-3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">5.00</span>
+                <span class="gpa-denom">/ 5.00 · Perfect</span>
+              </div>
+            </div>
+            <div class="tag-row">
+              <span class="tag tag-gold">Perfect GPA</span>
+              <span class="tag tag-blue">Science Stream</span>
+            </div>
+            <div class="gpa-bar-wrap">
+              <div class="gpa-bar-label">
+                <span>National Board Score</span>
+                <span>5.00 / 5.00 — Perfect</span>
+              </div>
+              <div class="gpa-bar">
+                <div class="gpa-bar-fill" data-width="1.0" style="background:var(--grad-3);"></div>
+              </div>
+            </div>
+            <ul class="degree-highlights" style="margin-top:14px;">
+              <li><div class="hi-dot" style="background:var(--accent-gold);"></div><strong style="color:var(--accent-gold);font-weight:500;">Consecutive perfect scores</strong> in both SSC and HSC — demonstrating consistent, sustained academic excellence over 4+ years.</li>
+            </ul>
+          </div>
+        </div>
+      </div><!-- /timeline-wrap -->
+
+      <!-- RIGHT: Sidebar -->
+      <div class="edu-sidebar reveal-r">
+
+        <!-- CGPA ring -->
+        <div class="glass-card cgpa-panel">
+          <div class="cgpa-ring">
+            <svg viewBox="0 0 120 120">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#4f8ef7"/>
+                  <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="60" cy="60" r="54"/>
+              <circle class="ring-fill" cx="60" cy="60" r="54"/>
+            </svg>
+            <div class="ring-center">
+              <div class="ring-num">3.99</div>
+              <div class="ring-label">CGPA</div>
+            </div>
+          </div>
+          <div class="cgpa-title">Academic Summary</div>
+          <div class="cgpa-sub">All Levels · National Board</div>
+          <div class="score-table">
+            <div class="score-row">
+              <span class="sr-label">BSC · University</span>
+              <span class="sr-val">3.995 / 4.00</span>
+            </div>
+            <div class="score-row">
+              <span class="sr-label">HSC · Science</span>
+              <span class="sr-val">5.00 / 5.00</span>
+            </div>
+            <div class="score-row">
+              <span class="sr-label">SSC · Science</span>
+              <span class="sr-val">5.00 / 5.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dean's Award -->
+        <div class="award-panel">
+          <div class="kicker" style="color:var(--accent-gold);margin-bottom:10px;">
+            <span style="background:var(--accent-gold);display:inline-block;width:22px;height:1.5px;"></span>
+            Recognition
+          </div>
+          <div class="award-name">🏅 Dean's Award</div>
+          <div class="award-body">
+            Awarded by <strong>Daffodil International University</strong> for
+            outstanding academic achievement — <strong>Spring 2025</strong>.
+            Recognises top-performing students across the faculty.
+          </div>
+        </div>
+
+        <!-- Research focus tags -->
+        <div class="research-tag-section">
+          <div class="research-tag-label">
+            <i class="fas fa-atom"></i>
+            Research Interests
+          </div>
+          <div>
+            <span class="rtag"><i class="fas fa-brain"></i> Explainable AI (XAI)</span>
+            <span class="rtag"><i class="fas fa-heartbeat"></i> Medical AI</span>
+            <span class="rtag"><i class="fas fa-eye"></i> Computer Vision</span>
+            <span class="rtag"><i class="fas fa-language"></i> NLP</span>
+            <span class="rtag"><i class="fas fa-shield-alt"></i> Trustworthy AI</span>
+            <span class="rtag"><i class="fas fa-chart-bar"></i> Data Science</span>
+          </div>
+        </div>
+
+        <!-- Scholarship readiness checklist -->
+        <div class="readiness-panel">
+          <div class="readiness-title">
+            <i class="fas fa-globe"></i>
+            Scholarship Readiness
+          </div>
+          <div class="readiness-item">
+            <div class="ri-check green"><i class="fas fa-check"></i></div>
+            Near-perfect CGPA (3.995 / 4.00)
+          </div>
+          <div class="readiness-item">
+            <div class="ri-check green"><i class="fas fa-check"></i></div>
+            Perfect national board scores (×2)
+          </div>
+          <div class="readiness-item">
+            <div class="ri-check gold"><i class="fas fa-medal"></i></div>
+            Dean's Award recipient — Spring 2025
+          </div>
+          <div class="readiness-item">
+            <div class="ri-check blue"><i class="fas fa-flask"></i></div>
+            Active AI research (thesis in progress)
+          </div>
+          <div class="readiness-item">
+            <div class="ri-check purple"><i class="fas fa-file-alt"></i></div>
+            International publication pipeline
+          </div>
+        </div>
+
+        
+
+      </div><!-- /edu-sidebar -->
+    </div><!-- /edu-main-grid -->
   </div>
 </section>
 
@@ -138,11 +985,102 @@
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
-    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+    <div class="footer-meta" style="margin-top:4px;opacity:.5;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="shared.js"></script>
+
+<script>
+/* ── Theme ── */
+(function(){
+  var t; try{t=localStorage.getItem('tj-theme');}catch(e){}
+  document.documentElement.setAttribute('data-theme',(t==='light'||t==='dark')?t:'dark');
+}());
+document.addEventListener('DOMContentLoaded',function(){
+  function ct(){return document.documentElement.getAttribute('data-theme')||'dark';}
+  function applyTheme(th){
+    document.documentElement.setAttribute('data-theme',th);
+    document.querySelectorAll('.tj-icon').forEach(function(el){
+      el.className=(th==='dark'?'fas fa-moon':'fas fa-sun')+' tj-icon';
+    });
+    try{localStorage.setItem('tj-theme',th);}catch(e){}
+  }
+  applyTheme(ct());
+  requestAnimationFrame(function(){requestAnimationFrame(function(){document.body.classList.add('theme-ready');});});
+  document.querySelectorAll('.tj-toggle').forEach(function(btn){
+    btn.addEventListener('click',function(){applyTheme(ct()==='dark'?'light':'dark');});
+  });
+
+  /* ── Scroll progress ── */
+  var prog=document.getElementById('scroll-progress');
+  if(prog) window.addEventListener('scroll',function(){
+    var max=document.body.scrollHeight-window.innerHeight;
+    prog.style.width=(max>0?Math.round(window.scrollY/max*100):0)+'%';
+  },{passive:true});
+
+  /* ── Mobile nav ── */
+  var ham=document.getElementById('nav-ham'),mobNav=document.getElementById('mob-nav');
+  if(ham&&mobNav){
+    function closeNav(){mobNav.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');}
+    ham.addEventListener('click',function(e){
+      e.stopPropagation();var o=!mobNav.classList.contains('open');
+      mobNav.classList.toggle('open',o);ham.classList.toggle('open',o);ham.setAttribute('aria-expanded',String(o));
+    });
+    mobNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeNav);});
+    document.addEventListener('click',function(e){if(!ham.contains(e.target)&&!mobNav.contains(e.target))closeNav();});
+    window.addEventListener('resize',function(){if(window.innerWidth>820)closeNav();},{passive:true});
+  }
+
+  /* ── Scroll reveal + animation trigger ── */
+  var els=document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
+  function revealEl(el,i){
+    setTimeout(function(){
+      el.classList.add('vis');
+      /* trigger GPA bars inside this element */
+      el.querySelectorAll('.gpa-bar-fill').forEach(function(bar){
+        var w=parseFloat(bar.getAttribute('data-width')||1);
+        bar.style.transformOrigin='left';
+        bar.style.transform='scaleX(0)';
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ bar.classList.add('animated'); bar.style.transform='scaleX('+w+')'; });
+        });
+      });
+    },i*80);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e,i){
+        if(e.isIntersecting){revealEl(e.target,i);io.unobserve(e.target);}
+      });
+    },{threshold:.06});
+    els.forEach(function(el){io.observe(el);});
+  } else {
+    els.forEach(function(el,i){revealEl(el,i);});
+  }
+
+  /* ── Ring animation ── */
+  var ring=document.querySelector('.ring-fill');
+  if(ring){
+    var ringObs=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting){
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ ring.classList.add('animated'); });
+        });
+        ringObs.disconnect();
+      }
+    },{threshold:.3});
+    ringObs.observe(ring);
+  }
+
+  /* ── Smooth anchor scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+});
+</script>
 </body>
 </html>
