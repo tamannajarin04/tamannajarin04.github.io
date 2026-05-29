@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Activities — Tamanna Jarin Tima</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="_variables.css"/>
+<style>
+/* ── AWARD BANNER ── */
+.award-banner { border-radius: 24px; padding: clamp(28px,5vw,50px) clamp(28px,5vw,60px); display: flex; align-items: center; gap: 36px; background: linear-gradient(135deg, rgba(251,191,36,0.07), rgba(79,142,247,0.04)); border: 1px solid rgba(251,191,36,0.22); position: relative; overflow: hidden; transition: all 0.3s; margin-bottom: 60px; }
+.award-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(251,191,36,0.05), transparent 65%); }
+.award-banner:hover { border-color: rgba(251,191,36,0.38); box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 60px rgba(251,191,36,0.07); }
+.award-icon-wrap { width: 80px; height: 80px; flex-shrink: 0; background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(251,191,36,0.08)); border: 1px solid rgba(251,191,36,0.3); border-radius: 22px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 36px rgba(251,191,36,0.15); }
+.award-icon-wrap i { font-size: 1.8rem; color: var(--accent-gold); }
+.award-title { font-family: 'DM Serif Display', serif; font-size: clamp(1.4rem,4vw,1.9rem); color: var(--accent-gold); margin-bottom: 8px; letter-spacing: -0.02em; }
+.award-desc { color: var(--text-secondary); font-size: 0.86rem; line-height: 1.9; font-weight: 300; }
+.award-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 10px; }
+
+/* ── ACTIVITIES GRID ── */
+.acts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 18px; }
+.act-card { padding: 26px; border-radius: 16px; transition: transform 0.28s; }
+.act-card:hover { transform: translateY(-4px); border-color: var(--border-hover) !important; }
+.act-role { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; color: var(--accent-cyan); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+.act-name { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.act-org  { font-size: 0.69rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; }
+.act-desc { font-size: 0.79rem; color: var(--text-secondary); line-height: 1.85; font-weight: 300; }
+
+/* ── TRAINING CARD ── */
+.training-card { padding: clamp(26px,5vw,40px); border-radius: 20px; position: relative; overflow: hidden; }
+.training-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple)); background-size: 200%; animation: shimmer 3s linear infinite; }
+.training-badge { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-cyan); background: rgba(34,211,238,0.1); border: 1px solid rgba(34,211,238,0.25); padding: 7px 14px; border-radius: 4px; width: fit-content; margin-bottom: 16px; }
+.training-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2s infinite; }
+.training-title { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: var(--text-primary); margin-bottom: 10px; letter-spacing: -0.02em; }
+.training-desc { color: var(--text-secondary); font-size: 0.84rem; line-height: 1.95; font-weight: 300; max-width: 740px; }
+.training-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.training-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--text-muted); border: 1px solid var(--border); padding: 4px 12px; border-radius: 4px; }
+
+@media (max-width: 700px) { .award-banner { flex-direction: column; text-align: center; padding: 28px 22px; gap: 20px; } }
+@media (max-width: 900px) { .acts-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .acts-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="bg-scene" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+<div class="bg-dots" aria-hidden="true"></div>
+
+<div id="scroll-progress"></div>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">T.J. Tima</a>
+    <div class="nav-links-wrap">
+      <a href="about.html"      class="nav-link-item">About</a>
+      <a href="education.html"  class="nav-link-item">Education</a>
+      <a href="research.html"   class="nav-link-item">Research</a>
+      <a href="projects.html"   class="nav-link-item">Projects</a>
+      <a href="skills.html"     class="nav-link-item">Skills</a>
+      <a href="activities.html" class="nav-link-item active">Activities</a>
+      <a href="contact.html"    class="nav-link-item">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button id="theme-toggle" aria-label="Toggle theme"><div class="toggle-thumb" id="toggle-thumb"><i class="fas fa-moon" id="toggle-icon"></i></div></button>
+      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">
+  <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
+  <a href="education.html"><i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
+  <a href="research.html"><i class="fas fa-flask" style="width:16px;color:var(--accent-blue)"></i>Research</a>
+  <a href="projects.html"><i class="fas fa-code" style="width:16px;color:var(--accent-blue)"></i>Projects</a>
+  <a href="skills.html"><i class="fas fa-tools" style="width:16px;color:var(--accent-blue)"></i>Skills</a>
+  <a href="activities.html"><i class="fas fa-star" style="width:16px;color:var(--accent-blue)"></i>Activities</a>
+  <a href="contact.html"><i class="fas fa-envelope" style="width:16px;color:var(--accent-blue)"></i>Contact</a>
+</div>
+
+<!-- ══ AWARDS ══ -->
+<section class="section section-alt">
+  <div class="container-main">
+    <div class="reveal">
+      <div class="kicker">Honors &amp; Awards</div>
+      <h2 class="section-title">Academic <em>Recognition</em></h2>
+    </div>
+    <div class="award-banner reveal">
+      <div class="award-icon-wrap"><i class="fas fa-medal"></i></div>
+      <div>
+        <div class="award-title">Dean's Award — Spring 2025</div>
+        <div class="award-desc">Awarded by Daffodil International University for outstanding academic performance during the Spring 2025 semester, recognizing exceptional dedication and scholarly achievement in Software Engineering and Data Science.</div>
+        <div class="award-meta">Daffodil International University · Spring Semester 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACTIVITIES ══ -->
+<section id="activities" class="section">
+  <div class="container-main">
+    <div class="reveal">
+      <div class="kicker">Beyond the Classroom</div>
+      <h2 class="section-title">Leadership &amp; <em>Activities</em></h2>
+    </div>
+    <div class="acts-grid">
+      <div class="glass-card act-card reveal">
+        <div class="act-role">Executive Member</div>
+        <div class="act-name">Data Science Club</div>
+        <div class="act-org">Daffodil International University</div>
+        <div class="act-desc">Organizing academic events, workshops, and peer-learning sessions focused on data science and machine learning for students across departments.</div>
+      </div>
+      <div class="glass-card act-card reveal" style="transition-delay:.08s">
+        <div class="act-role">Organizing Team</div>
+        <div class="act-name">DIU Data Summit 2025</div>
+        <div class="act-org">National Data Science Summit · DIU</div>
+        <div class="act-desc">Event coordination, participant management, and technical session logistics for a national-level data science summit drawing participants from across Bangladesh.</div>
+      </div>
+      <div class="glass-card act-card reveal" style="transition-delay:.16s">
+        <div class="act-role">Organizing Team</div>
+        <div class="act-name">National Robo Spark 2024</div>
+        <div class="act-org">National Robotics Competition · 2024</div>
+        <div class="act-desc">Assisted in organizing a national robotics competition — managing participant registration, scheduling, and on-site operations for a multi-university event.</div>
+      </div>
+    </div>
+    <div class="glass-card training-card reveal">
+      <div class="training-badge"><span class="training-dot"></span>Ongoing Professional Training</div>
+      <div class="training-title">BDSET Center — AI, ML, DL &amp; Emerging Technologies</div>
+      <p class="training-desc">Government-supported professional development under the Bangladesh Digital Service and Employment Training (BDSET) Center Project — equipping future tech professionals with hands-on AI and emerging technology expertise.</p>
+      <div class="training-tags">
+        <span class="training-tag">AI &amp; Machine Learning</span>
+        <span class="training-tag">Deep Learning Fundamentals</span>
+        <span class="training-tag">AR / VR / MR / XR</span>
+        <span class="training-tag">Emerging Technologies</span>
+        <span class="training-tag">Communicative English</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container-main">
+    <div class="footer-name">Tamanna Jarin Tima</div>
+    <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
+    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="_shared.js"></script>
+</body>
+</html>

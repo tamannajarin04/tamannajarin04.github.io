@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Education — Tamanna Jarin Tima</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="_variables.css"/>
+<style>
+/* ── EDUCATION-SPECIFIC STYLES ── */
+.edu-layout { display: grid; grid-template-columns: 1fr 240px; gap: 60px; align-items: start; }
+
+.timeline { padding-left: 32px; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 5px; top: 14px; bottom: 14px; width: 1px; background: linear-gradient(to bottom, var(--accent-blue), rgba(79,142,247,0.08)); }
+.tl-item { position: relative; margin-bottom: 28px; }
+.tl-item::before { content: ''; position: absolute; left: -37px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-blue); box-shadow: 0 0 0 3px var(--bg-primary), 0 0 0 5px rgba(79,142,247,0.3), 0 0 18px rgba(79,142,247,0.6); }
+.tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.56rem; color: var(--accent-blue); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+.tl-card { padding: 22px 26px; border-radius: var(--rs); transition: transform 0.28s; }
+.tl-card:hover { transform: translateX(5px); }
+.tl-degree { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--text-primary); margin-bottom: 4px; letter-spacing: -0.015em; }
+.tl-inst { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-muted); margin-bottom: 14px; }
+.gpa-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.2); padding: 5px 14px; border-radius: var(--rs); }
+.gpa-num { font-family: 'DM Serif Display', serif; font-size: 1rem; color: var(--accent-blue); }
+.gpa-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--text-muted); letter-spacing: 0.1em; }
+.tl-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; line-height: 1.8; font-weight: 300; }
+
+.edu-summary { padding: 30px; border-radius: var(--r); text-align: center; }
+.big-gpa-num { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 8vw, 4.8rem); line-height: 1; letter-spacing: -0.04em; background: var(--grad-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.big-gpa-label { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.16em; text-transform: uppercase; margin-top: 5px; }
+.score-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
+.score-row:last-child { border: none; }
+.score-row span { color: var(--text-secondary); font-weight: 300; }
+.score-row strong { font-family: 'JetBrains Mono', monospace; color: var(--accent-blue); font-size: 0.72rem; }
+.award-mini-card { margin-top: 18px; padding: 14px; background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.22); border-radius: var(--rs); }
+.award-mini-card p { font-size: 0.74rem; color: var(--text-secondary); margin: 0; line-height: 1.7; font-weight: 300; }
+.award-mini-card strong { color: var(--accent-gold); }
+
+@media (max-width: 900px) { .edu-layout { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 600px) { .timeline { padding-left: 26px; } .tl-item::before { left: -31px; } }
+</style>
+</head>
+<body>
+
+<div class="bg-scene" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+<div class="bg-dots" aria-hidden="true"></div>
+
+<div id="scroll-progress"></div>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">T.J. Tima</a>
+    <div class="nav-links-wrap">
+      <a href="about.html"      class="nav-link-item">About</a>
+      <a href="education.html"  class="nav-link-item active">Education</a>
+      <a href="research.html"   class="nav-link-item">Research</a>
+      <a href="projects.html"   class="nav-link-item">Projects</a>
+      <a href="skills.html"     class="nav-link-item">Skills</a>
+      <a href="activities.html" class="nav-link-item">Activities</a>
+      <a href="contact.html"    class="nav-link-item">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button id="theme-toggle" aria-label="Toggle theme"><div class="toggle-thumb" id="toggle-thumb"><i class="fas fa-moon" id="toggle-icon"></i></div></button>
+      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-nav" id="mob-nav">
+  <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
+  <a href="education.html"><i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
+  <a href="research.html"><i class="fas fa-flask" style="width:16px;color:var(--accent-blue)"></i>Research</a>
+  <a href="projects.html"><i class="fas fa-code" style="width:16px;color:var(--accent-blue)"></i>Projects</a>
+  <a href="skills.html"><i class="fas fa-tools" style="width:16px;color:var(--accent-blue)"></i>Skills</a>
+  <a href="activities.html"><i class="fas fa-star" style="width:16px;color:var(--accent-blue)"></i>Activities</a>
+  <a href="contact.html"><i class="fas fa-envelope" style="width:16px;color:var(--accent-blue)"></i>Contact</a>
+</div>
+
+<!-- ══ EDUCATION SECTION ══ -->
+<section id="education" class="section">
+  <div class="container-main">
+    <div class="reveal">
+      <div class="kicker">Academic Journey</div>
+      <h2 class="section-title">Education &amp; <em>Excellence</em></h2>
+    </div>
+    <div class="edu-layout">
+      <div class="timeline reveal-l">
+        <div class="tl-item">
+          <div class="tl-year">2023 — Present</div>
+          <div class="glass-card tl-card">
+            <div class="tl-degree">Bachelor of Software Engineering</div>
+            <div class="tl-inst">Daffodil International University · Major: Data Science</div>
+            <div class="gpa-badge"><span class="gpa-num">3.995</span><span class="gpa-sub">/ 4.00 · CGPA</span></div>
+            <p class="tl-note">Undergraduate thesis in Trustworthy AI · Dean's Award Spring 2025 · Actively researching explainable deep learning and medical AI.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2018 — 2020</div>
+          <div class="glass-card tl-card">
+            <div class="tl-degree">Higher Secondary Certificate (HSC)</div>
+            <div class="tl-inst">Shaheed Police Smrity College · Science</div>
+            <div class="gpa-badge"><span class="gpa-num">5.00</span><span class="gpa-sub">/ 5.00 · Perfect GPA</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2016 — 2018</div>
+          <div class="glass-card tl-card">
+            <div class="tl-degree">Secondary School Certificate (SSC)</div>
+            <div class="tl-inst">Rupnagar Model High School and College · Science</div>
+            <div class="gpa-badge"><span class="gpa-num">5.00</span><span class="gpa-sub">/ 5.00 · Perfect GPA</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-r">
+        <div class="glass-card edu-summary">
+          <div class="kicker" style="justify-content:center;margin-bottom:14px;">Summary</div>
+          <div class="big-gpa-num">3.99</div>
+          <div class="big-gpa-label">University CGPA</div>
+          <div style="margin-top:22px;">
+            <div class="score-row"><span>BSE · University</span><strong>3.995 / 4.00</strong></div>
+            <div class="score-row"><span>HSC · Science</span><strong>5.00 / 5.00</strong></div>
+            <div class="score-row"><span>SSC · Science</span><strong>5.00 / 5.00</strong></div>
+          </div>
+          <div class="award-mini-card"><p>🏅 <strong>Dean's Award</strong> — Spring 2025<br>Daffodil International University</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container-main">
+    <div class="footer-name">Tamanna Jarin Tima</div>
+    <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
+    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="_shared.js"></script>
+</body>
+</html>
