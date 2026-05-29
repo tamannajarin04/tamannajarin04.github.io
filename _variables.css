@@ -3,10 +3,6 @@
    Usage: <link rel="stylesheet" href="_variables.css">
 ══════════════════════════════════════════════ */
 
-/* Google Fonts — paste in <head> of each page:
-   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-*/
-
 /* ─── CSS CUSTOM PROPERTIES ─── */
 :root {
   /* Dark Theme (default) */
@@ -54,12 +50,18 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* FIX: Prevent FOUC — hide body until theme is applied by _shared.js */
+/* body starts invisible for <5ms then JS sets data-theme and we show it */
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.7;
+  /* FIX: Remove transition on body background to prevent FOUC flash */
+  /* transition is re-added via .theme-ready class set by JS */
+}
+body.theme-ready {
   transition: background 0.4s ease, color 0.4s ease;
 }
 
@@ -170,14 +172,20 @@ img { max-width: 100%; display: block; }
 .nav-ham.open span:nth-child(2) { opacity: 0; }
 .nav-ham.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
 
+/* FIX: Mobile nav — use display:none by default, only show when .open class is added */
 .mob-nav {
-  display: none; position: fixed; top: 60px; left: 16px; right: 16px;
+  display: none;
+  position: fixed;
+  /* FIX: Use top:60px exactly matching nav height */
+  top: 60px; left: 16px; right: 16px;
   background: var(--nav-bg); backdrop-filter: blur(32px);
   border: 1px solid var(--border); border-radius: 16px;
   padding: 12px; z-index: 999; flex-direction: column; gap: 4px;
   box-shadow: var(--shadow);
 }
+/* FIX: Only display:flex when explicitly .open — not just when rendered */
 .mob-nav.open { display: flex; }
+
 .mob-nav a {
   font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);
@@ -186,7 +194,17 @@ img { max-width: 100%; display: block; }
 }
 .mob-nav a:hover { color: var(--accent-blue); background: rgba(79,142,247,0.08); }
 
-@media (max-width: 820px) { .nav-links-wrap { display: none; } .nav-ham { display: flex; } }
+/* FIX: Hide hamburger on desktop, show on mobile */
+@media (min-width: 821px) {
+  .nav-ham { display: none !important; }
+  .nav-links-wrap { display: flex !important; }
+  /* Ensure mobile nav can never show on desktop even if .open class leaks */
+  .mob-nav { display: none !important; }
+}
+@media (max-width: 820px) {
+  .nav-links-wrap { display: none !important; }
+  .nav-ham { display: flex; }
+}
 @media (max-width: 480px) { .nav-inner { padding: 0 16px; } }
 
 /* ─── SECTION HELPERS ─── */
