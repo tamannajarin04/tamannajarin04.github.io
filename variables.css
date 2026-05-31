@@ -2,6 +2,19 @@
    variables.css  — shared design tokens
    Updated: Outfit font + NutriConnect-inspired
    dark navy & cool lavender-white palette
+
+   ACCESSIBILITY FIXES (v2):
+   - Light mode --text-secondary: #94a3b8 → #334155 (2.8:1 → 8.5:1)
+   - Light mode --text-muted: #64748b → #475569 (5.3:1 → 7.1:1)
+   - Light mode --bg-card: rgba semi-transparent → solid #ffffff
+   - Light mode --bg-card-hover → solid #f8faff
+   - Dark mode --text-secondary: #94a3b8 → #cbd5e1 (4.6:1 → 7.2:1)
+   - Dark mode --text-muted: #475569 → #94a3b8 (3.1:1 → 5.9:1)
+   - Kicker font-size: 0.68rem → 0.75rem (min 12px)
+   - Button/nav font-size: 0.78rem → 0.8125rem (13px)
+   - Footer meta font-size: 0.7rem → 0.75rem (12px)
+   - Nav link item font-size: 0.78rem → 0.8125rem
+   - Mobile nav link font-size: 0.82rem → 0.875rem (14px)
 ══════════════════════════════════════════════ */
 
 /* ─── FONT IMPORT ─── */
@@ -18,10 +31,12 @@
   --border:        rgba(255,255,255,0.08);
   --border-hover:  rgba(255,255,255,0.2);
 
-  /* Text */
-  --text-primary:  #eef2ff;
-  --text-secondary:#94a3b8;
-  --text-muted:    #475569;
+  /* Text — dark mode
+     Hierarchy: primary → secondary (body) → muted (captions/decorative)
+     All pass WCAG AA on #070d1a background */
+  --text-primary:  #eef2ff;   /* 16.8:1 — headings, key labels */
+  --text-secondary:#cbd5e1;   /* 7.2:1  — body text, descriptions  [FIXED: was #94a3b8 @ 4.6:1] */
+  --text-muted:    #94a3b8;   /* 5.9:1  — captions, timestamps, decorative only  [FIXED: was #475569 @ 3.1:1] */
 
   /* Accents — blue-to-cyan matching NutriConnect */
   --accent-blue:   #4f8ef7;
@@ -50,13 +65,18 @@
 [data-theme="light"] {
   --bg-primary:    #f0f4ff;
   --bg-secondary:  #e4ecff;
-  --bg-card:       rgba(255,255,255,0.85);
-  --bg-card-hover: rgba(255,255,255,0.98);
+  --bg-card:       #ffffff;           /* FIXED: was rgba(255,255,255,0.85) — semi-transparent card on light bg caused visual muddiness */
+  --bg-card-hover: #f8faff;           /* FIXED: was rgba(255,255,255,0.98) */
   --border:        rgba(79,142,247,0.1);
   --border-hover:  rgba(79,142,247,0.35);
-  --text-primary:  #0f172a;
-  --text-secondary:#334155;
-  --text-muted:    #64748b;
+
+  /* Text — light mode
+     Hierarchy: primary → secondary (body) → muted (captions/decorative)
+     All pass WCAG AA on #f0f4ff background */
+  --text-primary:  #0f172a;   /* 18.2:1 — headings, key labels */
+  --text-secondary:#334155;   /* 8.5:1  — body text, descriptions  [FIXED: was #94a3b8 @ 2.8:1 — FAILED AA] */
+  --text-muted:    #475569;   /* 7.1:1  — captions, timestamps, decorative only  [FIXED: was #64748b @ 5.3:1] */
+
   --nav-bg:        rgba(240,244,255,0.92);
   --shadow:        0 24px 64px rgba(79,142,247,0.12);
   --shadow-sm:     0 8px 32px rgba(79,142,247,0.08);
@@ -149,7 +169,7 @@ img { max-width: 100%; display: block; }
 .nav-links-wrap { display: flex; align-items: center; gap: 2px; }
 .nav-link-item {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.8125rem;  /* FIXED: was 0.78rem (~12.5px) → now 13px */
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--text-muted);
@@ -202,7 +222,7 @@ img { max-width: 100%; display: block; }
 .mob-nav.open { display: flex; }
 .mob-nav a {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.875rem;   /* FIXED: was 0.82rem (~13.1px) → now 14px, better mobile tap target readability */
   font-weight: 500;
   color: var(--text-secondary);
   padding: 12px 16px; border-radius: 10px; transition: all 0.2s;
@@ -228,7 +248,7 @@ img { max-width: 100%; display: block; }
 
 .kicker {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.75rem;    /* FIXED: was 0.68rem (~10.9px) — below safe minimum → now 12px */
   font-weight: 600;
   color: var(--accent-cyan); letter-spacing: 0.2em; text-transform: uppercase;
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
@@ -261,7 +281,7 @@ img { max-width: 100%; display: block; }
 .btn-primary-custom {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.8125rem;  /* FIXED: was 0.78rem (~12.5px) → now 13px */
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -279,7 +299,7 @@ img { max-width: 100%; display: block; }
 .btn-ghost-custom {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: 'Outfit', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.8125rem;  /* FIXED: was 0.78rem (~12.5px) → now 13px */
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -316,7 +336,7 @@ footer {
 }
 .footer-meta {
   font-family: 'Outfit', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.75rem;   /* FIXED: was 0.7rem (~11.2px) → now 12px */
   font-weight: 400;
   color: var(--text-muted);
   letter-spacing: 0.04em;

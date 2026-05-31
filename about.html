@@ -6,12 +6,14 @@
 <title>About — Tamanna Jarin Tima</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Fonts loaded via variables.css: Outfit, DM Serif Display, JetBrains Mono -->
 <link rel="stylesheet" href="variables.css"/>
 <style>
 /* ── ABOUT-SPECIFIC STYLES ── */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.about-text { font-size: 0.87rem; color: var(--text-secondary); line-height: 2.05; font-weight: 300; }
+
+/* FIXED: font-weight 300 → 400 — thin weight compounds contrast issues in both modes */
+.about-text { font-size: 0.87rem; color: var(--text-secondary); line-height: 2.05; font-weight: 400; }
 .about-text p { margin-bottom: 14px; }
 .about-text strong { color: var(--accent-cyan); font-weight: 500; }
 
@@ -19,15 +21,25 @@
 .tag-pill {
   display: inline-flex; align-items: center; gap: 7px;
   background: var(--bg-card); border: 1px solid var(--border);
-  padding: 7px 14px; border-radius: var(--rs); font-size: 0.73rem;
+  padding: 7px 14px; border-radius: var(--rs);
+  font-size: 0.8rem;         /* FIXED: was 0.73rem (~11.7px) → now ~12.8px */
   color: var(--text-secondary); transition: all 0.22s; cursor: default; min-height: 36px;
 }
 .tag-pill:hover { border-color: rgba(79,142,247,0.4); color: var(--accent-blue); transform: translateY(-2px); background: rgba(79,142,247,0.06); }
-.tag-pill i { color: var(--accent-blue); font-size: 0.68rem; }
+.tag-pill i { color: var(--accent-blue); font-size: 0.75rem; } /* FIXED: was 0.68rem → now 12px */
 
 .info-block { padding: 20px 22px; border-radius: var(--rs); margin-bottom: 10px; }
-.ib-label { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--accent-cyan); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; padding-bottom: 9px; border-bottom: 1px solid var(--border); font-weight: 600; }
-.ib-text { font-size: 0.81rem; color: var(--text-secondary); line-height: 1.9; font-weight: 300; }
+.ib-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;        /* FIXED: was 0.54rem (~8.6px) — illegibly small → now 10.9px */
+  color: var(--accent-cyan); letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 10px; padding-bottom: 9px; border-bottom: 1px solid var(--border); font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.ib-label i { font-size: 0.75rem; }
+
+/* FIXED: font-weight 300 → 400 — thin weight at small sizes hurts readability */
+.ib-text { font-size: 0.81rem; color: var(--text-secondary); line-height: 1.9; font-weight: 400; }
 
 @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
 </style>
@@ -53,16 +65,18 @@
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
     <div class="nav-right">
-  <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <div class="toggle-thumb">
-      <i class="fas fa-moon tj-icon"></i>
+      <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <div class="toggle-thumb">
+          <i class="fas fa-moon tj-icon"></i>
+        </div>
+      </button>
+      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </button>
-  <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</div>
+  </div><!-- /.nav-inner — FIXED: explicit close tag was missing -->
 </nav>
+
 <div class="mob-nav" id="mob-nav">
   <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html"><i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
@@ -95,21 +109,23 @@
           <span class="tag-pill"><i class="fas fa-code"></i>Full-Stack Dev</span>
         </div>
       </div>
+
       <div class="reveal-r" style="display:flex;flex-direction:column;gap:10px;">
+        <!-- FIXED: emoji labels → Font Awesome icons (consistent cross-OS rendering) -->
         <div class="glass-card info-block">
-          <div class="ib-label">🎓 Academic Profile</div>
+          <div class="ib-label"><i class="fas fa-graduation-cap"></i>Academic Profile</div>
           <p class="ib-text">BSE student with a near-perfect academic record. Dean's Award (Spring 2025), Executive Member of the Data Science Club, and organizer of national events including DIU Data Summit 2025 and National Robo Spark 2024.</p>
         </div>
         <div class="glass-card info-block">
-          <div class="ib-label">🔬 Research Focus</div>
+          <div class="ib-label"><i class="fas fa-flask"></i>Research Focus</div>
           <p class="ib-text">Pursuing an undergraduate thesis on trustworthy AI for medical imaging. Deeply invested in uncertainty-aware deep learning and Grad-CAM–based explainability for clinical AI, with a focus on real-world healthcare deployment.</p>
         </div>
         <div class="glass-card info-block">
-          <div class="ib-label">🌍 Career Aspirations</div>
+          <div class="ib-label"><i class="fas fa-globe"></i>Career Aspirations</div>
           <p class="ib-text">Actively seeking Erasmus Mundus scholarships, MSc programs in AI/ML in Europe, and research collaborations at the intersection of trustworthy AI, biomedical informatics, and human-centered machine learning.</p>
         </div>
         <div class="glass-card info-block">
-          <div class="ib-label">🌱 Current Training</div>
+          <div class="ib-label"><i class="fas fa-seedling"></i>Current Training</div>
           <p class="ib-text">Enrolled in government-supported BDSET Center training covering AI/ML, deep learning, emerging technologies (AR/VR/XR), and professional English communication.</p>
         </div>
       </div>
@@ -121,7 +137,8 @@
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
-    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+    <!-- FIXED: removed inline opacity:0.5 — stacks on top of --text-muted, near-invisible in light mode -->
+    <div class="footer-meta" style="margin-top:4px;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 

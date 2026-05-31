@@ -15,22 +15,26 @@
 <link rel="stylesheet" href="variables.css"/>
 
 <style>
-/* ────────────────────────────────────────────
-   HERO — full-viewport centred layout
-───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────
+   index.css  — Homepage  (centred single-column)
+   All tokens from variables.css :root / [data-theme]
+   All JS hooks wired for shared.js
+───────────────────────────────────────────────── */
+
+/* ── HERO SECTION ── */
 #hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(96px, 14vw, 130px) 24px clamp(72px, 10vw, 100px);
+  padding: clamp(96px,14vw,130px) 24px clamp(72px,10vw,100px);
   position: relative;
   z-index: 1;
 }
 
 .hero-inner {
   width: 100%;
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -53,45 +57,48 @@
   padding: 8px 20px 8px 14px;
   border-radius: 100px;
   margin-bottom: 40px;
-  animation: heroFadeUp 0.6s 0.05s ease both;
   backdrop-filter: blur(12px);
+  animation: heroFadeUp 0.55s 0.05s ease both;
 }
 .status-pip {
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--accent-gold);
   box-shadow: 0 0 8px rgba(251,191,36,0.8);
-  animation: pip 2.4s ease-in-out infinite;
+  animation: pipBlink 2.4s ease-in-out infinite;
+  flex-shrink: 0;
 }
-@keyframes pip { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+@keyframes pipBlink { 0%,100%{opacity:1;} 50%{opacity:0.25;} }
 
 /* ── Photo ── */
 .photo-wrap {
   position: relative;
   width: 160px; height: 160px;
   margin-bottom: 36px;
-  animation: heroFadeUp 0.6s 0.12s ease both;
+  animation: heroFadeUp 0.55s 0.12s ease both;
 }
 .photo-wrap::before {
   content: '';
-  position: absolute;
-  inset: -3px;
+  position: absolute; inset: -3px;
   border-radius: 50%;
   background: var(--grad-1);
   z-index: 0;
 }
 .photo-wrap::after {
   content: '';
-  position: absolute;
-  inset: -10px;
+  position: absolute; inset: -12px;
   border-radius: 50%;
   border: 1px solid rgba(79,142,247,0.15);
   z-index: 0;
   animation: ringPulse 3s ease-in-out infinite;
 }
-@keyframes ringPulse { 0%,100%{opacity:0.15;transform:scale(1);} 50%{opacity:0.35;transform:scale(1.03);} }
+@keyframes ringPulse {
+  0%,100% { opacity:0.15; transform:scale(1); }
+  50%      { opacity:0.35; transform:scale(1.04); }
+}
 .photo-disc {
   position: relative; z-index: 1;
-  width: 160px; height: 160px; border-radius: 50%;
+  width: 160px; height: 160px;
+  border-radius: 50%;
   border: 3px solid var(--bg-primary);
   overflow: hidden;
   background: var(--bg-secondary);
@@ -99,19 +106,19 @@
 .photo-disc img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
-  border-radius: 50%; display: block;
+  border-radius: 50%;
   filter: saturate(0.9) contrast(1.04);
   transition: filter 0.5s, transform 0.5s;
 }
-.photo-disc:hover img { filter: saturate(1.1) contrast(1); transform: scale(1.04); }
+.photo-disc:hover img { filter: saturate(1.1) contrast(1.02); transform: scale(1.05); }
 
 /* ── Name block ── */
 .hero-name {
   font-family: 'DM Serif Display', serif;
-  margin-bottom: 0;
-  animation: heroFadeUp 0.6s 0.18s ease both;
-  line-height: 1;
+  line-height: 1.0;
   letter-spacing: -0.03em;
+  margin-bottom: 0;
+  animation: heroFadeUp 0.55s 0.18s ease both;
 }
 .hero-name .first {
   display: block;
@@ -126,6 +133,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 .hero-affil {
   display: inline-block;
   margin-top: 14px;
@@ -134,38 +142,39 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-muted);
-  animation: heroFadeUp 0.6s 0.22s ease both;
+  animation: heroFadeUp 0.55s 0.22s ease both;
 }
 
-/* ── Rule ── */
+/* ── Divider rule ── */
 .hero-rule {
   width: 48px; height: 2px;
   background: var(--grad-1);
   border-radius: 2px;
   margin: 26px auto;
-  animation: heroFadeUp 0.6s 0.26s ease both;
+  animation: heroFadeUp 0.55s 0.26s ease both;
   box-shadow: 0 0 24px rgba(79,142,247,0.55);
 }
 
 /* ── Tagline ── */
 .hero-tagline {
-  font-size: clamp(0.9rem, 2.1vw, 1.02rem);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.88rem, 2.1vw, 1rem);
   color: var(--text-secondary);
-  line-height: 1.82;
+  line-height: 1.85;
   max-width: 500px;
   font-weight: 300;
-  animation: heroFadeUp 0.6s 0.3s ease both;
+  animation: heroFadeUp 0.55s 0.30s ease both;
 }
 .hero-tagline strong { color: var(--text-primary); font-weight: 600; }
 
-/* ── Location ── */
+/* ── Location tag ── */
 .hero-loc {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
+  font-size: 0.575rem;
   letter-spacing: 0.1em;
   color: var(--accent-cyan);
   margin: 20px 0 32px;
-  animation: heroFadeUp 0.6s 0.34s ease both;
+  animation: heroFadeUp 0.55s 0.34s ease both;
   display: inline-flex; align-items: center; gap: 7px;
 }
 .hero-loc::before { content: '▸'; opacity: 0.6; }
@@ -175,18 +184,17 @@
   display: flex; gap: 10px;
   flex-wrap: wrap; justify-content: center;
   margin-bottom: 36px;
-  animation: heroFadeUp 0.6s 0.38s ease both;
+  animation: heroFadeUp 0.55s 0.38s ease both;
 }
 .soc-btn {
   width: 44px; height: 44px;
-  border-radius: 10px;
+  border-radius: var(--rs);
   border: 1px solid var(--border);
   background: var(--bg-card);
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted);
-  font-size: 15px;
+  color: var(--text-muted); font-size: 15px;
   text-decoration: none;
-  transition: all 0.22s ease;
+  transition: all 0.22s;
   cursor: pointer;
   backdrop-filter: blur(12px);
 }
@@ -198,21 +206,28 @@
   box-shadow: 0 8px 24px rgba(79,142,247,0.18);
 }
 
-/* ────────────────────────────────────────────
-   MAIN CARD
-───────────────────────────────────────────── */
+/* ── Main card ── */
 .main-card {
   width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r);
   padding: 0;
-  animation: heroFadeUp 0.6s 0.44s ease both;
+  animation: heroFadeUp 0.55s 0.44s ease both;
   overflow: hidden;
   backdrop-filter: blur(28px);
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, background 0.3s;
 }
-.main-card:hover { border-color: var(--border-hover); }
+.main-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+/* Card top accent bar */
+.card-accent-bar {
+  height: 2px;
+  background: var(--grad-1);
+}
 
 /* Card header strip */
 .card-header-strip {
@@ -225,156 +240,148 @@
 }
 .card-icon {
   width: 34px; height: 34px;
-  border-radius: 8px;
+  border-radius: var(--rs);
   background: rgba(34,211,238,0.1);
   border: 1px solid rgba(34,211,238,0.2);
   display: flex; align-items: center; justify-content: center;
-  color: var(--accent-cyan);
-  font-size: 14px;
-  flex-shrink: 0;
+  color: var(--accent-cyan); font-size: 14px; flex-shrink: 0;
 }
 .card-title-text {
-  font-size: 0.875rem;
-  color: var(--text-primary);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem; font-weight: 600;
+  color: var(--text-primary); letter-spacing: -0.01em;
 }
 .card-title-text span {
   font-weight: 400;
-  color: var(--text-muted);
-  font-size: 0.8rem;
+  color: var(--text-muted); font-size: 0.8rem;
 }
 .card-pill {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.08em;
+  font-size: 0.52rem; letter-spacing: 0.08em;
   color: var(--accent-cyan);
   border: 1px dashed rgba(34,211,238,0.3);
-  border-radius: 100px;
-  padding: 4px 12px;
+  border-radius: 100px; padding: 4px 12px;
   white-space: nowrap;
+}
+.card-meta-right {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
 }
 .card-theme-indicator {
   display: flex; align-items: center; gap: 6px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.51rem;
-  color: var(--text-muted);
+  font-size: 0.51rem; color: var(--text-muted);
 }
 
-/* Tags row */
+/* Card tags */
 .card-tags {
   display: flex; flex-wrap: wrap; gap: 6px;
   padding: 14px 26px 0;
 }
-.tag {
+.ctag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.5rem;
-  letter-spacing: 0.07em;
+  font-size: 0.5rem; letter-spacing: 0.07em; text-transform: uppercase;
   color: var(--text-muted);
   background: rgba(255,255,255,0.04);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 4px 10px;
+  border-radius: 4px; padding: 4px 10px;
+  transition: border-color 0.2s, color 0.2s;
 }
+.ctag:hover { border-color: rgba(79,142,247,0.3); color: var(--accent-blue); }
+[data-theme="light"] .ctag { background: rgba(0,0,0,0.03); }
 
-/* Card body */
+/* Card body text */
 .card-body-content {
   padding: 16px 26px 22px;
 }
 .card-desc {
-  font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; font-weight: 300;
   color: var(--text-secondary);
-  line-height: 1.82;
-  font-weight: 300;
-  margin-bottom: 0;
+  line-height: 1.85;
 }
 .card-desc strong { color: var(--text-primary); font-weight: 600; }
 
-/* ── CTA row — all 4 buttons centered in one row ── */
+/* CTA row — 4 buttons in one line, centred */
 .card-cta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: nowrap;
+  display: flex; gap: 8px; flex-wrap: nowrap;
   padding: 0 26px 22px;
-  align-items: center;
-  justify-content: center;
+  align-items: center; justify-content: center;
 }
-
 .card-cta .btn-primary-custom,
 .card-cta .btn-ghost-custom {
   font-size: 0.66rem;
-  padding: 10px 13px;
+  padding: 10px 14px;
   white-space: nowrap;
   flex-shrink: 0;
   min-height: 40px;
   gap: 6px;
 }
 
-/* ── Stats ── */
+/* Stats bar */
 .hero-stats {
   display: flex;
   border-top: 1px solid var(--border);
 }
 .stat {
-  flex: 1;
-  padding: 22px 12px 20px;
-  text-align: center;
-  position: relative;
+  flex: 1; padding: 22px 12px 20px;
+  text-align: center; position: relative;
 }
 .stat + .stat { border-left: 1px solid var(--border); }
+.stat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--stat-accent, transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.stat:hover::before { opacity: 1; }
 .stat-num {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.6rem, 3.8vw, 2.1rem);
+  font-size: clamp(1.55rem, 3.8vw, 2.1rem);
   color: var(--accent-blue);
-  line-height: 1;
-  letter-spacing: -0.02em;
+  line-height: 1; letter-spacing: -0.02em;
 }
 .stat-num sup {
-  font-size: 0.55em;
-  color: var(--text-muted);
+  font-size: 0.55em; color: var(--text-muted);
   font-family: 'JetBrains Mono', monospace;
 }
 .stat-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.46rem;
-  color: var(--text-muted);
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-top: 6px;
+  font-size: 0.46rem; color: var(--text-muted);
+  letter-spacing: 0.15em; text-transform: uppercase; margin-top: 6px;
 }
 .stat-sub {
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-  display: block;
-  font-style: italic;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem; color: var(--text-muted);
+  margin-top: 2px; display: block; font-style: italic;
 }
 
-/* ── Animation keyframes ── */
+/* ── ANIMATIONS ── */
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(22px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  from { opacity:0; transform:translateY(22px); }
+  to   { opacity:1; transform:none; }
 }
 
-/* ── Mobile adjustments ── */
+/* ── LIGHT MODE CARD ── */
+[data-theme="light"] .main-card {
+  background: rgba(255,255,255,0.88);
+  box-shadow: var(--shadow-sm);
+}
+[data-theme="light"] .ctag { background: rgba(0,0,0,0.03); }
+
+/* ── RESPONSIVE ── */
 @media (max-width: 580px) {
   .card-header-strip { padding: 16px 18px 0; }
   .card-tags         { padding: 12px 18px 0; }
-  .card-body-content { padding: 14px 18px 20px; }
+  .card-body-content { padding: 14px 18px 18px; }
   .card-theme-indicator { display: none; }
 
-  /* Stack buttons on mobile */
   .card-cta {
     padding: 0 18px 18px;
     flex-wrap: wrap;
   }
   .card-cta .btn-primary-custom,
   .card-cta .btn-ghost-custom {
-    width: 100%;
-    justify-content: center;
-    font-size: 0.74rem;
-    padding: 12px 20px;
-    min-height: 44px;
+    width: 100%; justify-content: center;
+    font-size: 0.8125rem; padding: 12px 20px; min-height: 44px;
   }
 
   .hero-stats { flex-wrap: wrap; }
@@ -382,19 +389,14 @@
   .stat:nth-child(2n) { border-left: 1px solid var(--border) !important; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
 }
-
-/* ── Light mode card tint ── */
-[data-theme="light"] .main-card {
-  background: rgba(255,255,255,0.82);
-  box-shadow: 0 12px 48px rgba(79,142,247,0.08);
+@media (max-width: 400px) {
+  #hero { padding-left: 16px; padding-right: 16px; }
 }
-[data-theme="light"] .tag { background: rgba(0,0,0,0.03); }
-[data-theme="light"] .card-icon { background: rgba(34,211,238,0.07); }
 </style>
 </head>
 <body>
 
-<!-- Background scene -->
+<!-- ── BACKGROUND ── -->
 <div class="bg-scene" aria-hidden="true">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -403,7 +405,7 @@
 <div class="bg-dots" aria-hidden="true"></div>
 <div id="scroll-progress"></div>
 
-<!-- ═══ NAVBAR ═══ -->
+<!-- ══ NAVBAR ══ -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -417,34 +419,36 @@
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
     <div class="nav-right">
-      <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <!-- id="theme-toggle" + class="tj-toggle" → wired by shared.js -->
+      <button class="tj-toggle" id="theme-toggle" aria-label="Toggle colour theme">
         <div class="toggle-thumb"><i class="fas fa-moon tj-icon"></i></div>
       </button>
-      <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
+      <!-- id="nav-ham" → wired by shared.js -->
+      <button class="nav-ham" id="nav-ham" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </nav>
 
-<!-- Mobile nav -->
+<!-- Mobile nav — id="mob-nav" wired by shared.js -->
 <div class="mob-nav" id="mob-nav">
   <a href="about.html">      <i class="fas fa-user-circle"    style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html">  <i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
-  <a href="research.html">   <i class="fas fa-flask"           style="width:16px;color:var(--accent-blue)"></i>Research</a>
-  <a href="projects.html">   <i class="fas fa-code"            style="width:16px;color:var(--accent-blue)"></i>Projects</a>
-  <a href="skills.html">     <i class="fas fa-tools"           style="width:16px;color:var(--accent-blue)"></i>Skills</a>
-  <a href="activities.html"> <i class="fas fa-star"            style="width:16px;color:var(--accent-blue)"></i>Activities</a>
-  <a href="contact.html">    <i class="fas fa-envelope"        style="width:16px;color:var(--accent-blue)"></i>Contact</a>
+  <a href="research.html">   <i class="fas fa-flask"          style="width:16px;color:var(--accent-blue)"></i>Research</a>
+  <a href="projects.html">   <i class="fas fa-code"           style="width:16px;color:var(--accent-blue)"></i>Projects</a>
+  <a href="skills.html">     <i class="fas fa-tools"          style="width:16px;color:var(--accent-blue)"></i>Skills</a>
+  <a href="activities.html"> <i class="fas fa-star"           style="width:16px;color:var(--accent-blue)"></i>Activities</a>
+  <a href="contact.html">    <i class="fas fa-envelope"       style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ═══ HERO ═══ -->
+<!-- ══ HERO ══ -->
 <section id="hero" aria-label="Introduction">
   <div class="hero-inner">
 
     <!-- Status chip -->
     <div class="status-chip" role="status">
-      <div class="status-pip"></div>
+      <div class="status-pip" aria-hidden="true"></div>
       BSc Software Engineering &nbsp;·&nbsp; AI Researcher
     </div>
 
@@ -475,24 +479,25 @@
     <!-- Location -->
     <span class="hero-loc">Dhaka, Bangladesh</span>
 
-    <!-- Social links -->
+    <!-- Social icons -->
+    <!-- Theme toggle button uses class="tj-toggle" so shared.js wires it automatically -->
     <div class="social-row" role="list" aria-label="Social links">
-      <a href="#" class="soc-btn" role="listitem" title="GitHub" aria-label="GitHub profile">
+      <a href="#" class="soc-btn" role="listitem" aria-label="GitHub profile" title="GitHub">
         <i class="fab fa-github" aria-hidden="true"></i>
       </a>
-      <a href="#" class="soc-btn" role="listitem" title="LinkedIn" aria-label="LinkedIn profile">
+      <a href="#" class="soc-btn" role="listitem" aria-label="LinkedIn profile" title="LinkedIn">
         <i class="fab fa-linkedin-in" aria-hidden="true"></i>
       </a>
-      <a href="mailto:" class="soc-btn" role="listitem" title="Email" aria-label="Send email">
+      <a href="mailto:" class="soc-btn" role="listitem" aria-label="Send email" title="Email">
         <i class="fas fa-envelope" aria-hidden="true"></i>
       </a>
-      <a href="CV_TIMA_2026.pdf" class="soc-btn" role="listitem" title="Download CV" aria-label="Download CV" download>
+      <a href="CV_TIMA_2026.pdf" class="soc-btn" role="listitem" aria-label="Download CV" title="Download CV" download>
         <i class="fas fa-download" aria-hidden="true"></i>
       </a>
-      <a href="research.html" class="soc-btn" role="listitem" title="Research" aria-label="View research">
+      <a href="research.html" class="soc-btn" role="listitem" aria-label="View research" title="Research">
         <i class="fas fa-flask" aria-hidden="true"></i>
       </a>
-      <button class="soc-btn tj-toggle" title="Toggle theme" aria-label="Toggle colour scheme">
+      <button class="soc-btn tj-toggle" aria-label="Toggle colour scheme" title="Toggle theme">
         <i class="fas fa-moon tj-icon" aria-hidden="true"></i>
       </button>
     </div>
@@ -500,7 +505,9 @@
     <!-- ── Main card ── -->
     <div class="main-card" role="region" aria-label="Research focus">
 
-      <!-- Header strip -->
+      <div class="card-accent-bar"></div>
+
+      <!-- Card header -->
       <div class="card-header-strip">
         <div class="card-header-left">
           <div class="card-icon" aria-hidden="true">
@@ -511,22 +518,23 @@
             <span>— Brain Tumour &middot; MRI</span>
           </div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <div class="card-meta-right">
           <span class="card-pill">Active · 2025–2026</span>
+          <!-- #theme-label text is updated by shared.js applyTheme() -->
           <div class="card-theme-indicator">
             Theme&nbsp;<span class="card-pill" id="theme-label">Dark</span>
           </div>
         </div>
       </div>
 
-      <!-- Tags -->
+      <!-- Research keywords -->
       <div class="card-tags" aria-label="Research keywords">
-        <span class="tag">Grad-CAM</span>
-        <span class="tag">SHAP</span>
-        <span class="tag">Uncertainty Quantification</span>
-        <span class="tag">Multimodal Classification</span>
-        <span class="tag">CNN</span>
-        <span class="tag">Transfer Learning</span>
+        <span class="ctag">Grad-CAM</span>
+        <span class="ctag">SHAP</span>
+        <span class="ctag">Uncertainty Quantification</span>
+        <span class="ctag">Multimodal Classification</span>
+        <span class="ctag">CNN</span>
+        <span class="ctag">Transfer Learning</span>
       </div>
 
       <!-- Description -->
@@ -535,46 +543,46 @@
           My thesis investigates <strong>multimodal brain tumour classification</strong>
           using convolutional neural networks augmented with Grad-CAM, SHAP, and
           Bayesian uncertainty quantification — engineering clinical AI that is
-          <strong>transparent, calibrated, and deployable</strong> in resource-constrained
-          medical settings.
+          <strong>transparent, calibrated, and deployable</strong> in
+          resource-constrained medical settings.
         </p>
       </div>
 
-      <!-- CTA buttons — all 4 in one row -->
+      <!-- CTA buttons — shared classes btn-primary-custom / btn-ghost-custom from variables.css -->
       <div class="card-cta">
         <a href="research.html"    class="btn-primary-custom">
-          <i class="fas fa-flask"         aria-hidden="true"></i> View Research
+          <i class="fas fa-flask"       aria-hidden="true"></i> View Research
         </a>
         <a href="projects.html"    class="btn-ghost-custom">
-          <i class="fas fa-code"          aria-hidden="true"></i> Projects
+          <i class="fas fa-code"        aria-hidden="true"></i> Projects
         </a>
         <a href="CV_TIMA_2026.pdf" class="btn-ghost-custom" download>
-          <i class="fas fa-download"      aria-hidden="true"></i> Download CV
+          <i class="fas fa-download"    aria-hidden="true"></i> Download CV
         </a>
         <a href="contact.html"     class="btn-ghost-custom">
-          <i class="fas fa-paper-plane"   aria-hidden="true"></i> Get in Touch
+          <i class="fas fa-paper-plane" aria-hidden="true"></i> Get in Touch
         </a>
       </div>
 
       <!-- Stats bar -->
       <div class="hero-stats" role="list" aria-label="Key metrics">
-        <div class="stat" role="listitem">
+        <div class="stat" role="listitem" style="--stat-accent:var(--grad-1);">
           <div class="stat-num">3.99<sup>/4</sup></div>
           <div class="stat-label">CGPA</div>
           <span class="stat-sub">Dean's List</span>
         </div>
-        <div class="stat" role="listitem">
+        <div class="stat" role="listitem" style="--stat-accent:var(--grad-2);">
           <div class="stat-num">3<sup>+</sup></div>
           <div class="stat-label">AI Projects</div>
           <span class="stat-sub">Medical &amp; NLP</span>
         </div>
-        <div class="stat" role="listitem">
+        <div class="stat" role="listitem" style="--stat-accent:var(--grad-1);">
           <div class="stat-num">94<sup>%</sup></div>
           <div class="stat-label">Best Accuracy</div>
           <span class="stat-sub">Brain Tumour</span>
         </div>
-        <div class="stat" role="listitem">
-          <div class="stat-num">1</div>
+        <div class="stat" role="listitem" style="--stat-accent:var(--grad-3);">
+          <div class="stat-num" style="color:var(--accent-gold);">1</div>
           <div class="stat-label">Dean's Award</div>
           <span class="stat-sub">Academic Merit</span>
         </div>
@@ -585,16 +593,18 @@
   </div><!-- /hero-inner -->
 </section>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ══ FOOTER ══ -->
 <footer role="contentinfo">
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering &nbsp;·&nbsp; AI Researcher &nbsp;·&nbsp; Dhaka, Bangladesh</div>
-    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+    <div class="footer-meta" style="margin-top:4px;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- shared.js handles: theme (.tj-toggle/.tj-icon/#theme-label), scroll progress,
+     mobile nav (#nav-ham/#mob-nav), reveal animations, smooth scroll -->
 <script src="shared.js"></script>
 </body>
 </html>

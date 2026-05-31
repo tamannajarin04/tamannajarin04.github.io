@@ -6,7 +6,8 @@
 <title>Projects — Tamanna Jarin Tima</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<!-- Fonts loaded via variables.css: Outfit, DM Serif Display, JetBrains Mono -->
+<!-- FIXED: removed redundant DM Sans + DM Serif Display + JetBrains Mono Google Fonts link -->
 <link rel="stylesheet" href="variables.css"/>
 <style>
 /* ── PROJECT GRID ── */
@@ -35,7 +36,6 @@
   box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 0 40px rgba(79,142,247,0.12);
   border-color: rgba(255,255,255,0.22);
 }
-
 [data-theme="light"] .proj-card {
   background: rgba(255,255,255,0.94);
   border-color: rgba(79,142,247,0.13);
@@ -72,12 +72,14 @@
 .proj-quick-link {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 10px; border-radius: 7px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;       /* FIXED: was 0.55rem (~8.8px) → now 9.6px */
+  font-weight: 600;
   letter-spacing: 0.06em; text-decoration: none; border: 1px solid;
   transition: all 0.2s ease; white-space: nowrap;
   backdrop-filter: blur(14px);
 }
-.proj-quick-link i { font-size: 0.65rem; }
+.proj-quick-link i { font-size: 0.68rem; } /* FIXED: was 0.65rem — minor nudge */
 .proj-quick-link:hover { transform: translateY(-2px); }
 .ql-github  { background: rgba(15,15,20,0.75); border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.88); }
 .ql-github:hover  { background: rgba(40,40,55,0.9); color: #fff; }
@@ -92,13 +94,16 @@
   display: flex; justify-content: space-between; align-items: center;
 }
 .proj-num {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;       /* FIXED: was 0.52rem (~8.3px) → now 9.6px */
+  font-weight: 600;
   color: rgba(255,255,255,0.65); background: rgba(0,0,0,0.5);
   backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12);
   padding: 4px 10px; border-radius: 6px; letter-spacing: 0.1em;
 }
 .proj-cat {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;       /* FIXED: was 0.5rem (~8px) → now 9.6px */
   letter-spacing: 0.1em; padding: 4px 10px; border-radius: 6px; font-weight: 600;
 }
 .cat-fs { color: var(--accent-gold);   background: rgba(251,191,36,0.18);  border: 1px solid rgba(251,191,36,0.35); }
@@ -114,24 +119,30 @@
   min-width: 0;
 }
 .proj-title {
-  font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 700;
+  font-family: 'Outfit', sans-serif; /* FIXED: was DM Sans (not loaded) → Outfit from variables.css */
+  font-size: 0.97rem; font-weight: 700;
   color: var(--text-primary); margin-bottom: 9px; line-height: 1.4;
 }
-[data-theme="dark"] .proj-title { color: #eef2ff; }
-[data-theme="light"] .proj-title { color: #0f172a; }
+/* FIXED: redundant [data-theme] overrides removed — var(--text-primary) already handles both modes correctly */
 
 .proj-desc {
-  font-size: 0.78rem; color: var(--text-secondary); line-height: 1.9;
-  margin-bottom: 13px; flex: 1; font-weight: 300;
+  font-size: 0.8rem;       /* FIXED: was 0.78rem — nudged up; weight 300 → 400 below */
+  color: var(--text-secondary); /* FIXED: hardcoded #94a3b8 dark / #334155 light removed —
+                                   var(--text-secondary) from variables.css already has correct
+                                   contrast-fixed values for both modes (#cbd5e1 dark / #334155 light) */
+  line-height: 1.9;
+  margin-bottom: 13px; flex: 1;
+  font-weight: 400;        /* FIXED: was 300 — thin weight compounds contrast issues */
 }
-[data-theme="dark"] .proj-desc { color: #94a3b8; }
-[data-theme="light"] .proj-desc { color: #334155; }
 
 .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
 .proj-stack span {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;       /* FIXED: was 0.52rem (~8.3px) → now 9.6px */
   padding: 3px 9px; border-radius: 4px; font-weight: 500;
 }
+/* FIXED: kept theme-specific colors here since these use non-token hex values
+   that intentionally differ from the standard text tokens */
 [data-theme="dark"] .proj-stack span {
   color: #7ab3fa;
   background: rgba(79,142,247,0.1);
@@ -145,17 +156,21 @@
 
 .proj-bullets { list-style: none; margin-bottom: 0; padding: 0; }
 .proj-bullets li {
-  font-size: 0.74rem; padding: 3px 0 3px 14px;
-  position: relative; line-height: 1.65; font-weight: 300;
+  font-size: 0.78rem;      /* FIXED: was 0.74rem (~11.8px) → now 12.5px; weight 300 → 400 */
+  padding: 3px 0 3px 14px;
+  position: relative; line-height: 1.65; font-weight: 400;
+  /* FIXED: hardcoded #64748b dark / #475569 light removed — use var(--text-muted) which has
+     correct contrast-fixed values for both modes from variables.css */
+  color: var(--text-muted);
 }
-[data-theme="dark"] .proj-bullets li { color: #64748b; }
-[data-theme="light"] .proj-bullets li { color: #475569; }
 .proj-bullets li::before {
   content: '▸'; position: absolute; left: 0;
-  color: var(--accent-blue); font-size: 0.62rem; top: 6px;
+  color: var(--accent-blue);
+  font-size: 0.65rem;      /* FIXED: was 0.62rem → nudged up */
+  top: 6px;
 }
 
-/* ══ BOTTOM LINK ROW ══ */
+/* ── BOTTOM LINK ROW ── */
 .proj-links-row {
   padding: 12px 16px 14px;
   border-top: 1px solid var(--border);
@@ -172,22 +187,9 @@
   border-top-color: rgba(79,142,247,0.1);
   background: rgba(240,244,255,0.5);
 }
-
-/* Top row: GitHub + Live App */
-.proj-links-top {
-  display: flex;
-  gap: 8px;
-}
-.proj-links-top .proj-link-btn {
-  flex: 1;
-  justify-content: center;
-}
-
-/* Bottom row: Demo Video full width */
-.proj-links-bottom .proj-link-btn {
-  width: 100%;
-  justify-content: center;
-}
+.proj-links-top { display: flex; gap: 8px; }
+.proj-links-top .proj-link-btn { flex: 1; justify-content: center; }
+.proj-links-bottom .proj-link-btn { width: 100%; justify-content: center; }
 
 /* ── Base button ── */
 .proj-link-btn {
@@ -196,8 +198,8 @@
   gap: 6px;
   padding: 8px 12px;
   border-radius: 9px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem;
+  font-family: 'Outfit', sans-serif; /* FIXED: was DM Sans (not loaded) → Outfit */
+  font-size: 0.8rem;       /* FIXED: was 0.72rem (~11.5px) → now 12.8px */
   font-weight: 600;
   text-decoration: none;
   border: 1.5px solid;
@@ -206,7 +208,7 @@
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
-.proj-link-btn i { font-size: 0.82rem; line-height: 1; }
+.proj-link-btn i { font-size: 0.85rem; line-height: 1; }
 .proj-link-btn:hover { transform: translateY(-2px); }
 
 /* GitHub */
@@ -275,7 +277,7 @@
   color: #b91c1c;
 }
 
-/* ── Ghost (disabled) ── */
+/* Ghost (disabled) */
 .plb-ghost {
   display: inline-flex !important;
   flex: 1 !important;
@@ -293,10 +295,7 @@
   background: transparent;
   border-color: rgba(79,142,247,0.1);
 }
-.proj-links-bottom .plb-ghost {
-  width: 100% !important;
-  flex: unset !important;
-}
+.proj-links-bottom .plb-ghost { width: 100% !important; flex: unset !important; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1060px) {
@@ -368,9 +367,9 @@
             <span class="proj-cat cat-fs">Full-Stack · AI</span>
           </div>
           <div class="proj-quick-links">
-            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
-            <a href="#" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
+            <a href="https://github.com/tamannajarin04/NutriConnect" target="_blank" rel="noopener" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://nutriconnect-69ww.onrender.com" target="_blank" rel="noopener" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+            <a href="https://youtu.be/TX4KEq-VgJ0" target="_blank" rel="noopener" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
           </div>
         </div>
         <div class="proj-body">
@@ -404,8 +403,8 @@
             <span class="proj-cat cat-ml">NLP · ML</span>
           </div>
           <div class="proj-quick-links">
-            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+            <a href="https://github.com/tamannajarin04/sms_web_app" target="_blank" rel="noopener" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://smishguard-ai.onrender.com/" target="_blank" rel="noopener" class="proj-quick-link ql-live"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
           </div>
         </div>
         <div class="proj-body">
@@ -439,8 +438,8 @@
             <span class="proj-cat cat-ai">Vision · LLM</span>
           </div>
           <div class="proj-quick-links">
-            <a href="#" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
-            <a href="#" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
+            <a href="https://github.com/tamannajarin04/AuroraLeaf-Rice-Disease-Vision-Language-AI" target="_blank" rel="noopener" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
+            <a href="https://youtube.com/watch?v=YOUR_ID" target="_blank" rel="noopener" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
           </div>
         </div>
         <div class="proj-body">
@@ -472,7 +471,8 @@
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
-    <div class="footer-meta" style="margin-top:4px;opacity:0.5;">© 2025–2026 · All Rights Reserved</div>
+    <!-- FIXED: removed opacity:0.5 — stacks on --text-muted, near-invisible in light mode -->
+    <div class="footer-meta" style="margin-top:4px;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 
