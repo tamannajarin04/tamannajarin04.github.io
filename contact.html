@@ -11,8 +11,7 @@
 <style>
 
 /* ═══════════════════════════════════════════════
-   CONTACT PAGE — Professional / Scholarship-Ready
-   Redesigned for international academic outreach
+   CONTACT PAGE — Full-width, no sidebar
 ═══════════════════════════════════════════════ */
 
 /* ── Status Badge ── */
@@ -41,169 +40,84 @@
 .contact-intro { text-align: center; margin-bottom: 52px; }
 .contact-intro .subtitle {
   font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-  color: var(--text-secondary); max-width: 480px; margin: 16px auto 0;
+  color: var(--text-secondary); max-width: 520px; margin: 16px auto 0;
   line-height: 1.8; font-weight: 400;
 }
 
-/* ── Main Two-Column Layout ── */
-.contact-layout {
+/* ── Contact Grid (2-column cards) ── */
+.contact-grid {
   display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
-  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* ══ Profile Card (Left) ══ */
-.profile-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  backdrop-filter: blur(24px);
-  overflow: hidden;
-  position: sticky;
-  top: 80px;
-}
-.profile-card-top {
-  padding: 28px 24px 20px;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-}
-.profile-card-top::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-  background: var(--grad-1);
-}
-.avatar-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-.avatar {
-  width: 64px; height: 64px; border-radius: 16px;
-  background: var(--grad-1);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem;
-  color: #fff; flex-shrink: 0; letter-spacing: -0.03em;
-  box-shadow: 0 6px 20px rgba(79,142,247,0.35);
-}
-.avatar-meta .full-name {
-  font-family: 'Outfit', sans-serif; font-weight: 700;
-  font-size: 1rem; color: var(--text-primary);
-  line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 3px;
-}
-.avatar-meta .degree-line {
-  font-family: 'Outfit', sans-serif; font-size: 0.73rem;
-  color: var(--text-muted); font-weight: 400; line-height: 1.4;
-}
-.degree-line span {
-  display: inline-block;
-  background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.18);
-  border-radius: 4px; padding: 1px 6px; font-size: 0.65rem;
-  font-family: 'JetBrains Mono', monospace; color: var(--accent-blue);
-  font-weight: 600; letter-spacing: 0.04em; margin-left: 4px; vertical-align: middle;
-}
-
-/* Research tags */
-.profile-section { padding: 18px 24px; border-bottom: 1px solid var(--border); }
-.profile-section:last-child { border-bottom: none; }
-.p-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
-  color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.tag-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
-.rtag {
-  font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 500;
-  padding: 3px 10px; border-radius: 20px; line-height: 1.6;
-}
-.rtag.blue   { background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.18); color: var(--accent-blue); }
-.rtag.cyan   { background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.18); color: var(--accent-cyan); }
-.rtag.purple { background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.18); color: var(--accent-purple); }
-.rtag.gold   { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); color: var(--accent-gold); }
-
-/* Meta rows in profile */
-.meta-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  margin-bottom: 10px;
-}
-.meta-item:last-child { margin-bottom: 0; }
-.mi-icon {
-  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; margin-top: 1px;
-  background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.15);
-  display: flex; align-items: center; justify-content: center;
-}
-.mi-icon i { font-size: 0.65rem; color: var(--accent-blue); }
-.mi-body {}
-.mi-title {
-  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
-  color: var(--text-primary); margin-bottom: 1px; line-height: 1.3;
-}
-.mi-sub {
-  font-family: 'Outfit', sans-serif; font-size: 0.72rem;
-  color: var(--text-muted); line-height: 1.4; font-weight: 400;
-}
-
-/* Availability timeline */
-.timeline-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.18);
-  border-radius: 6px; padding: 5px 10px; margin-top: 6px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
-  font-weight: 600; color: var(--accent-blue); letter-spacing: 0.05em;
-}
-.timeline-pill i { font-size: 0.55rem; }
-
-/* ══ Contact Methods (Right) ══ */
-.contact-col { display: flex; flex-direction: column; gap: 10px; }
-
+/* ── Contact Cards ── */
 .contact-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 14px; padding: 14px 18px;
-  display: flex; align-items: center; gap: 14px;
+  border-radius: 16px; padding: 20px 22px;
+  display: flex; align-items: center; gap: 16px;
   transition: all 0.22s ease; backdrop-filter: blur(16px);
   text-decoration: none; position: relative;
 }
 .contact-card:hover {
   border-color: rgba(79,142,247,0.38);
-  transform: translateX(5px);
+  transform: translateY(-3px);
   background: rgba(79,142,247,0.04);
-  box-shadow: -4px 0 0 rgba(79,142,247,0.5), 0 8px 28px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.22), 0 0 0 1px rgba(79,142,247,0.18);
 }
 .contact-card.is-primary {
   border-color: rgba(79,142,247,0.22);
   background: rgba(79,142,247,0.04);
+  grid-column: 1 / -1;
 }
 .contact-card.is-primary:hover {
   border-color: rgba(79,142,247,0.5);
   background: rgba(79,142,247,0.08);
-  box-shadow: -4px 0 0 rgba(79,142,247,0.7), 0 8px 28px rgba(79,142,247,0.12);
+  box-shadow: 0 12px 40px rgba(79,142,247,0.15), 0 0 0 1px rgba(79,142,247,0.3);
 }
+
+/* Primary email row inner layout */
+.contact-card.is-primary .cc-body-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 1; gap: 12px; min-width: 0;
+}
+.contact-card.is-primary .cc-val {
+  font-size: 0.95rem;
+}
+
 .cc-icon {
-  width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0;
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.22s;
 }
 .cc-icon.default { background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.18); }
 .cc-icon.default i { color: var(--accent-blue); }
-.contact-card:hover .cc-icon.default { background: var(--grad-1); border-color: transparent; box-shadow: 0 0 16px rgba(79,142,247,0.4); }
+.contact-card:hover .cc-icon.default { background: var(--grad-1); border-color: transparent; box-shadow: 0 0 18px rgba(79,142,247,0.4); }
 .contact-card:hover .cc-icon.default i { color: #fff; }
 
 .cc-icon.li  { background: rgba(10,102,194,0.1); border: 1px solid rgba(10,102,194,0.22); }
 .cc-icon.li i  { color: #0a66c2; }
-.contact-card:hover .cc-icon.li  { background: #0a66c2; border-color: transparent; box-shadow: 0 0 16px rgba(10,102,194,0.4); }
+.contact-card:hover .cc-icon.li  { background: #0a66c2; border-color: transparent; box-shadow: 0 0 18px rgba(10,102,194,0.4); }
 .contact-card:hover .cc-icon.li i { color: #fff; }
 
 .cc-icon.gh  { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
 .cc-icon.gh i  { color: var(--text-secondary); }
-.contact-card:hover .cc-icon.gh  { background: #24292e; border-color: transparent; box-shadow: 0 0 16px rgba(0,0,0,0.4); }
+.contact-card:hover .cc-icon.gh  { background: #24292e; border-color: transparent; box-shadow: 0 0 18px rgba(0,0,0,0.4); }
 .contact-card:hover .cc-icon.gh i { color: #fff; }
 
-.cc-icon i { font-size: 0.82rem; transition: color 0.22s; }
+.cc-icon i { font-size: 0.9rem; transition: color 0.22s; }
 .cc-body { flex: 1; min-width: 0; }
 .cc-label {
   font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
-  color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 2px;
+  color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px;
 }
 .cc-val {
-  font-family: 'Outfit', sans-serif; font-size: 0.83rem; font-weight: 500;
+  font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 500;
   color: var(--text-secondary); transition: color 0.22s;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -211,7 +125,7 @@
 
 .cc-badge {
   font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
-  padding: 3px 8px; border-radius: 20px; flex-shrink: 0;
+  padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
   background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);
   color: var(--accent-blue); letter-spacing: 0.04em; text-transform: uppercase;
 }
@@ -221,19 +135,56 @@
 }
 .contact-card:hover .cc-arrow { opacity: 1; transform: none; }
 
-/* Response badge */
+/* ── Response Note ── */
 .response-note {
-  display: flex; align-items: center; gap: 10px;
-  padding: 11px 16px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 12px 20px;
   background: rgba(34,197,94,0.06);
   border: 1px solid rgba(34,197,94,0.15);
   border-radius: 10px;
-  font-family: 'Outfit', sans-serif; font-size: 0.77rem; font-weight: 500;
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500;
   color: #4ade80;
+  max-width: 780px; margin: 0 auto 12px;
 }
 .response-note i { font-size: 0.72rem; }
 
+/* ── Meta strip (location / timezone / target) ── */
+.meta-strip {
+  display: flex; align-items: center; justify-content: center; gap: 0;
+  flex-wrap: wrap;
+  max-width: 780px; margin: 0 auto 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+.meta-strip-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 22px; flex: 1; min-width: 0;
+  border-right: 1px solid var(--border);
+}
+.meta-strip-item:last-child { border-right: none; }
+.msi-icon {
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+  background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.15);
+  display: flex; align-items: center; justify-content: center;
+}
+.msi-icon i { font-size: 0.68rem; color: var(--accent-blue); }
+.msi-body {}
+.msi-title {
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
+  color: var(--text-primary); margin-bottom: 1px; line-height: 1.3;
+}
+.msi-sub {
+  font-family: 'Outfit', sans-serif; font-size: 0.68rem;
+  color: var(--text-muted); font-weight: 400; line-height: 1.3;
+}
+
 /* ── Open To Section ── */
+.opp-section {
+  max-width: 780px; margin: 0 auto;
+}
 .opp-header {
   display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
 }
@@ -282,18 +233,21 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 980px) {
-  .contact-layout { grid-template-columns: 1fr; }
-  .profile-card   { position: static; }
-  .opp-grid       { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 700px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-card.is-primary { grid-column: 1; }
+  .meta-strip { flex-direction: column; border-radius: 14px; }
+  .meta-strip-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
+  .meta-strip-item:last-child { border-bottom: none; }
+  .opp-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 560px) {
+@media (max-width: 480px) {
   .opp-grid { grid-template-columns: 1fr 1fr; }
   .cta-row  { flex-direction: column; width: 100%; }
   .cta-row .btn-primary-custom,
   .cta-row .btn-ghost-custom  { width: 100%; justify-content: center; }
 }
-@media (max-width: 380px) { .opp-grid { grid-template-columns: 1fr; } }
+@media (max-width: 360px) { .opp-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -334,13 +288,13 @@
 
 <!-- ── MOBILE NAV ── -->
 <div class="mob-nav" id="mob-nav">
-  <a href="about.html">     <i class="fas fa-user-circle"  style="width:16px;color:var(--accent-blue)"></i>About</a>
+  <a href="about.html">     <i class="fas fa-user-circle"   style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html"> <i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
-  <a href="research.html">  <i class="fas fa-flask"         style="width:16px;color:var(--accent-blue)"></i>Research</a>
-  <a href="projects.html">  <i class="fas fa-code"          style="width:16px;color:var(--accent-blue)"></i>Projects</a>
-  <a href="skills.html">    <i class="fas fa-tools"         style="width:16px;color:var(--accent-blue)"></i>Skills</a>
-  <a href="activities.html"><i class="fas fa-star"          style="width:16px;color:var(--accent-blue)"></i>Activities</a>
-  <a href="contact.html">   <i class="fas fa-envelope"      style="width:16px;color:var(--accent-blue)"></i>Contact</a>
+  <a href="research.html">  <i class="fas fa-flask"          style="width:16px;color:var(--accent-blue)"></i>Research</a>
+  <a href="projects.html">  <i class="fas fa-code"           style="width:16px;color:var(--accent-blue)"></i>Projects</a>
+  <a href="skills.html">    <i class="fas fa-tools"          style="width:16px;color:var(--accent-blue)"></i>Skills</a>
+  <a href="activities.html"><i class="fas fa-star"           style="width:16px;color:var(--accent-blue)"></i>Activities</a>
+  <a href="contact.html">   <i class="fas fa-envelope"       style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -353,7 +307,7 @@
     <div class="contact-intro reveal">
       <div class="status-badge">
         <span class="status-dot"></span>
-        Available · Seeking MSc 2025–26
+        Available · Seeking MSc 2027–28
       </div>
       <div class="kicker" style="justify-content:center; margin-top:18px;">Get In Touch</div>
       <h2 class="section-title" style="margin-bottom:0;text-align:center;">Let's <em>Connect</em></h2>
@@ -364,163 +318,91 @@
       </p>
     </div>
 
-    <!-- ── Main Grid: Profile + Contact Methods ── -->
-    <div class="contact-layout reveal">
-
-      <!-- LEFT: Profile Card -->
-      <div class="profile-card">
-
-        <!-- Avatar + Name -->
-        <div class="profile-card-top">
-          <div class="avatar-row">
-            <div class="avatar" aria-hidden="true">TJT</div>
-            <div class="avatar-meta">
-              <div class="full-name">Tamanna Jarin Tima</div>
-              <div class="degree-line">BSc Software Engineering<span>DIU</span></div>
-            </div>
-          </div>
-          <div class="status-badge" style="font-size:0.6rem;padding:5px 12px;">
-            <span class="status-dot"></span>
-            Actively Looking for Opportunities
-          </div>
+    <!-- ── Meta Strip ── -->
+    <div class="meta-strip reveal">
+      <div class="meta-strip-item">
+        <div class="msi-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="msi-body">
+          <div class="msi-title">Dhaka, Bangladesh</div>
+          <div class="msi-sub">UTC+6 · Bangladesh Standard Time</div>
         </div>
-
-        <!-- Research Focus -->
-        <div class="profile-section">
-          <div class="p-label">Research Focus</div>
-          <div class="tag-wrap">
-            <span class="rtag blue">Trustworthy AI</span>
-            <span class="rtag cyan">Healthcare AI</span>
-            <span class="rtag purple">Explainability</span>
-            <span class="rtag blue">NLP</span>
-            <span class="rtag gold">Medical Imaging</span>
-          </div>
-        </div>
-
-        <!-- Location & Timezone -->
-        <div class="profile-section">
-          <div class="p-label">Location &amp; Availability</div>
-          <div class="meta-item">
-            <div class="mi-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="mi-body">
-              <div class="mi-title">Dhaka, Bangladesh</div>
-              <div class="mi-sub">Bangladesh Standard Time · UTC+6</div>
-            </div>
-          </div>
-          <div class="meta-item">
-            <div class="mi-icon"><i class="fas fa-calendar-check"></i></div>
-            <div class="mi-body">
-              <div class="mi-title">Target Enrollment</div>
-              <div class="mi-sub">Fall 2027 &nbsp;/&nbsp; Spring 2028</div>
-              <div class="timeline-pill">
-                <i class="fas fa-circle" style="font-size:0.45rem;color:#4ade80;"></i>
-                Open to Applications Now
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Languages -->
-        <div class="profile-section">
-          <div class="p-label">Languages</div>
-          <div class="meta-item">
-            <div class="mi-icon"><i class="fas fa-language"></i></div>
-            <div class="mi-body">
-              <div class="mi-title">English</div>
-              <div class="mi-sub">Professional working proficiency</div>
-            </div>
-          </div>
-          <div class="meta-item">
-            <div class="mi-icon"><i class="fas fa-language"></i></div>
-            <div class="mi-body">
-              <div class="mi-title">Bengali</div>
-              <div class="mi-sub">Native / Full professional proficiency</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Visa Note -->
-        <div class="profile-section">
-          <div class="p-label">Visa &amp; Eligibility</div>
-          <div class="meta-item" style="margin-bottom:0;">
-            <div class="mi-icon"><i class="fas fa-passport"></i></div>
-            <div class="mi-body">
-              <div class="mi-title">Bangladeshi National</div>
-              <div class="mi-sub">Eligible for international student visas. Actively pursuing fully-funded MSc positions globally.</div>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <!-- /profile-card -->
+      <div class="meta-strip-item">
+        <div class="msi-icon"><i class="fas fa-calendar-check"></i></div>
+        <div class="msi-body">
+          <div class="msi-title">Target Enrollment</div>
+          <div class="msi-sub">Fall 2027 &nbsp;/&nbsp; Spring 2028</div>
+        </div>
+      </div>
+      <div class="meta-strip-item">
+        <div class="msi-icon"><i class="fas fa-passport"></i></div>
+        <div class="msi-body">
+          <div class="msi-title">Bangladeshi National</div>
+          <div class="msi-sub">Eligible for international student visas</div>
+        </div>
+      </div>
+      <div class="meta-strip-item">
+        <div class="msi-icon"><i class="fas fa-language"></i></div>
+        <div class="msi-body">
+          <div class="msi-title">English &amp; Bengali</div>
+          <div class="msi-sub">Professional &amp; Native proficiency</div>
+        </div>
+      </div>
+    </div>
 
-      <!-- RIGHT: Contact Methods -->
-      <div class="contact-col">
+    <!-- ── Contact Cards ── -->
+    <div class="contact-grid reveal">
 
-        <!-- Email — Primary -->
-        <a href="mailto:tamanna.jarintima@gmail.com" class="contact-card is-primary">
-          <div class="cc-icon default"><i class="fas fa-envelope"></i></div>
+      <!-- Email — Primary (full width) -->
+      <a href="mailto:tamanna.jarintima@gmail.com" class="contact-card is-primary">
+        <div class="cc-icon default"><i class="fas fa-envelope"></i></div>
+        <div class="cc-body-wrap">
           <div class="cc-body">
             <div class="cc-label">Email — Preferred</div>
             <div class="cc-val">tamanna.jarintima@gmail.com</div>
           </div>
           <span class="cc-badge">Primary</span>
-          <i class="fas fa-arrow-right cc-arrow"></i>
-        </a>
-
-        <!-- Phone -->
-        <a href="tel:+8801909266015" class="contact-card">
-          <div class="cc-icon default"><i class="fas fa-phone"></i></div>
-          <div class="cc-body">
-            <div class="cc-label">Phone / WhatsApp</div>
-            <div class="cc-val">+880 1909 266 015</div>
-          </div>
-          <i class="fas fa-arrow-right cc-arrow"></i>
-        </a>
-
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/tamannajarintima/" target="_blank" rel="noopener" class="contact-card">
-          <div class="cc-icon li"><i class="fab fa-linkedin-in"></i></div>
-          <div class="cc-body">
-            <div class="cc-label">LinkedIn</div>
-            <div class="cc-val">linkedin.com/in/tamannajarintima</div>
-          </div>
-          <i class="fas fa-arrow-right cc-arrow"></i>
-        </a>
-
-        <!-- GitHub -->
-        <a href="https://github.com/tamannajarin04" target="_blank" rel="noopener" class="contact-card">
-          <div class="cc-icon gh"><i class="fab fa-github"></i></div>
-          <div class="cc-body">
-            <div class="cc-label">GitHub</div>
-            <div class="cc-val">github.com/tamannajarin04</div>
-          </div>
-          <i class="fas fa-arrow-right cc-arrow"></i>
-        </a>
-
-        <!-- Response note -->
-        <div class="response-note">
-          <i class="fas fa-clock"></i>
-          Usually responds within 24 hours &nbsp;·&nbsp; Best reached via email or LinkedIn
         </div>
+        <i class="fas fa-arrow-right cc-arrow"></i>
+      </a>
 
-        <!-- Professional Context block -->
-        <div class="profile-section" style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-top:2px;">
-          <div class="p-label" style="margin-bottom:10px;">Professional Context</div>
-          <p style="font-family:'Outfit',sans-serif;font-size:0.8rem;color:var(--text-secondary);line-height:1.75;font-weight:400;margin:0;">
-            Final-year Software Engineering student at DIU with research experience in
-            AI-driven healthcare diagnostics and explainable machine learning. Seeking fully-funded
-            MSc opportunities to advance work on trustworthy AI systems with real-world clinical impact.
-            My research has been presented at national conferences and I am well-versed in standard
-            academic communication and collaboration.
-          </p>
+      <!-- Phone -->
+      <a href="tel:+8801909266015" class="contact-card">
+        <div class="cc-icon default"><i class="fas fa-phone"></i></div>
+        <div class="cc-body">
+          <div class="cc-label">Phone / WhatsApp</div>
+          <div class="cc-val">+880 1909 266 015</div>
         </div>
+        <i class="fas fa-arrow-right cc-arrow"></i>
+      </a>
 
-      </div>
-      <!-- /contact-col -->
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/tamannajarintima/" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-icon li"><i class="fab fa-linkedin-in"></i></div>
+        <div class="cc-body">
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-val">linkedin.com/in/tamannajarintima</div>
+        </div>
+        <i class="fas fa-arrow-right cc-arrow"></i>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/tamannajarin04" target="_blank" rel="noopener" class="contact-card">
+        <div class="cc-icon gh"><i class="fab fa-github"></i></div>
+        <div class="cc-body">
+          <div class="cc-label">GitHub</div>
+          <div class="cc-val">github.com/tamannajarin04</div>
+        </div>
+        <i class="fas fa-arrow-right cc-arrow"></i>
+      </a>
 
     </div>
-    <!-- /contact-layout -->
+
+    <!-- ── Response Note ── -->
+    <div class="response-note reveal">
+      <i class="fas fa-clock"></i>
+      Usually responds within 24 hours &nbsp;·&nbsp; Best reached via email or LinkedIn
+    </div>
 
     <!-- ── Open To Section ── -->
     <div class="opp-section reveal">
