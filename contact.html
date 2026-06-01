@@ -10,259 +10,164 @@
 <link rel="stylesheet" href="variables.css"/>
 <style>
 
-/* ═══════════════════════════════════════════════
-   CONTACT PAGE — Full-width, no sidebar
-═══════════════════════════════════════════════ */
+.contact-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 140px 0 100px;
+  position: relative; z-index: 1;
+}
 
-/* ── Status Badge ── */
-.status-badge {
+/* ── HEADER ── */
+.c-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 7px 16px;
-  background: rgba(34,197,94,0.08);
-  border: 1px solid rgba(34,197,94,0.22);
-  border-radius: 40px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem; font-weight: 600;
-  color: #4ade80; letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 20px;
 }
-.status-dot {
-  width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0;
-  box-shadow: 0 0 0 0 rgba(74,222,128,0.5);
-  animation: pulse-green 2.2s ease-in-out infinite;
+.c-pip {
+  width: 6px; height: 6px; border-radius: 50%; background: #4ade80;
+  animation: pip 2.2s ease-in-out infinite;
 }
-@keyframes pulse-green {
-  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.45); }
-  60%      { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
+@keyframes pip {
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+  60%      { box-shadow: 0 0 0 6px rgba(74,222,128,0); }
 }
 
-/* ── Section Intro ── */
-.contact-intro { text-align: center; margin-bottom: 52px; }
-.contact-intro .subtitle {
-  font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-  color: var(--text-secondary); max-width: 520px; margin: 16px auto 0;
-  line-height: 1.8; font-weight: 400;
+.c-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
+  font-weight: 800; letter-spacing: -0.04em; line-height: 0.95;
+  color: var(--text-primary); margin-bottom: 20px;
+}
+.c-title em {
+  font-style: normal;
+  background: var(--grad-1); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-/* ── Contact Grid (2-column cards) ── */
-.contact-grid {
+.c-sub {
+  font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 400;
+  color: var(--text-muted); line-height: 1.75; max-width: 380px;
+  border-left: 2px solid rgba(79,142,247,0.3); padding-left: 14px;
+}
+
+/* ── LAYOUT ── */
+.c-layout {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 12px;
-  max-width: 780px;
-  margin-left: auto;
-  margin-right: auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 64px;
+  align-items: start;
 }
 
-/* ── Contact Cards ── */
-.contact-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px; padding: 20px 22px;
-  display: flex; align-items: center; gap: 16px;
-  transition: all 0.22s ease; backdrop-filter: blur(16px);
-  text-decoration: none; position: relative;
+/* ── CONTACT LIST ── */
+.c-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-blue);
+  margin-bottom: 24px; display: flex; align-items: center; gap: 10px;
 }
-.contact-card:hover {
-  border-color: rgba(79,142,247,0.38);
-  transform: translateY(-3px);
-  background: rgba(79,142,247,0.04);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.22), 0 0 0 1px rgba(79,142,247,0.18);
-}
-.contact-card.is-primary {
-  border-color: rgba(79,142,247,0.22);
-  background: rgba(79,142,247,0.04);
-  grid-column: 1 / -1;
-}
-.contact-card.is-primary:hover {
-  border-color: rgba(79,142,247,0.5);
-  background: rgba(79,142,247,0.08);
-  box-shadow: 0 12px 40px rgba(79,142,247,0.15), 0 0 0 1px rgba(79,142,247,0.3);
-}
+.c-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-/* Primary email row inner layout */
-.contact-card.is-primary .cc-body-wrap {
+.c-list { display: flex; flex-direction: column; }
+
+.c-item {
   display: flex; align-items: center; justify-content: space-between;
-  flex: 1; gap: 12px; min-width: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: padding-left 0.2s;
+  gap: 12px;
 }
-.contact-card.is-primary .cc-val {
-  font-size: 0.95rem;
-}
+.c-item:first-child { border-top: 1px solid var(--border); }
+.c-item:hover { padding-left: 6px; }
 
-.cc-icon {
-  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+.c-item-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+
+.c-item-icon {
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.22s;
+  font-size: 0.78rem; border: 1px solid var(--border);
+  background: transparent; color: var(--text-muted);
+  transition: all 0.2s;
 }
-.cc-icon.default { background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.18); }
-.cc-icon.default i { color: var(--accent-blue); }
-.contact-card:hover .cc-icon.default { background: var(--grad-1); border-color: transparent; box-shadow: 0 0 18px rgba(79,142,247,0.4); }
-.contact-card:hover .cc-icon.default i { color: #fff; }
-
-.cc-icon.li  { background: rgba(10,102,194,0.1); border: 1px solid rgba(10,102,194,0.22); }
-.cc-icon.li i  { color: #0a66c2; }
-.contact-card:hover .cc-icon.li  { background: #0a66c2; border-color: transparent; box-shadow: 0 0 18px rgba(10,102,194,0.4); }
-.contact-card:hover .cc-icon.li i { color: #fff; }
-
-.cc-icon.gh  { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); }
-.cc-icon.gh i  { color: var(--text-secondary); }
-.contact-card:hover .cc-icon.gh  { background: #24292e; border-color: transparent; box-shadow: 0 0 18px rgba(0,0,0,0.4); }
-.contact-card:hover .cc-icon.gh i { color: #fff; }
-
-.cc-icon i { font-size: 0.9rem; transition: color 0.22s; }
-.cc-body { flex: 1; min-width: 0; }
-.cc-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
-  color: var(--text-muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 3px;
+.c-item:hover .c-item-icon {
+  background: rgba(79,142,247,0.08);
+  border-color: rgba(79,142,247,0.25);
+  color: var(--accent-blue);
 }
-.cc-val {
-  font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 500;
-  color: var(--text-secondary); transition: color 0.22s;
+
+.c-item-text {}
+.c-item-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 2px;
+}
+.c-item-val {
+  font-family: 'Outfit', sans-serif; font-size: 0.86rem; font-weight: 500;
+  color: var(--text-secondary); transition: color 0.2s;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.contact-card:hover .cc-val { color: var(--text-primary); }
+.c-item:hover .c-item-val { color: var(--text-primary); }
 
-.cc-badge {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; font-weight: 600;
-  padding: 3px 10px; border-radius: 20px; flex-shrink: 0;
-  background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);
-  color: var(--accent-blue); letter-spacing: 0.04em; text-transform: uppercase;
+.c-item-arr {
+  font-size: 0.6rem; color: var(--text-muted); flex-shrink: 0;
+  opacity: 0; transform: translateX(-4px); transition: all 0.2s;
 }
-.cc-arrow {
-  color: var(--text-muted); font-size: 0.72rem; flex-shrink: 0;
-  opacity: 0; transform: translateX(-6px); transition: all 0.22s; margin-left: 4px;
-}
-.contact-card:hover .cc-arrow { opacity: 1; transform: none; }
+.c-item:hover .c-item-arr { opacity: 1; transform: none; }
 
-/* ── Response Note ── */
-.response-note {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 12px 20px;
-  background: rgba(34,197,94,0.06);
-  border: 1px solid rgba(34,197,94,0.15);
-  border-radius: 10px;
-  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500;
-  color: #4ade80;
-  max-width: 780px; margin: 0 auto 12px;
-}
-.response-note i { font-size: 0.72rem; }
+/* ── RIGHT COLUMN ── */
+.c-right { display: flex; flex-direction: column; gap: 40px; }
 
-/* ── Meta strip (location / timezone / target) ── */
-.meta-strip {
-  display: flex; align-items: center; justify-content: center; gap: 0;
-  flex-wrap: wrap;
-  max-width: 780px; margin: 0 auto 40px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  backdrop-filter: blur(16px);
+/* meta facts — plain rows, no cards */
+.c-facts { display: flex; flex-direction: column; gap: 14px; }
+.c-fact { display: flex; gap: 12px; align-items: baseline; }
+.c-fact-key {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted); flex-shrink: 0; width: 72px; padding-top: 2px;
 }
-.meta-strip-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 22px; flex: 1; min-width: 0;
-  border-right: 1px solid var(--border);
-}
-.meta-strip-item:last-child { border-right: none; }
-.msi-icon {
-  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
-  background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.15);
-  display: flex; align-items: center; justify-content: center;
-}
-.msi-icon i { font-size: 0.68rem; color: var(--accent-blue); }
-.msi-body {}
-.msi-title {
-  font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 600;
-  color: var(--text-primary); margin-bottom: 1px; line-height: 1.3;
-}
-.msi-sub {
-  font-family: 'Outfit', sans-serif; font-size: 0.68rem;
-  color: var(--text-muted); font-weight: 400; line-height: 1.3;
+.c-fact-val {
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 500;
+  color: var(--text-secondary); line-height: 1.5;
 }
 
-/* ── Open To Section ── */
-.opp-section {
-  max-width: 780px; margin: 0 auto;
+/* open-to — plain comma-separated or simple pills, no borders on pills */
+.c-open-list {
+  display: flex; flex-direction: column; gap: 9px;
 }
-.opp-header {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+.c-open-item {
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem;
+  color: var(--text-muted); display: flex; align-items: center; gap: 10px;
 }
-.opp-header-title {
-  font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.875rem;
-  color: var(--text-primary); letter-spacing: -0.01em; white-space: nowrap;
-}
-.opp-header-line { flex: 1; height: 1px; background: var(--border); }
-
-.opp-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-}
-.opp-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 18px 16px;
-  transition: all 0.24s; backdrop-filter: blur(16px);
-}
-.opp-card:hover {
-  border-color: rgba(79,142,247,0.3);
-  background: var(--bg-card-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.2);
-}
-.opp-ic {
-  width: 36px; height: 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.82rem; margin-bottom: 11px;
-}
-.opp-ic.b { background:rgba(79,142,247,0.1);  border:1px solid rgba(79,142,247,0.2);  color:var(--accent-blue); }
-.opp-ic.c { background:rgba(34,211,238,0.1);  border:1px solid rgba(34,211,238,0.2);  color:var(--accent-cyan); }
-.opp-ic.p { background:rgba(129,140,248,0.1); border:1px solid rgba(129,140,248,0.2); color:var(--accent-purple); }
-.opp-ic.g { background:rgba(251,191,36,0.1);  border:1px solid rgba(251,191,36,0.22); color:var(--accent-gold); }
-.opp-title {
-  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700;
-  color: var(--text-primary); margin-bottom: 5px; line-height: 1.3; letter-spacing: -0.01em;
-}
-.opp-desc {
-  font-family: 'Outfit', sans-serif; font-size: 0.71rem;
-  color: var(--text-muted); line-height: 1.55; font-weight: 400;
+.c-open-item::before {
+  content: ''; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--accent-blue); flex-shrink: 0;
 }
 
-/* ── CTA Row ── */
-.cta-row {
-  display: flex; align-items: center; justify-content: center;
-  gap: 14px; margin-top: 38px;
-}
+/* CTA — two clean buttons */
+.c-cta { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* ── Responsive ── */
-@media (max-width: 700px) {
-  .contact-grid { grid-template-columns: 1fr; }
-  .contact-card.is-primary { grid-column: 1; }
-  .meta-strip { flex-direction: column; border-radius: 14px; }
-  .meta-strip-item { border-right: none; border-bottom: 1px solid var(--border); width: 100%; }
-  .meta-strip-item:last-child { border-bottom: none; }
-  .opp-grid { grid-template-columns: repeat(2, 1fr); }
+/* ── RESPONSIVE ── */
+@media (max-width: 780px) {
+  .c-layout { grid-template-columns: 1fr; gap: 48px; }
+  .contact-page { padding: 110px 0 80px; }
 }
 @media (max-width: 480px) {
-  .opp-grid { grid-template-columns: 1fr 1fr; }
-  .cta-row  { flex-direction: column; width: 100%; }
-  .cta-row .btn-primary-custom,
-  .cta-row .btn-ghost-custom  { width: 100%; justify-content: center; }
+  .c-cta { flex-direction: column; }
+  .c-cta a { justify-content: center; }
 }
-@media (max-width: 360px) { .opp-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- ── AMBIENT BACKGROUND ── -->
 <div class="bg-scene" aria-hidden="true">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 </div>
 <div class="bg-dots" aria-hidden="true"></div>
-
 <div id="scroll-progress"></div>
 
-<!-- ── NAVBAR ── -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -286,9 +191,8 @@
   </div>
 </nav>
 
-<!-- ── MOBILE NAV ── -->
 <div class="mob-nav" id="mob-nav">
-  <a href="about.html">     <i class="fas fa-user-circle"   style="width:16px;color:var(--accent-blue)"></i>About</a>
+  <a href="about.html">     <i class="fas fa-user-circle"    style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html"> <i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
   <a href="research.html">  <i class="fas fa-flask"          style="width:16px;color:var(--accent-blue)"></i>Research</a>
   <a href="projects.html">  <i class="fas fa-code"           style="width:16px;color:var(--accent-blue)"></i>Projects</a>
@@ -297,162 +201,123 @@
   <a href="contact.html">   <i class="fas fa-envelope"       style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ══════════════════════════════════════════
-     CONTACT SECTION
-══════════════════════════════════════════ -->
-<section id="contact" class="section">
+<div class="contact-page">
   <div class="container-main">
 
-    <!-- ── Intro Header ── -->
-    <div class="contact-intro reveal">
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        Available · Seeking MSc 2027–28
-      </div>
-      <div class="kicker" style="justify-content:center; margin-top:18px;">Get In Touch</div>
-      <h2 class="section-title" style="margin-bottom:0;text-align:center;">Let's <em>Connect</em></h2>
-      <p class="subtitle">
-        Open to MSc scholarship opportunities, funded research positions,
-        AI&nbsp;&amp;&nbsp;ML internships, and collaborations on trustworthy AI for healthcare.
-        Feel free to reach out — I respond within 24 hours.
-      </p>
+    <!-- Header -->
+    <div class="reveal">
+      <div class="c-eyebrow"><span class="c-pip"></span>Available · MSc 2027–28</div>
+      <h1 class="c-title">Let's <em>Connect</em></h1>
+      <p class="c-sub">Open to scholarships, research collaborations, and AI/ML roles. Responds within 24 hours.</p>
     </div>
 
-    <!-- ── Meta Strip ── -->
-    <div class="meta-strip reveal">
-      <div class="meta-strip-item">
-        <div class="msi-icon"><i class="fas fa-map-marker-alt"></i></div>
-        <div class="msi-body">
-          <div class="msi-title">Dhaka, Bangladesh</div>
-          <div class="msi-sub">UTC+6 · Bangladesh Standard Time</div>
-        </div>
-      </div>
-      <div class="meta-strip-item">
-        <div class="msi-icon"><i class="fas fa-calendar-check"></i></div>
-        <div class="msi-body">
-          <div class="msi-title">Target Enrollment</div>
-          <div class="msi-sub">Fall 2027 &nbsp;/&nbsp; Spring 2028</div>
-        </div>
-      </div>
-      <div class="meta-strip-item">
-        <div class="msi-icon"><i class="fas fa-passport"></i></div>
-        <div class="msi-body">
-          <div class="msi-title">Bangladeshi National</div>
-          <div class="msi-sub">Eligible for international student visas</div>
-        </div>
-      </div>
-      <div class="meta-strip-item">
-        <div class="msi-icon"><i class="fas fa-language"></i></div>
-        <div class="msi-body">
-          <div class="msi-title">English &amp; Bengali</div>
-          <div class="msi-sub">Professional &amp; Native proficiency</div>
-        </div>
-      </div>
-    </div>
+    <div class="c-layout">
 
-    <!-- ── Contact Cards ── -->
-    <div class="contact-grid reveal">
+      <!-- LEFT: channels -->
+      <div class="reveal" style="transition-delay:.05s;">
+        <div class="c-section-label">Reach me</div>
+        <div class="c-list">
 
-      <!-- Email — Primary (full width) -->
-      <a href="mailto:tamanna.jarintima@gmail.com" class="contact-card is-primary">
-        <div class="cc-icon default"><i class="fas fa-envelope"></i></div>
-        <div class="cc-body-wrap">
-          <div class="cc-body">
-            <div class="cc-label">Email — Preferred</div>
-            <div class="cc-val">tamanna.jarintima@gmail.com</div>
+          <a href="mailto:tamanna.jarintima@gmail.com" class="c-item">
+            <div class="c-item-left">
+              <div class="c-item-icon"><i class="fas fa-envelope"></i></div>
+              <div class="c-item-text">
+                <div class="c-item-label">Email — preferred</div>
+                <div class="c-item-val">tamanna.jarintima@gmail.com</div>
+              </div>
+            </div>
+            <i class="fas fa-arrow-right c-item-arr"></i>
+          </a>
+
+          <a href="tel:+8801909266015" class="c-item">
+            <div class="c-item-left">
+              <div class="c-item-icon"><i class="fas fa-phone"></i></div>
+              <div class="c-item-text">
+                <div class="c-item-label">Phone / WhatsApp</div>
+                <div class="c-item-val">+880 1909 266 015</div>
+              </div>
+            </div>
+            <i class="fas fa-arrow-right c-item-arr"></i>
+          </a>
+
+          <a href="https://www.linkedin.com/in/tamannajarintima/" target="_blank" rel="noopener" class="c-item">
+            <div class="c-item-left">
+              <div class="c-item-icon"><i class="fab fa-linkedin-in"></i></div>
+              <div class="c-item-text">
+                <div class="c-item-label">LinkedIn</div>
+                <div class="c-item-val">tamannajarintima</div>
+              </div>
+            </div>
+            <i class="fas fa-arrow-right c-item-arr"></i>
+          </a>
+
+          <a href="https://github.com/tamannajarin04" target="_blank" rel="noopener" class="c-item">
+            <div class="c-item-left">
+              <div class="c-item-icon"><i class="fab fa-github"></i></div>
+              <div class="c-item-text">
+                <div class="c-item-label">GitHub</div>
+                <div class="c-item-val">tamannajarin04</div>
+              </div>
+            </div>
+            <i class="fas fa-arrow-right c-item-arr"></i>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="c-right reveal" style="transition-delay:.1s;">
+
+        <!-- Facts -->
+        <div>
+          <div class="c-section-label">Details</div>
+          <div class="c-facts">
+            <div class="c-fact">
+              <div class="c-fact-key">Location</div>
+              <div class="c-fact-val">Dhaka, Bangladesh · UTC+6</div>
+            </div>
+            <div class="c-fact">
+              <div class="c-fact-key">Citizenship</div>
+              <div class="c-fact-val">Bangladeshi — eligible for international visas</div>
+            </div>
+            <div class="c-fact">
+              <div class="c-fact-key">Languages</div>
+              <div class="c-fact-val">English (professional) · Bengali (native)</div>
+            </div>
+            <div class="c-fact">
+              <div class="c-fact-key">Target</div>
+              <div class="c-fact-val">Fully-funded MSc / PhD · Fall 2027 or Spring 2028</div>
+            </div>
           </div>
-          <span class="cc-badge">Primary</span>
-        </div>
-        <i class="fas fa-arrow-right cc-arrow"></i>
-      </a>
-
-      <!-- Phone -->
-      <a href="tel:+8801909266015" class="contact-card">
-        <div class="cc-icon default"><i class="fas fa-phone"></i></div>
-        <div class="cc-body">
-          <div class="cc-label">Phone / WhatsApp</div>
-          <div class="cc-val">+880 1909 266 015</div>
-        </div>
-        <i class="fas fa-arrow-right cc-arrow"></i>
-      </a>
-
-      <!-- LinkedIn -->
-      <a href="https://www.linkedin.com/in/tamannajarintima/" target="_blank" rel="noopener" class="contact-card">
-        <div class="cc-icon li"><i class="fab fa-linkedin-in"></i></div>
-        <div class="cc-body">
-          <div class="cc-label">LinkedIn</div>
-          <div class="cc-val">linkedin.com/in/tamannajarintima</div>
-        </div>
-        <i class="fas fa-arrow-right cc-arrow"></i>
-      </a>
-
-      <!-- GitHub -->
-      <a href="https://github.com/tamannajarin04" target="_blank" rel="noopener" class="contact-card">
-        <div class="cc-icon gh"><i class="fab fa-github"></i></div>
-        <div class="cc-body">
-          <div class="cc-label">GitHub</div>
-          <div class="cc-val">github.com/tamannajarin04</div>
-        </div>
-        <i class="fas fa-arrow-right cc-arrow"></i>
-      </a>
-
-    </div>
-
-    <!-- ── Response Note ── -->
-    <div class="response-note reveal">
-      <i class="fas fa-clock"></i>
-      Usually responds within 24 hours &nbsp;·&nbsp; Best reached via email or LinkedIn
-    </div>
-
-    <!-- ── Open To Section ── -->
-    <div class="opp-section reveal">
-      <div class="opp-header">
-        <div class="opp-header-title">Open To</div>
-        <div class="opp-header-line"></div>
-      </div>
-      <div class="opp-grid">
-
-        <div class="opp-card">
-          <div class="opp-ic b"><i class="fas fa-graduation-cap"></i></div>
-          <div class="opp-title">MSc Scholarships</div>
-          <div class="opp-desc">Fully-funded graduate programs in AI, ML, or related fields — globally.</div>
         </div>
 
-        <div class="opp-card">
-          <div class="opp-ic c"><i class="fas fa-flask"></i></div>
-          <div class="opp-title">Research Collaboration</div>
-          <div class="opp-desc">Joint projects on healthcare AI, fairness, interpretability, or clinical NLP.</div>
+        <!-- Open to -->
+        <div>
+          <div class="c-section-label">Open to</div>
+          <div class="c-open-list">
+            <div class="c-open-item">MSc &amp; PhD scholarships — Erasmus Mundus, DAAD, Commonwealth</div>
+            <div class="c-open-item">Research collaborations in healthcare AI &amp; XAI</div>
+            <div class="c-open-item">AI / ML internships — applied or research</div>
+            <div class="c-open-item">Trustworthy AI conversations &amp; speaking</div>
+          </div>
         </div>
 
-        <div class="opp-card">
-          <div class="opp-ic p"><i class="fas fa-code"></i></div>
-          <div class="opp-title">AI / ML Internships</div>
-          <div class="opp-desc">Industry or research internships in applied machine learning and data science.</div>
-        </div>
-
-        <div class="opp-card">
-          <div class="opp-ic g"><i class="fas fa-comments"></i></div>
-          <div class="opp-title">Trustworthy AI Discussions</div>
-          <div class="opp-desc">Conversations on responsible AI, bias mitigation, and safe deployment in healthcare.</div>
+        <!-- CTA -->
+        <div class="c-cta">
+          <a href="mailto:tamanna.jarintima@gmail.com" class="btn-primary-custom">
+            <i class="fas fa-paper-plane"></i> Send a Message
+          </a>
+          <a href="CV_TIMA_2026.pdf" download class="btn-ghost-custom">
+            <i class="fas fa-download"></i> Download CV
+          </a>
         </div>
 
       </div>
-    </div>
-
-    <!-- ── CTA Buttons ── -->
-    <div class="cta-row reveal">
-      <a href="resume.pdf" download class="btn-ghost-custom">
-        <i class="fas fa-file-arrow-down"></i> Download CV
-      </a>
-      <a href="mailto:tamanna.jarintima@gmail.com" class="btn-primary-custom">
-        <i class="fas fa-paper-plane"></i> Send a Message
-      </a>
     </div>
 
   </div>
-</section>
+</div>
 
-<!-- ── FOOTER ── -->
 <footer>
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>

@@ -6,42 +6,201 @@
 <title>About — Tamanna Jarin Tima</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-<!-- Fonts loaded via variables.css: Outfit, DM Serif Display, JetBrains Mono -->
 <link rel="stylesheet" href="variables.css"/>
 <style>
-/* ── ABOUT-SPECIFIC STYLES ── */
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 
-/* FIXED: font-weight 300 → 400 — thin weight compounds contrast issues in both modes */
-.about-text { font-size: 0.87rem; color: var(--text-secondary); line-height: 2.05; font-weight: 400; }
-.about-text p { margin-bottom: 14px; }
-.about-text strong { color: var(--accent-cyan); font-weight: 500; }
+/* ── HERO ── */
+.hero-section {
+  padding: 130px 0 80px;
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.012);
+}
+.hero-section::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-blue); margin-bottom: 20px;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent-blue); }
+.hero-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.0;
+  color: var(--text-primary);
+}
+.hero-name .grad-word {
+  background: var(--grad-1); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-title-line {
+  font-family: 'Outfit', sans-serif; font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 500; color: var(--text-secondary); margin-top: 10px; letter-spacing: -0.01em;
+}
+.hero-title-line strong { color: var(--accent-cyan); font-weight: 600; }
+.hero-tagline {
+  font-family: 'Outfit', sans-serif; font-size: 0.88rem;
+  color: var(--text-secondary); line-height: 1.9; max-width: 520px;
+  margin-top: 18px; padding-left: 16px;
+  border-left: 2px solid rgba(79,142,247,0.4);
+}
+.hero-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.hero-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 30px;
+  color: var(--text-secondary); border: 1px solid var(--border);
+  transition: all 0.22s; text-decoration: none;
+}
+.hero-link i { font-size: 9px; color: var(--accent-cyan); }
+.hero-link:hover { color: var(--accent-blue); border-color: rgba(79,142,247,0.45); background: rgba(79,142,247,0.06); }
+.hero-link--active {
+  color: var(--accent-cyan); border-color: rgba(34,211,238,0.35);
+  background: rgba(34,211,238,0.06);
+}
+.hero-link--active i { animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
 
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+/* ── STAT ROW ── */
+.stat-row {
+  display: flex; align-items: stretch; gap: 0;
+  border: 1px solid var(--border); border-radius: var(--r);
+  overflow: hidden; width: fit-content; margin-top: 44px;
+}
+.stat-item {
+  padding: 16px 28px; border-right: 1px solid var(--border);
+  text-align: center; min-width: 110px;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800;
+  letter-spacing: -0.04em; background: var(--grad-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; margin-bottom: 4px;
+}
+.stat-num--gold { background: var(--grad-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-num--purple { background: var(--grad-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-secondary); }
+
+/* ── SECTION CHROME ── */
+.sec-chrome { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+.sec-chrome-line { flex: 1; height: 1px; background: var(--border); }
+.sec-chrome-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.56rem;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-secondary);
+  white-space: nowrap; padding: 5px 14px; border: 1px solid var(--border); border-radius: 30px;
+}
+
+/* ── MAIN ABOUT GRID ── */
+.about-main-grid {
+  display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: start;
+}
+
+/* Left: narrative */
+.about-narrative {
+  font-family: 'Outfit', sans-serif; font-size: 0.88rem;
+  color: var(--text-secondary); line-height: 2.05; font-weight: 400;
+}
+.about-narrative p { margin-bottom: 16px; }
+.about-narrative p:last-child { margin-bottom: 0; }
+.about-narrative strong { color: var(--text-primary); font-weight: 600; }
+.about-narrative em { color: var(--accent-cyan); font-style: normal; font-weight: 500; }
+
+.about-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-blue);
+  margin-bottom: 14px; margin-top: 32px; display: flex; align-items: center; gap: 8px;
+}
+.about-section-label::before { content: ''; width: 18px; height: 1.5px; background: var(--accent-blue); }
+
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
 .tag-pill {
   display: inline-flex; align-items: center; gap: 7px;
   background: var(--bg-card); border: 1px solid var(--border);
-  padding: 7px 14px; border-radius: var(--rs);
-  font-size: 0.8rem;         /* FIXED: was 0.73rem (~11.7px) → now ~12.8px */
-  color: var(--text-secondary); transition: all 0.22s; cursor: default; min-height: 36px;
+  padding: 7px 13px; border-radius: var(--rs);
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem;
+  color: var(--text-secondary); transition: all 0.22s; cursor: default;
 }
 .tag-pill:hover { border-color: rgba(79,142,247,0.4); color: var(--accent-blue); transform: translateY(-2px); background: rgba(79,142,247,0.06); }
-.tag-pill i { color: var(--accent-blue); font-size: 0.75rem; } /* FIXED: was 0.68rem → now 12px */
+.tag-pill i { color: var(--accent-blue); font-size: 0.72rem; }
 
-.info-block { padding: 20px 22px; border-radius: var(--rs); margin-bottom: 10px; }
-.ib-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;        /* FIXED: was 0.54rem (~8.6px) — illegibly small → now 10.9px */
-  color: var(--accent-cyan); letter-spacing: 0.18em; text-transform: uppercase;
-  margin-bottom: 10px; padding-bottom: 9px; border-bottom: 1px solid var(--border); font-weight: 600;
-  display: flex; align-items: center; gap: 8px;
+/* Right: profile sidebar */
+.profile-sidebar { display: flex; flex-direction: column; gap: 12px; }
+
+.profile-card {
+  padding: 18px 20px; border-radius: var(--rs);
+  background: var(--bg-card); border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  transition: border-color 0.25s, background 0.25s;
 }
-.ib-label i { font-size: 0.75rem; }
+.profile-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+.profile-card-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.17em; text-transform: uppercase;
+  color: var(--accent-cyan); margin-bottom: 9px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 7px; font-weight: 600;
+}
+.profile-card-label i { font-size: 0.68rem; }
+.profile-card-body {
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem;
+  color: var(--text-secondary); line-height: 1.85; font-weight: 400;
+}
+.profile-card-body strong { color: var(--text-primary); font-weight: 600; }
 
-/* FIXED: font-weight 300 → 400 — thin weight at small sizes hurts readability */
-.ib-text { font-size: 0.81rem; color: var(--text-secondary); line-height: 1.9; font-weight: 400; }
+/* CGPA highlight card */
+.cgpa-card {
+  padding: 20px 22px; border-radius: var(--rs);
+  background: linear-gradient(135deg, rgba(79,142,247,0.08), rgba(34,211,238,0.04));
+  border: 1px solid rgba(79,142,247,0.25); border-left: 3px solid var(--accent-blue);
+  display: flex; align-items: center; gap: 18px; margin-bottom: 0;
+  position: relative; overflow: hidden;
+}
+.cgpa-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 90% 50%, rgba(34,211,238,0.06), transparent 60%);
+  pointer-events: none;
+}
+.cgpa-num {
+  font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800;
+  letter-spacing: -0.05em; background: var(--grad-1);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; flex-shrink: 0;
+}
+.cgpa-detail { flex: 1; }
+.cgpa-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 3px;
+}
+.cgpa-sub {
+  font-family: 'Outfit', sans-serif; font-size: 0.78rem;
+  color: var(--text-secondary); line-height: 1.5;
+}
+.cgpa-sub strong { color: var(--text-primary); font-weight: 600; }
 
-@media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+/* Status indicator */
+.status-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: 8px;
+  background: rgba(34,211,238,0.05); border: 1px solid rgba(34,211,238,0.18);
+  margin-bottom: 0;
+}
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-cyan); flex-shrink: 0; animation: pulse-dot 2s infinite; }
+.status-text { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-cyan); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .about-main-grid { grid-template-columns: 1fr; gap: 36px; }
+  .stat-row { flex-wrap: wrap; width: 100%; }
+  .stat-item { flex: 1; min-width: 90px; }
+}
+@media (max-width: 620px) {
+  .hero-section { padding: 100px 0 56px; }
+}
 </style>
 </head>
 <body>
@@ -50,8 +209,8 @@
   <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 </div>
 <div class="bg-dots" aria-hidden="true"></div>
-
 <div id="scroll-progress"></div>
+
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -66,17 +225,14 @@
     </div>
     <div class="nav-right">
       <button class="tj-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <div class="toggle-thumb">
-          <i class="fas fa-moon tj-icon"></i>
-        </div>
+        <div class="toggle-thumb"><i class="fas fa-moon tj-icon"></i></div>
       </button>
       <button class="nav-ham" id="nav-ham" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-  </div><!-- /.nav-inner — FIXED: explicit close tag was missing -->
+  </div>
 </nav>
-
 <div class="mob-nav" id="mob-nav">
   <a href="about.html"><i class="fas fa-user-circle" style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html"><i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
@@ -87,58 +243,154 @@
   <a href="contact.html"><i class="fas fa-envelope" style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ══ ABOUT SECTION ══ -->
-<section id="about" class="section section-alt">
-  <div class="container-main">
-    <div class="about-grid">
-      <div class="reveal-l">
-        <div class="kicker">About Me</div>
-        <h2 class="section-title" style="margin-bottom:22px">Building <em>Trustworthy</em> AI<br>For a Better World</h2>
-        <div class="about-text">
-          <p>I'm a <strong>Software Engineering undergraduate</strong> majoring in Data Science at Daffodil International University, holding a near-perfect CGPA of <strong>3.995 / 4.00</strong>. My passion lies in building AI that isn't just accurate — but interpretable, fair, and clinically deployable.</p>
-          <p>My current undergraduate thesis focuses on <strong>Trustworthy Multimodal XAI</strong> for brain tumor classification, merging multi-sequence MRI analysis with Grad-CAM and SHAP to build diagnostic AI that clinicians can genuinely trust.</p>
-          <p>I believe the most impactful AI breakthroughs are those built with human dignity and transparency at their core — not just optimized loss functions.</p>
-        </div>
-        <div class="tag-cloud">
-          <span class="tag-pill"><i class="fas fa-brain"></i>Explainable AI</span>
-          <span class="tag-pill"><i class="fas fa-microchip"></i>Deep Learning</span>
-          <span class="tag-pill"><i class="fas fa-chart-bar"></i>Data Science</span>
-          <span class="tag-pill"><i class="fas fa-eye"></i>Computer Vision</span>
-          <span class="tag-pill"><i class="fas fa-comment-dots"></i>NLP</span>
-          <span class="tag-pill"><i class="fas fa-hospital"></i>Healthcare AI</span>
-          <span class="tag-pill"><i class="fas fa-code"></i>Full-Stack Dev</span>
-        </div>
-      </div>
 
-      <div class="reveal-r" style="display:flex;flex-direction:column;gap:10px;">
-        <!-- FIXED: emoji labels → Font Awesome icons (consistent cross-OS rendering) -->
-        <div class="glass-card info-block">
-          <div class="ib-label"><i class="fas fa-graduation-cap"></i>Academic Profile</div>
-          <p class="ib-text">BSE student with a near-perfect academic record. Dean's Award (Spring 2025), Executive Member of the Data Science Club, and organizer of national events including DIU Data Summit 2025 and National Robo Spark 2024.</p>
-        </div>
-        <div class="glass-card info-block">
-          <div class="ib-label"><i class="fas fa-flask"></i>Research Focus</div>
-          <p class="ib-text">Pursuing an undergraduate thesis on trustworthy AI for medical imaging. Deeply invested in uncertainty-aware deep learning and Grad-CAM–based explainability for clinical AI, with a focus on real-world healthcare deployment.</p>
-        </div>
-        <div class="glass-card info-block">
-          <div class="ib-label"><i class="fas fa-globe"></i>Career Aspirations</div>
-          <p class="ib-text">Actively seeking Erasmus Mundus scholarships, MSc programs in AI/ML in Europe, and research collaborations at the intersection of trustworthy AI, biomedical informatics, and human-centered machine learning.</p>
-        </div>
-        <div class="glass-card info-block">
-          <div class="ib-label"><i class="fas fa-seedling"></i>Current Training</div>
-          <p class="ib-text">Enrolled in government-supported BDSET Center training covering AI/ML, deep learning, emerging technologies (AR/VR/XR), and professional English communication.</p>
-        </div>
+<!-- ══ HERO ══ -->
+<section class="hero-section">
+  <div class="container-main">
+    <div class="reveal">
+      <div class="hero-eyebrow">About · Software Engineering · AI Researcher</div>
+      <h1 class="hero-name">Tamanna Jarin <span class="grad-word">Tima</span></h1>
+      <p class="hero-title-line">
+        BSc Software Engineering (Data Science) ·
+        <strong>Daffodil International University</strong> · Dhaka, Bangladesh
+      </p>
+      <p class="hero-tagline">
+        I build AI systems that are not just accurate — but interpretable, fair, and deployable in high-stakes environments. My work sits at the intersection of explainable AI, medical imaging, and human-centred machine learning.
+      </p>
+      <div class="hero-links">
+        <span class="hero-link hero-link--active"><i class="fas fa-circle"></i>Open to MSc / PhD opportunities</span>
+        <a href="research.html" class="hero-link"><i class="fas fa-flask"></i>View Research</a>
+        <a href="projects.html" class="hero-link"><i class="fas fa-code"></i>View Projects</a>
+        <a href="contact.html"  class="hero-link"><i class="fas fa-envelope"></i>Get in touch</a>
+      </div>
+    </div>
+
+    <div class="stat-row reveal" style="transition-delay:.1s">
+      <div class="stat-item" style="background:rgba(79,142,247,0.04);">
+        <div class="stat-num">3.995</div>
+        <div class="stat-label">CGPA / 4.00</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num stat-num--gold">1st</div>
+        <div class="stat-label">Dean's Award</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Competition Selections</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Deployed Projects</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num stat-num--purple">XAI</div>
+        <div class="stat-label">Thesis Domain</div>
       </div>
     </div>
   </div>
 </section>
 
+
+<!-- ══ NARRATIVE + SIDEBAR ══ -->
+<section class="section" style="padding-top:68px; padding-bottom:80px;">
+  <div class="container-main">
+    <div class="about-main-grid">
+
+      <!-- LEFT: bio + interests -->
+      <div>
+        <div class="sec-chrome reveal" style="margin-bottom:28px;">
+          <div class="sec-chrome-line"></div>
+          <div class="sec-chrome-tag"><i class="fas fa-user" style="font-size:9px;margin-right:6px;color:var(--accent-blue);"></i>Who I Am</div>
+          <div class="sec-chrome-line"></div>
+        </div>
+
+        <div class="about-narrative reveal">
+          <p>
+            I am a <strong>Software Engineering undergraduate</strong> specialising in Data Science at Daffodil International University, carrying a near-perfect CGPA of <strong>3.995 / 4.00</strong>. Growing up in Dhaka, I was drawn to computer science not for its outputs — but for the questions it forces you to ask: whose problems does a model solve? Who does it fail? Can a clinician actually trust what it shows?
+          </p>
+          <p>
+            Those questions now shape my entire research direction. My undergraduate thesis investigates <em>Trustworthy Multimodal Explainable AI</em> for brain tumour classification — fusing multi-sequence MRI data with Grad-CAM saliency maps and SHAP value analysis to produce diagnostic outputs that are both accurate and genuinely legible to medical professionals. Accuracy alone is not enough when the stakes are a patient's life.
+          </p>
+          <p>
+            Beyond the lab, I have led cross-functional teams to two national competition selections — including the <strong>Final Round of AI BuildFest 2026</strong>, Bangladesh's largest AI competition with 610+ participating teams. I serve as Executive Member of the university's Data Science Club and have organised national events including the DIU Data Summit 2025 and National Robo Spark 2024.
+          </p>
+          <p>
+            I am actively seeking a <strong>fully funded international postgraduate scholarship</strong> — Erasmus Mundus, or equivalent MSc/PhD programmes in AI and Machine Learning — where I can deepen my research in trustworthy AI and contribute to a world-class academic environment. My long-term goal is to return to Bangladesh and strengthen local AI research capacity.
+          </p>
+        </div>
+
+        <div class="about-section-label reveal" style="transition-delay:.05s">Areas of Interest</div>
+        <div class="tag-cloud reveal" style="transition-delay:.1s">
+          <span class="tag-pill"><i class="fas fa-brain"></i>Explainable AI</span>
+          <span class="tag-pill"><i class="fas fa-microscope"></i>Medical Imaging</span>
+          <span class="tag-pill"><i class="fas fa-microchip"></i>Deep Learning</span>
+          <span class="tag-pill"><i class="fas fa-chart-bar"></i>Data Science</span>
+          <span class="tag-pill"><i class="fas fa-eye"></i>Computer Vision</span>
+          <span class="tag-pill"><i class="fas fa-comment-dots"></i>NLP</span>
+          <span class="tag-pill"><i class="fas fa-hospital"></i>Healthcare AI</span>
+          <span class="tag-pill"><i class="fas fa-code"></i>Full-Stack Development</span>
+          <span class="tag-pill"><i class="fas fa-shield-alt"></i>Trustworthy AI</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: sidebar cards -->
+      <div class="profile-sidebar reveal" style="transition-delay:.1s">
+
+        <!-- CGPA highlight -->
+        <div class="cgpa-card">
+          <div class="cgpa-num">3.995</div>
+          <div class="cgpa-detail">
+            <div class="cgpa-label">Cumulative GPA</div>
+            <div class="cgpa-sub">Out of <strong>4.00</strong> · BSc Software Engineering<br>Daffodil International University</div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="status-row">
+          <div class="status-dot"></div>
+          <span class="status-text">Open to international scholarship applications · 2027–2028</span>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-card-label"><i class="fas fa-graduation-cap"></i>Academic Standing</div>
+          <div class="profile-card-body">
+            <strong>Dean's Award</strong> recipient, Spring 2025 — awarded to a select cohort of top-performing students each term. Executive Member of the university Data Science Club. Organiser of two national events spanning multiple institutions.
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-card-label"><i class="fas fa-trophy"></i>Competition Record</div>
+          <div class="profile-card-body">
+            NutriConnect selected in <strong>two separate competitions</strong> — DIU AI Project Competition (MVP Development Phase) and The Infinity × AI BuildFest 2026 (Final Round, HealthTech Track, 610+ teams, 3,300+ participants).
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-card-label"><i class="fas fa-map-marker-alt"></i>Location &amp; Languages</div>
+          <div class="profile-card-body">
+            Based in <strong>Dhaka, Bangladesh</strong>. Working fluency in English (professional &amp; academic) and Bengali (native). Currently completing government-supported English communication training at BDSET Centre.
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-card-label"><i class="fas fa-globe"></i>Scholarship Target</div>
+          <div class="profile-card-body">
+            Pursuing <strong>Erasmus Mundus</strong>, Commonwealth, DAAD, and equivalent fully funded MSc / PhD programmes in AI, Machine Learning, or Intelligent Systems at universities in Europe or North America.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
-    <!-- FIXED: removed inline opacity:0.5 — stacks on top of --text-muted, near-invisible in light mode -->
-    <div class="footer-meta" style="margin-top:4px;">© 2025–2026 · All Rights Reserved</div>
+    <div class="footer-meta" style="margin-top:4px;opacity:0.55;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 

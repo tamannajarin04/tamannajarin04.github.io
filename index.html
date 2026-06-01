@@ -15,12 +15,6 @@
 <link rel="stylesheet" href="variables.css"/>
 
 <style>
-/* ─────────────────────────────────────────────────
-   index.css  — Homepage  (centred single-column)
-   All tokens from variables.css :root / [data-theme]
-   All JS hooks wired for shared.js
-───────────────────────────────────────────────── */
-
 /* ── HERO SECTION ── */
 #hero {
   min-height: 100vh;
@@ -120,14 +114,13 @@
   margin-bottom: 0;
   animation: heroFadeUp 0.55s 0.18s ease both;
 }
-.hero-name .first {
-  display: block;
-  font-size: clamp(2.4rem, 6.5vw, 3.6rem);
-  color: var(--text-primary);
-}
+.hero-name .first,
 .hero-name .last {
   display: block;
   font-size: clamp(2.4rem, 6.5vw, 3.6rem);
+}
+.hero-name .first { color: var(--text-primary); }
+.hero-name .last {
   background: var(--grad-1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -166,18 +159,6 @@
   animation: heroFadeUp 0.55s 0.30s ease both;
 }
 .hero-tagline strong { color: var(--text-primary); font-weight: 600; }
-
-/* ── Location tag ── */
-.hero-loc {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.575rem;
-  letter-spacing: 0.1em;
-  color: var(--accent-cyan);
-  margin: 20px 0 32px;
-  animation: heroFadeUp 0.55s 0.34s ease both;
-  display: inline-flex; align-items: center; gap: 7px;
-}
-.hero-loc::before { content: '▸'; opacity: 0.6; }
 
 /* ── Social icons ── */
 .social-row {
@@ -223,13 +204,11 @@
   background: var(--bg-card-hover);
 }
 
-/* Card top accent bar */
 .card-accent-bar {
   height: 2px;
   background: var(--grad-1);
 }
 
-/* Card header strip */
 .card-header-strip {
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px 26px 0;
@@ -272,7 +251,6 @@
   font-size: 0.51rem; color: var(--text-muted);
 }
 
-/* Card tags */
 .card-tags {
   display: flex; flex-wrap: wrap; gap: 6px;
   padding: 14px 26px 0;
@@ -289,7 +267,6 @@
 .ctag:hover { border-color: rgba(79,142,247,0.3); color: var(--accent-blue); }
 [data-theme="light"] .ctag { background: rgba(0,0,0,0.03); }
 
-/* Card body text */
 .card-body-content {
   padding: 16px 26px 22px;
 }
@@ -301,7 +278,6 @@
 }
 .card-desc strong { color: var(--text-primary); font-weight: 600; }
 
-/* CTA row — 4 buttons in one line, centred */
 .card-cta {
   display: flex; gap: 8px; flex-wrap: nowrap;
   padding: 0 26px 22px;
@@ -317,7 +293,6 @@
   gap: 6px;
 }
 
-/* Stats bar */
 .hero-stats {
   display: flex;
   border-top: 1px solid var(--border);
@@ -360,7 +335,6 @@
   to   { opacity:1; transform:none; }
 }
 
-/* ── LIGHT MODE CARD ── */
 [data-theme="light"] .main-card {
   background: rgba(255,255,255,0.88);
   box-shadow: var(--shadow-sm);
@@ -396,7 +370,6 @@
 </head>
 <body>
 
-<!-- ── BACKGROUND ── -->
 <div class="bg-scene" aria-hidden="true">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -405,7 +378,6 @@
 <div class="bg-dots" aria-hidden="true"></div>
 <div id="scroll-progress"></div>
 
-<!-- ══ NAVBAR ══ -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -419,11 +391,9 @@
       <a href="contact.html"    class="nav-link-item">Contact</a>
     </div>
     <div class="nav-right">
-      <!-- id="theme-toggle" + class="tj-toggle" → wired by shared.js -->
       <button class="tj-toggle" id="theme-toggle" aria-label="Toggle colour theme">
         <div class="toggle-thumb"><i class="fas fa-moon tj-icon"></i></div>
       </button>
-      <!-- id="nav-ham" → wired by shared.js -->
       <button class="nav-ham" id="nav-ham" aria-label="Open navigation menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -431,7 +401,6 @@
   </div>
 </nav>
 
-<!-- Mobile nav — id="mob-nav" wired by shared.js -->
 <div class="mob-nav" id="mob-nav">
   <a href="about.html">      <i class="fas fa-user-circle"    style="width:16px;color:var(--accent-blue)"></i>About</a>
   <a href="education.html">  <i class="fas fa-graduation-cap" style="width:16px;color:var(--accent-blue)"></i>Education</a>
@@ -442,53 +411,42 @@
   <a href="contact.html">    <i class="fas fa-envelope"       style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<!-- ══ HERO ══ -->
 <section id="hero" aria-label="Introduction">
   <div class="hero-inner">
 
-    <!-- Status chip -->
     <div class="status-chip" role="status">
       <div class="status-pip" aria-hidden="true"></div>
       BSc Software Engineering &nbsp;·&nbsp; AI Researcher
     </div>
 
-    <!-- Profile photo -->
     <div class="photo-wrap" aria-hidden="true">
       <div class="photo-disc">
         <img src="images/profile.jpeg" alt="Portrait of Tamanna Jarin Tima" loading="eager"/>
       </div>
     </div>
 
-    <!-- Name -->
     <h1 class="hero-name">
       <span class="first">Tamanna Jarin</span>
       <span class="last">Tima</span>
     </h1>
     <span class="hero-affil">Daffodil International University &nbsp;·&nbsp; Dhaka, Bangladesh</span>
 
-    <!-- Divider -->
     <div class="hero-rule" aria-hidden="true"></div>
 
-    <!-- Tagline -->
     <p class="hero-tagline">
       Building <strong>trustworthy AI</strong> at the intersection of
       explainability, deep learning &amp; medical imaging — where
       <strong>clinical utility</strong> meets interpretable design.
     </p>
 
-    <!-- Location -->
-    <span class="hero-loc">Dhaka, Bangladesh</span>
-
-    <!-- Social icons -->
-    <!-- Theme toggle button uses class="tj-toggle" so shared.js wires it automatically -->
     <div class="social-row" role="list" aria-label="Social links">
-      <a href="#" class="soc-btn" role="listitem" aria-label="GitHub profile" title="GitHub">
+      <a href="https://github.com/tamannajarin04" class="soc-btn" role="listitem" aria-label="GitHub profile" title="GitHub">
         <i class="fab fa-github" aria-hidden="true"></i>
       </a>
-      <a href="#" class="soc-btn" role="listitem" aria-label="LinkedIn profile" title="LinkedIn">
+      <a href="https://www.linkedin.com/in/tamannajarintima/" class="soc-btn" role="listitem" aria-label="LinkedIn profile" title="LinkedIn">
         <i class="fab fa-linkedin-in" aria-hidden="true"></i>
       </a>
-      <a href="mailto:" class="soc-btn" role="listitem" aria-label="Send email" title="Email">
+      <a href="mailto:tamanna.jarintima@gmail.com" class="soc-btn" role="listitem" aria-label="Send email" title="Email">
         <i class="fas fa-envelope" aria-hidden="true"></i>
       </a>
       <a href="CV_TIMA_2026.pdf" class="soc-btn" role="listitem" aria-label="Download CV" title="Download CV" download>
@@ -502,12 +460,10 @@
       </button>
     </div>
 
-    <!-- ── Main card ── -->
     <div class="main-card" role="region" aria-label="Research focus">
 
       <div class="card-accent-bar"></div>
 
-      <!-- Card header -->
       <div class="card-header-strip">
         <div class="card-header-left">
           <div class="card-icon" aria-hidden="true">
@@ -519,36 +475,31 @@
           </div>
         </div>
         <div class="card-meta-right">
-          <span class="card-pill">Active · 2025–2026</span>
-          <!-- #theme-label text is updated by shared.js applyTheme() -->
+          <span class="card-pill">In Progress · 2025–2026</span>
           <div class="card-theme-indicator">
             Theme&nbsp;<span class="card-pill" id="theme-label">Dark</span>
           </div>
         </div>
       </div>
 
-      <!-- Research keywords -->
       <div class="card-tags" aria-label="Research keywords">
         <span class="ctag">Grad-CAM</span>
         <span class="ctag">SHAP</span>
         <span class="ctag">Uncertainty Quantification</span>
-        <span class="ctag">Multimodal Classification</span>
+        <span class="ctag">Multimodal MRI</span>
         <span class="ctag">CNN</span>
         <span class="ctag">Transfer Learning</span>
       </div>
 
-      <!-- Description -->
       <div class="card-body-content">
         <p class="card-desc">
-          My thesis investigates <strong>multimodal brain tumour classification</strong>
-          using convolutional neural networks augmented with Grad-CAM, SHAP, and
+          My thesis fuses multi-sequence MRI with CNNs augmented by Grad-CAM, SHAP, and
           Bayesian uncertainty quantification — engineering clinical AI that is
           <strong>transparent, calibrated, and deployable</strong> in
           resource-constrained medical settings.
         </p>
       </div>
 
-      <!-- CTA buttons — shared classes btn-primary-custom / btn-ghost-custom from variables.css -->
       <div class="card-cta">
         <a href="research.html"    class="btn-primary-custom">
           <i class="fas fa-flask"       aria-hidden="true"></i> View Research
@@ -564,36 +515,34 @@
         </a>
       </div>
 
-      <!-- Stats bar -->
       <div class="hero-stats" role="list" aria-label="Key metrics">
         <div class="stat" role="listitem" style="--stat-accent:var(--grad-1);">
-          <div class="stat-num">3.99<sup>/4</sup></div>
+          <div class="stat-num">3.995<sup>/4</sup></div>
           <div class="stat-label">CGPA</div>
-          <span class="stat-sub">Dean's List</span>
+          <span class="stat-sub">Dean's Award</span>
         </div>
         <div class="stat" role="listitem" style="--stat-accent:var(--grad-2);">
           <div class="stat-num">3<sup>+</sup></div>
-          <div class="stat-label">AI Projects</div>
+          <div class="stat-label">Deployed Projects</div>
           <span class="stat-sub">Medical &amp; NLP</span>
         </div>
         <div class="stat" role="listitem" style="--stat-accent:var(--grad-1);">
-          <div class="stat-num">94<sup>%</sup></div>
-          <div class="stat-label">Best Accuracy</div>
-          <span class="stat-sub">Brain Tumour</span>
+          <div class="stat-num">610<sup>+</sup></div>
+          <div class="stat-label">Teams Beaten</div>
+          <span class="stat-sub">AI BuildFest Final</span>
         </div>
         <div class="stat" role="listitem" style="--stat-accent:var(--grad-3);">
-          <div class="stat-num" style="color:var(--accent-gold);">1</div>
-          <div class="stat-label">Dean's Award</div>
-          <span class="stat-sub">Academic Merit</span>
+          <div class="stat-num" style="color:var(--accent-gold);">2</div>
+          <div class="stat-label">Competition Picks</div>
+          <span class="stat-sub">National Selections</span>
         </div>
       </div>
 
-    </div><!-- /main-card -->
+    </div>
 
-  </div><!-- /hero-inner -->
+  </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer role="contentinfo">
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
@@ -603,8 +552,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<!-- shared.js handles: theme (.tj-toggle/.tj-icon/#theme-label), scroll progress,
-     mobile nav (#nav-ham/#mob-nav), reveal animations, smooth scroll -->
 <script src="shared.js"></script>
 </body>
 </html>

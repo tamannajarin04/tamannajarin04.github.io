@@ -6,467 +6,462 @@
 <title>Activities — Tamanna Jarin Tima</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="variables.css"/>
 <style>
-/* SECTION ALT */
-.section-alt { background: rgba(255,255,255,0.012); }
-[data-theme="light"] .section-alt { background: rgba(15,30,60,0.022); }
 
-/* ══ HERO ══ */
+/* ── HERO ── */
 .hero-section {
-  padding: 130px 0 88px;
+  padding: 130px 0 80px;
   position: relative; z-index: 1;
 }
 .hero-section::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px;
   background: linear-gradient(90deg, transparent 0%, var(--border) 30%, var(--border) 70%, transparent 100%);
 }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: 'Outfit', sans-serif; font-size: 0.68rem;
-  font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--accent-blue); margin-bottom: 20px;
 }
-[data-theme="light"] .hero-eyebrow { color: #1d6ae5; }
-.hero-eyebrow::before { content:''; width: 24px; height: 2px; background: var(--accent-blue); }
+.hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent-blue); }
 .hero-title {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+  font-size: clamp(2.6rem, 6.5vw, 4rem);
   font-weight: 800; letter-spacing: -0.03em; line-height: 1.06;
   color: var(--text-primary); margin-bottom: 0;
 }
 .hero-title .grad-word {
-  background: var(--grad-1);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  background: var(--grad-1); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
 }
 .hero-subtitle {
-  font-family: 'Outfit', sans-serif; font-size: 0.92rem;
-  font-weight: 400; color: var(--text-secondary);
-  line-height: 1.9; max-width: 580px;
-  margin-top: 22px; padding-left: 18px;
-  border-left: 2px solid rgba(79,142,247,0.45);
+  font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  color: var(--text-secondary); line-height: 1.9; max-width: 560px;
+  margin-top: 20px; padding-left: 16px;
+  border-left: 2px solid rgba(79,142,247,0.4);
 }
-[data-theme="light"] .hero-subtitle { color: #334155; }
-.hero-cta-row {
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-  margin-top: 34px;
+.hero-badges {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 28px;
 }
-.hero-cta-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--text-secondary);
-  padding: 7px 16px; border: 1px solid var(--border); border-radius: 30px;
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-secondary); padding: 6px 14px;
+  border: 1px solid var(--border); border-radius: 30px;
 }
-[data-theme="light"] .hero-cta-badge {
-  color: #334155; border-color: rgba(79,142,247,0.3); background: rgba(79,142,247,0.04);
-}
-.hero-cta-badge i { color: var(--accent-cyan); font-size: 10px; }
-[data-theme="light"] .hero-cta-badge i { color: #1d6ae5; }
-
-/* ── SCHOLARSHIP INTENT BANNER ── */
-.scholarship-intent-banner {
-  margin-top: 44px; padding: 22px 28px; border-radius: var(--r);
-  background: linear-gradient(135deg, rgba(79,142,247,0.06), rgba(34,211,238,0.04));
-  border: 1px solid rgba(79,142,247,0.22); border-left: 3px solid var(--accent-cyan);
-  display: flex; align-items: flex-start; gap: 18px; max-width: 700px;
-  position: relative; overflow: hidden;
-}
-.scholarship-intent-banner::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 90% 50%, rgba(34,211,238,0.05), transparent 60%);
-  pointer-events: none;
-}
-[data-theme="light"] .scholarship-intent-banner {
-  background: rgba(79,142,247,0.05); border-color: rgba(79,142,247,0.3);
-}
-.sib-icon { font-size: 1.3rem; color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px; }
-[data-theme="light"] .sib-icon { color: #0e7490; }
-.sib-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 5px;
-}
-[data-theme="light"] .sib-label { color: #0e7490; }
-.sib-text { font-family: 'Outfit', sans-serif; font-size: 0.84rem; color: var(--text-secondary); line-height: 1.8; }
-[data-theme="light"] .sib-text { color: #334155; }
-.sib-text strong { color: var(--text-primary); font-weight: 600; }
+.hero-badge i { color: var(--accent-cyan); font-size: 9px; }
 
 /* ── STAT ROW ── */
 .stat-row {
-  display: flex; align-items: stretch; gap: 0;
-  margin-top: 44px; border: 1px solid var(--border);
-  border-radius: var(--r); overflow: hidden; width: fit-content;
+  display: flex; align-items: stretch; gap: 0; margin-top: 44px;
+  border: 1px solid var(--border); border-radius: var(--r);
+  overflow: hidden; width: fit-content;
 }
 .stat-item {
-  padding: 18px 28px; border-right: 1px solid var(--border);
-  text-align: center; min-width: 100px; position: relative;
+  padding: 16px 28px; border-right: 1px solid var(--border);
+  text-align: center; min-width: 100px;
 }
 .stat-item:last-child { border-right: none; }
-.stat-item--highlight { background: rgba(251,191,36,0.04); }
 .stat-num {
-  font-family: 'Outfit', sans-serif; font-size: 1.6rem;
-  font-weight: 800; letter-spacing: -0.04em;
-  background: var(--grad-1);
+  font-family: 'Outfit', sans-serif; font-size: 1.55rem; font-weight: 800;
+  letter-spacing: -0.04em; background: var(--grad-1);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   line-height: 1; margin-bottom: 4px;
 }
 .stat-num--gold { background: var(--grad-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .stat-num--purple { background: var(--grad-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .stat-label {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-secondary);
 }
-[data-theme="light"] .stat-label { color: #475569; }
 
-/* ══ SECTION CHROME ══ */
+/* ── SECTION CHROME ── */
 .sec-chrome { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
 .sec-chrome-line { flex: 1; height: 1px; background: var(--border); }
 .sec-chrome-tag {
   font-family: 'JetBrains Mono', monospace; font-size: 0.56rem;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--text-secondary); white-space: nowrap;
-  padding: 5px 14px; border: 1px solid var(--border); border-radius: 30px;
-}
-[data-theme="light"] .sec-chrome-tag {
-  color: #334155; border-color: rgba(79,142,247,0.25); background: rgba(79,142,247,0.04);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-secondary);
+  white-space: nowrap; padding: 5px 14px; border: 1px solid var(--border); border-radius: 30px;
 }
 
-/* ══ AWARD BANNER ══ */
+/* ── COMPETITION SECTION ── */
+.comp-section-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; margin-bottom: 32px; flex-wrap: wrap;
+}
+.comp-section-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-cyan);
+  margin-bottom: 8px;
+}
+.comp-section-title {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); line-height: 1.1;
+}
+.comp-count-badge {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 20px; border-radius: 40px;
+  background: rgba(34,211,238,0.06); border: 1px solid rgba(34,211,238,0.2);
+  flex-shrink: 0; align-self: flex-start; margin-top: 4px;
+}
+.comp-count-num {
+  font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800;
+  background: var(--grad-1); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.04em;
+}
+.comp-count-text {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Competition Cards */
+.comp-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+
+.comp-card {
+  border-radius: var(--r); overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative; display: flex; flex-direction: column;
+}
+.comp-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+}
+.comp-card--purple { border-top: 3px solid var(--accent-purple); }
+.comp-card--purple:hover { border-color: var(--accent-purple); box-shadow: 0 20px 60px rgba(129,140,248,0.12); }
+.comp-card--gold   { border-top: 3px solid var(--accent-gold); }
+.comp-card--gold:hover   { border-color: var(--accent-gold);   box-shadow: 0 20px 60px rgba(251,191,36,0.12); }
+
+.comp-card-inner { padding: 28px 28px 24px; flex: 1; display: flex; flex-direction: column; }
+
+/* Track band at top of each card */
+.comp-track {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 8px;
+}
+.comp-org-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 4px; width: fit-content;
+}
+.comp-org-tag--purple { color: var(--accent-purple); background: rgba(129,140,248,0.08); border: 1px solid rgba(129,140,248,0.25); }
+.comp-org-tag--gold   { color: rgba(251,191,36,0.95); background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.25); }
+
+.comp-year-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-secondary);
+}
+
+/* Achievement badge — the BIG visual */
+.comp-achievement {
+  margin-bottom: 18px; padding: 16px 18px; border-radius: 10px;
+  display: flex; align-items: center; gap: 14px;
+}
+.comp-achievement--purple { background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.2); }
+.comp-achievement--gold   { background: rgba(251,191,36,0.06);  border: 1px solid rgba(251,191,36,0.2);  }
+
+.comp-achievement-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.comp-achievement-icon--purple { background: rgba(129,140,248,0.14); }
+.comp-achievement-icon--gold   { background: rgba(251,191,36,0.12); }
+.comp-achievement-icon i { font-size: 1.2rem; }
+.comp-achievement-icon--purple i { color: var(--accent-purple); }
+.comp-achievement-icon--gold i   { color: var(--accent-gold); }
+
+.comp-achievement-text { flex: 1; }
+.comp-achievement-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 3px;
+}
+.comp-achievement-value {
+  font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.15;
+}
+.comp-achievement-value--purple { color: var(--accent-purple); }
+.comp-achievement-value--gold   { color: var(--accent-gold); }
+.comp-achievement-sub {
+  font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.comp-project-name {
+  font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--text-primary); margin-bottom: 4px; line-height: 1;
+}
+.comp-role-line {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 12px;
+}
+.comp-desc {
+  font-family: 'Outfit', sans-serif; font-size: 0.81rem; color: var(--text-secondary);
+  line-height: 1.88; flex: 1; margin-bottom: 16px;
+}
+
+.comp-stats {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.comp-stat {
+  display: flex; flex-direction: column; padding: 8px 14px; border-radius: 6px; min-width: 56px;
+}
+.comp-stat--purple { background: rgba(129,140,248,0.06); border: 1px solid rgba(129,140,248,0.15); }
+.comp-stat--gold   { background: rgba(251,191,36,0.05);  border: 1px solid rgba(251,191,36,0.15);  }
+.comp-stat-val {
+  font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 800;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.comp-stat-val--purple { color: var(--accent-purple); }
+.comp-stat-val--gold   { color: var(--accent-gold); }
+.comp-stat-key {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.46rem;
+  letter-spacing: 0.11em; text-transform: uppercase; color: var(--text-secondary); margin-top: 3px;
+}
+
+.comp-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.comp-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.49rem;
+  color: var(--text-secondary); letter-spacing: 0.06em;
+  border: 1px solid var(--border); padding: 3px 9px; border-radius: 3px;
+}
+
+.comp-proof {
+  border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;
+}
+.proof-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+}
+.proof-link:hover { color: var(--text-primary); }
+.proof-link-icon--purple { font-size: 12px; color: var(--accent-purple); }
+.proof-link-icon--gold   { font-size: 12px; color: var(--accent-gold); }
+.proof-arrow { opacity: 0; transform: translateX(-4px); transition: opacity 0.2s, transform 0.2s; font-size: 10px; }
+.proof-link:hover .proof-arrow { opacity: 1; transform: translateX(0); }
+
+/* Shared project callout between 2 comp cards */
+.same-project-bar {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 10px 20px; border-radius: 8px; margin-bottom: 20px;
+  background: rgba(79,142,247,0.04); border: 1px solid rgba(79,142,247,0.12);
+}
+.same-project-bar i { color: var(--accent-blue); font-size: 0.7rem; }
+.same-project-bar-text {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary);
+}
+.same-project-bar-text strong { color: var(--accent-blue); }
+
+/* ── DEAN'S AWARD ── */
 .award-banner {
-  display: grid; grid-template-columns: 80px 1fr auto;
-  gap: 32px; align-items: start;
-  padding: clamp(32px,4vw,48px) clamp(32px,4vw,52px);
+  display: grid; grid-template-columns: 72px 1fr auto;
+  gap: 28px; align-items: start;
+  padding: clamp(28px,4vw,44px) clamp(28px,4vw,48px);
   border-radius: var(--r); background: var(--bg-card);
   border: 1px solid rgba(251,191,36,0.18); border-left: 3px solid var(--accent-gold);
   backdrop-filter: blur(24px); position: relative; overflow: hidden;
   transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
 }
-.award-banner:hover { border-color: rgba(251,191,36,0.42); background: var(--bg-card-hover); box-shadow: 0 16px 56px rgba(251,191,36,0.08); }
+.award-banner:hover {
+  border-color: rgba(251,191,36,0.38); background: var(--bg-card-hover);
+  box-shadow: 0 16px 48px rgba(251,191,36,0.07);
+}
 .award-banner::before {
   content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 85% 50%, rgba(251,191,36,0.05), transparent 60%);
+  background: radial-gradient(ellipse at 90% 50%, rgba(251,191,36,0.05), transparent 60%);
   pointer-events: none;
 }
 .award-icon {
-  width: 80px; height: 80px; border-radius: var(--rs);
+  width: 72px; height: 72px; border-radius: var(--rs);
   border: 1px solid rgba(251,191,36,0.28);
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, rgba(251,191,36,0.14), rgba(251,191,36,0.04)); flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(251,191,36,0.14), rgba(251,191,36,0.04));
+  flex-shrink: 0;
 }
-.award-icon i { font-size: 1.9rem; color: var(--accent-gold); }
+.award-icon i { font-size: 1.7rem; color: var(--accent-gold); }
 .award-tag {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.53rem;
+  letter-spacing: 0.13em; text-transform: uppercase;
   color: rgba(251,191,36,0.9); background: rgba(251,191,36,0.08);
-  border: 1px solid rgba(251,191,36,0.25); padding: 4px 12px; border-radius: 30px;
-  width: fit-content; margin-bottom: 10px;
+  border: 1px solid rgba(251,191,36,0.25); padding: 4px 11px; border-radius: 30px;
+  width: fit-content; margin-bottom: 9px;
 }
-[data-theme="light"] .award-tag { color: #92600a; background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.4); }
-.award-tag-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-gold); }
+.award-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-gold); }
 .award-name {
-  font-family: 'Outfit', sans-serif; font-size: clamp(1.15rem, 2.8vw, 1.55rem);
-  font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary);
-  line-height: 1.15; margin-bottom: 10px;
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem); font-weight: 800; letter-spacing: -0.025em;
+  color: var(--text-primary); line-height: 1.15; margin-bottom: 9px;
 }
 .award-body {
-  font-family: 'Outfit', sans-serif; font-size: 0.83rem;
-  font-weight: 400; color: var(--text-secondary); line-height: 1.9; margin-bottom: 16px;
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem;
+  color: var(--text-secondary); line-height: 1.9; margin-bottom: 14px;
 }
-[data-theme="light"] .award-body { color: #334155; }
-.award-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+.award-pills { display: flex; flex-wrap: wrap; gap: 6px; }
 .award-pill {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
-  color: rgba(251,191,36,0.85); letter-spacing: 0.07em;
-  border: 1px solid rgba(251,191,36,0.25); padding: 4px 12px; border-radius: 4px;
-}
-[data-theme="light"] .award-pill { color: #92600a; border-color: rgba(251,191,36,0.4); }
-.award-meta-col { text-align: right; flex-shrink: 0; padding-top: 2px; }
-.award-meta-sup {
   font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 6px;
+  color: rgba(251,191,36,0.8); letter-spacing: 0.06em;
+  border: 1px solid rgba(251,191,36,0.22); padding: 3px 11px; border-radius: 4px;
 }
-[data-theme="light"] .award-meta-sup { color: #475569; }
-.award-meta-val { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--text-secondary); line-height: 1.55; }
-[data-theme="light"] .award-meta-val { color: #334155; }
-.award-distinction {
-  margin-top: 18px; padding: 10px 14px; border-radius: 8px;
+.award-aside { text-align: right; flex-shrink: 0; padding-top: 2px; }
+.award-aside-sup {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 5px;
+}
+.award-aside-val {
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600;
+  color: var(--text-secondary); line-height: 1.5;
+}
+.award-aside-flag {
+  margin-top: 12px; padding: 8px 12px; border-radius: 7px;
   background: rgba(251,191,36,0.06); border: 1px solid rgba(251,191,36,0.18);
-  font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(251,191,36,0.85); line-height: 1.7;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(251,191,36,0.8); line-height: 1.7;
 }
-[data-theme="light"] .award-distinction { color: #92600a; background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.3); }
 
-/* ══ IMPACT STRIP ══ */
-.impact-strip {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border); border-radius: var(--r);
-  overflow: hidden; margin-bottom: 56px;
-}
-.impact-cell { background: var(--bg-primary); padding: 24px 20px; text-align: center; transition: background 0.2s; }
-[data-theme="light"] .impact-cell { background: #f5f7ff; }
-.impact-cell:hover { background: var(--bg-secondary); }
-.impact-cell-num {
-  font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800;
-  letter-spacing: -0.04em; background: var(--grad-1);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  line-height: 1; margin-bottom: 6px;
-}
-.impact-cell-num--gold { background: var(--grad-3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.impact-cell-num--purple { background: var(--grad-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.impact-cell-label { font-family: 'JetBrains Mono', monospace; font-size: 0.53rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 4px; }
-[data-theme="light"] .impact-cell-label { color: #334155; }
-.impact-cell-sub { font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: var(--text-secondary); font-weight: 400; }
-[data-theme="light"] .impact-cell-sub { color: #475569; }
-
-/* ══ ACTIVITIES GRID ══ */
+/* ── ACTIVITY CARDS ── */
 .acts-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--border);
-  border: 1px solid var(--border); border-radius: var(--r) var(--r) 0 0; overflow: hidden;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden;
 }
-.acts-grid + .acts-grid { border-top: none; border-radius: 0 0 var(--r) var(--r); margin-bottom: 52px; }
 .act-card {
-  background: var(--bg-primary); padding: 28px 24px 24px;
+  background: var(--bg-primary); padding: 26px 22px 22px;
   transition: background 0.22s; position: relative; display: flex; flex-direction: column;
 }
-[data-theme="light"] .act-card { background: #f5f7ff; }
 .act-card:hover { background: var(--bg-secondary); }
-.act-card--featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-gold), rgba(251,191,36,0.3)); }
-.act-card--blue::before    { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-blue), rgba(34,211,238,0.3)); }
-.act-card--empty { background: transparent !important; pointer-events: none; }
-[data-theme="light"] .act-card--empty { background: transparent !important; }
+.act-card--blue::before, .act-card--default::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.act-card--blue::before { background: linear-gradient(90deg, var(--accent-blue), rgba(34,211,238,0.3)); }
+.act-card--green::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #4ade80, rgba(74,222,128,0.3)); }
 
 .act-chip {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.53rem;
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.51rem;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 9px;
 }
-[data-theme="light"] .act-chip { color: #475569; }
 .act-chip .chip-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-secondary); flex-shrink: 0; }
-.act-chip--gold { color: rgba(161,110,0,0.9); }
-[data-theme="light"] .act-chip--gold { color: #92600a; }
-.act-chip--gold .chip-dot { background: var(--accent-gold); }
 .act-chip--blue { color: var(--accent-cyan); }
-[data-theme="light"] .act-chip--blue { color: #0e7490; }
 .act-chip--blue .chip-dot { background: var(--accent-cyan); }
 .act-chip--green { color: #4ade80; }
 .act-chip--green .chip-dot { background: #4ade80; }
 
-.act-role { font-family: 'Outfit', sans-serif; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-blue); margin-bottom: 4px; }
-.act-name { font-family: 'Outfit', sans-serif; font-size: 1.06rem; font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary); margin-bottom: 2px; line-height: 1.2; }
-.act-org { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; color: var(--text-secondary); letter-spacing: 0.05em; margin-bottom: 12px; }
-[data-theme="light"] .act-org { color: #475569; }
-.act-body { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 400; color: var(--text-secondary); line-height: 1.88; flex: 1; }
-[data-theme="light"] .act-body { color: #334155; }
-
-.act-metrics { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 0; }
-.act-metric {
-  display: flex; flex-direction: column; padding: 8px 12px; border-radius: 6px;
-  background: rgba(79,142,247,0.06); border: 1px solid rgba(79,142,247,0.12); min-width: 60px;
+.act-role {
+  font-family: 'Outfit', sans-serif; font-size: 0.57rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-blue); margin-bottom: 3px;
 }
-[data-theme="light"] .act-metric { background: rgba(79,142,247,0.06); border-color: rgba(79,142,247,0.2); }
-.act-metric--gold { background: rgba(251,191,36,0.05); border-color: rgba(251,191,36,0.15); }
-[data-theme="light"] .act-metric--gold { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.3); }
-.act-metric-val { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent-blue); line-height: 1; }
-[data-theme="light"] .act-metric-val { color: #1d6ae5; }
-.act-metric--gold .act-metric-val { color: var(--accent-gold); }
-[data-theme="light"] .act-metric--gold .act-metric-val { color: #92600a; }
-.act-metric-key { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); margin-top: 3px; }
-[data-theme="light"] .act-metric-key { color: #475569; }
-
-.act-skills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
-.act-skill-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--text-secondary); letter-spacing: 0.06em; border: 1px solid var(--border); padding: 3px 9px; border-radius: 3px; }
-[data-theme="light"] .act-skill-tag { color: #475569; border-color: rgba(79,142,247,0.25); }
-
-.sel-badge {
-  display: inline-flex; align-items: center; gap: 7px;
+.act-name {
+  font-family: 'Outfit', sans-serif; font-size: 1.02rem; font-weight: 800;
+  letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: 2px; line-height: 1.2;
+}
+.act-org {
   font-family: 'JetBrains Mono', monospace; font-size: 0.52rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: #16a34a; background: rgba(74,222,128,0.08); border: 1px solid rgba(74,222,128,0.3);
-  padding: 4px 11px; border-radius: 4px; margin-bottom: 12px; width: fit-content;
+  color: var(--text-secondary); letter-spacing: 0.04em; margin-bottom: 10px;
 }
-[data-theme="light"] .sel-badge { color: #15803d; background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.4); }
-.sel-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; flex-shrink: 0; }
-
-.proof-sep { border: none; border-top: 1px solid var(--border); margin: 16px 0 12px; }
-.proof-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.54rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+.act-body {
+  font-family: 'Outfit', sans-serif; font-size: 0.79rem; color: var(--text-secondary);
+  line-height: 1.85; flex: 1;
 }
-[data-theme="light"] .proof-link { color: #475569; }
-.proof-link:hover { color: var(--text-primary); }
-.proof-link-icon { font-size: 12px; color: var(--accent-gold); opacity: 0.9; }
-.proof-arrow { opacity: 0; transform: translateX(-5px); transition: opacity 0.2s, transform 0.2s; font-size: 10px; }
-.proof-link:hover .proof-arrow { opacity: 1; transform: translateX(0); }
-
-/* ══ LEADERSHIP TIMELINE ══ */
-.timeline-wrap { position: relative; padding-left: 36px; }
-.timeline-wrap::before {
-  content: ''; position: absolute; left: 9px; top: 10px; bottom: 10px; width: 1.5px;
-  background: linear-gradient(180deg, var(--accent-blue), var(--accent-cyan), rgba(79,142,247,0.1));
+.act-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.act-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+  color: var(--text-secondary); letter-spacing: 0.05em;
+  border: 1px solid var(--border); padding: 3px 8px; border-radius: 3px;
 }
-.tl-item { position: relative; padding-bottom: 36px; }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-dot { position: absolute; left: -33px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg-primary); border: 2px solid var(--accent-blue); z-index: 1; }
-.tl-dot--gold { border-color: var(--accent-gold); }
-.tl-dot--cyan { border-color: var(--accent-cyan); }
-.tl-dot--active { background: var(--accent-cyan); border-color: var(--accent-cyan); box-shadow: 0 0 0 3px rgba(34,211,238,0.2); animation: pulse 2s infinite; }
-.tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 4px; }
-[data-theme="light"] .tl-year { color: #1d6ae5; }
-.tl-year--gold { color: #b45309; }
-[data-theme="light"] .tl-year--gold { color: #92600a; }
-.tl-year--cyan { color: var(--accent-cyan); }
-[data-theme="light"] .tl-year--cyan { color: #0e7490; }
-.tl-title { font-family: 'Outfit', sans-serif; font-size: 0.92rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.015em; margin-bottom: 4px; }
-.tl-org { font-family: 'JetBrains Mono', monospace; font-size: 0.53rem; color: var(--text-secondary); letter-spacing: 0.04em; margin-bottom: 7px; }
-[data-theme="light"] .tl-org { color: #475569; }
-.tl-desc { font-family: 'Outfit', sans-serif; font-size: 0.79rem; font-weight: 400; color: var(--text-secondary); line-height: 1.85; }
-[data-theme="light"] .tl-desc { color: #334155; }
 
-/* ══ COMPETENCY GRID ══ */
-.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.comp-card { padding: 20px; border-radius: var(--rs); background: var(--bg-card); border: 1px solid var(--border); transition: border-color 0.25s, background 0.25s; }
-[data-theme="light"] .comp-card { background: rgba(255,255,255,0.9); border-color: rgba(79,142,247,0.15); }
-.comp-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
-.comp-icon { font-size: 1.1rem; margin-bottom: 10px; background: var(--grad-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.comp-title { font-family: 'Outfit', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -0.01em; }
-.comp-desc { font-family: 'Outfit', sans-serif; font-size: 0.74rem; font-weight: 400; color: var(--text-secondary); line-height: 1.75; }
-[data-theme="light"] .comp-desc { color: #334155; }
-.comp-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-.comp-pill { font-family: 'JetBrains Mono', monospace; font-size: 0.48rem; color: var(--text-secondary); border: 1px solid var(--border); padding: 3px 8px; border-radius: 3px; letter-spacing: 0.06em; }
-[data-theme="light"] .comp-pill { color: #475569; border-color: rgba(79,142,247,0.22); }
-
-/* ══ TRAINING BLOCK ══ */
+/* ── TRAINING BLOCK ── */
 .training-block {
-  display: grid; grid-template-columns: 1fr 200px; gap: 44px; align-items: start;
-  padding: clamp(32px,5vw,52px) clamp(32px,5vw,56px); border-radius: var(--r);
-  background: var(--bg-card); border: 1px solid var(--border); border-left: 3px solid var(--accent-blue);
+  display: grid; grid-template-columns: 1fr 190px; gap: 40px; align-items: start;
+  padding: clamp(28px,4vw,48px) clamp(28px,4vw,52px);
+  border-radius: var(--r); background: var(--bg-card);
+  border: 1px solid var(--border); border-left: 3px solid var(--accent-blue);
   backdrop-filter: blur(24px); position: relative; overflow: hidden;
   transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
 }
-.training-block:hover { border-color: var(--border-hover); background: var(--bg-card-hover); box-shadow: var(--shadow-sm); }
-.training-block::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 95% 50%, rgba(79,142,247,0.05), transparent 60%); pointer-events: none; }
-.training-chip { display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 14px; }
-[data-theme="light"] .training-chip { color: #0e7490; }
-.training-chip-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan); animation: pulse 2.5s infinite; }
-.training-name { font-family: 'Outfit', sans-serif; font-size: clamp(1.05rem, 2.5vw, 1.42rem); font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary); line-height: 1.22; margin-bottom: 12px; }
-.training-body { font-family: 'Outfit', sans-serif; font-size: 0.81rem; font-weight: 400; color: var(--text-secondary); line-height: 1.95; max-width: 520px; margin-bottom: 18px; }
-[data-theme="light"] .training-body { color: #334155; }
-.training-modules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px; }
-.training-module { display: flex; align-items: flex-start; gap: 9px; padding: 10px 13px; border-radius: 7px; background: rgba(79,142,247,0.04); border: 1px solid rgba(79,142,247,0.1); }
-[data-theme="light"] .training-module { background: rgba(79,142,247,0.05); border-color: rgba(79,142,247,0.2); }
-.training-module-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-cyan); flex-shrink: 0; margin-top: 5px; }
-.training-module-text { font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 500; color: var(--text-secondary); line-height: 1.4; }
-[data-theme="light"] .training-module-text { color: #334155; }
-.training-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
-.training-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.53rem; color: var(--text-secondary); letter-spacing: 0.06em; border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; transition: border-color 0.2s, color 0.2s; }
-[data-theme="light"] .training-tag { color: #475569; border-color: rgba(79,142,247,0.25); }
-.training-tag:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-.training-aside { display: flex; flex-direction: column; gap: 22px; padding-top: 4px; }
-.aside-label { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 5px; opacity: 0.85; }
-[data-theme="light"] .aside-label { color: #1d6ae5; opacity: 1; }
-.aside-val { font-family: 'Outfit', sans-serif; font-size: 0.81rem; font-weight: 600; color: var(--text-secondary); line-height: 1.5; }
-[data-theme="light"] .aside-val { color: #334155; }
+.training-block:hover {
+  border-color: var(--border-hover); background: var(--bg-card-hover);
+  box-shadow: var(--shadow-sm);
+}
+.training-block::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 95% 50%, rgba(79,142,247,0.05), transparent 60%);
+  pointer-events: none;
+}
+.training-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 12px;
+}
+.training-chip-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cyan);
+  animation: pulse-dot 2.5s infinite;
+}
+@keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.training-name {
+  font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 2.4vw, 1.38rem);
+  font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary);
+  line-height: 1.22; margin-bottom: 10px;
+}
+.training-body {
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem;
+  color: var(--text-secondary); line-height: 1.9; max-width: 520px; margin-bottom: 16px;
+}
+.training-modules {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 16px;
+}
+.training-module {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 9px 12px; border-radius: 7px;
+  background: rgba(79,142,247,0.04); border: 1px solid rgba(79,142,247,0.1);
+}
+.training-module-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent-cyan); flex-shrink: 0; margin-top: 5px;
+}
+.training-module-text {
+  font-family: 'Outfit', sans-serif; font-size: 0.77rem; font-weight: 500;
+  color: var(--text-secondary); line-height: 1.4;
+}
+.training-aside { display: flex; flex-direction: column; gap: 20px; padding-top: 4px; }
+.aside-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 4px;
+}
+.aside-val {
+  font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600;
+  color: var(--text-secondary); line-height: 1.5;
+}
 .aside-val--live { color: var(--accent-cyan); }
-[data-theme="light"] .aside-val--live { color: #0e7490; }
-.progress-bar-track { width: 100%; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 8px; }
-[data-theme="light"] .progress-bar-track { background: rgba(79,142,247,0.15); }
-.progress-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
-
-/* ══ SCHOLARSHIP GOALS GRID ══ */
-.goals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 36px; }
-.goal-card {
-  padding: 28px 26px; border-radius: var(--r); background: var(--bg-card);
-  border: 1px solid var(--border); position: relative; overflow: hidden;
-  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
-}
-.goal-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); box-shadow: var(--shadow-sm); }
-[data-theme="light"] .goal-card { background: #fff; border-color: rgba(79,142,247,0.15); }
-.goal-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; }
-.goal-card--blue  { border-left: 2px solid var(--accent-blue); }
-.goal-card--cyan  { border-left: 2px solid var(--accent-cyan); }
-.goal-card--purple{ border-left: 2px solid var(--accent-purple); }
-.goal-card--gold  { border-left: 2px solid var(--accent-gold); }
-.goal-card--blue::before   { background: radial-gradient(ellipse at 100% 0%, rgba(79,142,247,0.07), transparent 55%); }
-.goal-card--cyan::before   { background: radial-gradient(ellipse at 100% 0%, rgba(34,211,238,0.07), transparent 55%); }
-.goal-card--purple::before { background: radial-gradient(ellipse at 100% 0%, rgba(129,140,248,0.07), transparent 55%); }
-.goal-card--gold::before   { background: radial-gradient(ellipse at 100% 0%, rgba(251,191,36,0.07), transparent 55%); }
-.goal-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px; }
-.goal-eyebrow--blue   { color: var(--accent-blue); }
-.goal-eyebrow--cyan   { color: var(--accent-cyan); }
-.goal-eyebrow--purple { color: var(--accent-purple); }
-.goal-eyebrow--gold   { color: var(--accent-gold); }
-[data-theme="light"] .goal-eyebrow--blue   { color: #1d6ae5; }
-[data-theme="light"] .goal-eyebrow--cyan   { color: #0e7490; }
-[data-theme="light"] .goal-eyebrow--purple { color: #4338ca; }
-[data-theme="light"] .goal-eyebrow--gold   { color: #92600a; }
-.goal-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.25; }
-.goal-body  { font-family: 'Outfit', sans-serif; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.85; }
-[data-theme="light"] .goal-body { color: #334155; }
-.goal-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
-.goal-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.49rem; color: var(--text-secondary); border: 1px solid var(--border); padding: 3px 9px; border-radius: 3px; letter-spacing: 0.06em; }
-[data-theme="light"] .goal-tag { color: #475569; border-color: rgba(79,142,247,0.25); }
-
-/* ══ GLOBAL READINESS PANEL ══ */
-.global-panel {
-  padding: clamp(32px,5vw,52px); border-radius: var(--r); background: var(--bg-card);
-  border: 1px solid var(--border); border-top: 2px solid var(--accent-purple);
-  position: relative; overflow: hidden; margin-top: 24px;
-}
-.global-panel::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% -10%, rgba(129,140,248,0.08), transparent 55%); pointer-events: none; }
-[data-theme="light"] .global-panel { background: #fff; border-color: rgba(79,142,247,0.18); }
-.global-panel-title { font-family: 'Outfit', sans-serif; font-size: clamp(1rem, 2.2vw, 1.3rem); font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary); margin-bottom: 8px; }
-.global-panel-sub { font-family: 'Outfit', sans-serif; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.85; max-width: 580px; margin-bottom: 28px; }
-[data-theme="light"] .global-panel-sub { color: #334155; }
-.readiness-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.readiness-item { text-align: center; padding: 18px 12px; border-radius: var(--rs); background: rgba(129,140,248,0.05); border: 1px solid rgba(129,140,248,0.14); transition: border-color 0.25s; }
-.readiness-item:hover { border-color: rgba(129,140,248,0.3); }
-[data-theme="light"] .readiness-item { background: rgba(79,142,247,0.04); border-color: rgba(79,142,247,0.15); }
-.readiness-icon { font-size: 1.3rem; margin-bottom: 8px; background: var(--grad-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.readiness-label { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
-.readiness-sub { font-family: 'JetBrains Mono', monospace; font-size: 0.5rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; }
-[data-theme="light"] .readiness-sub { color: #475569; }
-
-/* ── FANCY DIVIDER ── */
-.fancy-divider { display: flex; align-items: center; gap: 20px; margin: 52px 0; }
-.fancy-divider::before, .fancy-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-.fancy-divider-label { font-family: 'JetBrains Mono', monospace; font-size: 0.54rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-secondary); white-space: nowrap; }
-[data-theme="light"] .fancy-divider-label { color: #475569; }
+.progress-track { width: 100%; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 7px; }
+.progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan)); }
+.progress-label { font-family: 'JetBrains Mono', monospace; font-size: 0.38rem; color: var(--text-secondary); margin-top: 4px; letter-spacing: 0.1em; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1000px) {
-  .comp-grid  { grid-template-columns: 1fr 1fr; }
-  .impact-strip { grid-template-columns: repeat(3, 1fr); }
-  .readiness-row { grid-template-columns: repeat(2, 1fr); }
-}
 @media (max-width: 900px) {
-  .acts-grid { grid-template-columns: 1fr 1fr; }
+  .comp-grid { grid-template-columns: 1fr; }
   .award-banner { grid-template-columns: auto 1fr; }
-  .award-meta-col { display: none; }
+  .award-aside { display: none; }
   .training-block { grid-template-columns: 1fr; }
-  .stat-row { flex-wrap: wrap; width: 100%; }
-  .stat-item { flex: 1; min-width: 90px; }
   .training-modules { grid-template-columns: 1fr; }
-  .goals-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-wrap: wrap; width: 100%; }
+  .stat-item { flex: 1; min-width: 85px; }
 }
-@media (max-width: 600px) {
-  .acts-grid    { grid-template-columns: 1fr; }
-  .comp-grid    { grid-template-columns: 1fr; }
-  .impact-strip { grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) {
+  .acts-grid { grid-template-columns: 1fr; }
   .award-banner { grid-template-columns: 1fr; text-align: center; }
-  .award-icon   { margin: 0 auto; }
-  .award-tag    { margin: 0 auto 10px; }
-  .award-pills  { justify-content: center; }
-  .hero-section { padding: 100px 0 60px; }
-  .stat-row     { width: 100%; border-radius: var(--rs); }
-  .readiness-row { grid-template-columns: 1fr 1fr; }
+  .award-icon { margin: 0 auto; }
+  .hero-section { padding: 100px 0 56px; }
 }
+
 </style>
 </head>
 <body>
@@ -477,7 +472,6 @@
 <div class="bg-dots" aria-hidden="true"></div>
 <div id="scroll-progress"></div>
 
-<!-- ══ NAVBAR ══ -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -511,446 +505,295 @@
 </div>
 
 <!-- ══ HERO ══ -->
-<section class="hero-section section-alt">
+<section class="hero-section" style="background:rgba(255,255,255,0.012);">
   <div class="container-main">
     <div class="reveal">
-      <div class="hero-eyebrow">Leadership &amp; Engagement Profile · International Scholarship Candidate</div>
-      <h1 class="hero-title">
-        Impact Beyond<br>
-        <span class="grad-word">the Classroom</span>
-      </h1>
-      <p class="hero-subtitle">
-        A verified record of academic distinction, national-level leadership, government-backed professional training, and community impact — built across Software Engineering, AI research, and Data Science at Daffodil International University. Presented in support of a fully funded international postgraduate scholarship application.
-      </p>
-      <div class="hero-cta-row">
-        <span class="hero-cta-badge"><i class="fas fa-university"></i>&nbsp; Daffodil International University</span>
-        <span class="hero-cta-badge"><i class="fas fa-map-marker-alt"></i>&nbsp; Dhaka, Bangladesh</span>
-        <span class="hero-cta-badge"><i class="fas fa-brain"></i>&nbsp; AI · Software Engineering · Data Science</span>
-        <span class="hero-cta-badge"><i class="fas fa-globe"></i>&nbsp; Seeking Fully Funded Scholarship Abroad</span>
-      </div>
-      <div class="scholarship-intent-banner">
-        <i class="fas fa-plane-departure sib-icon"></i>
-        <div>
-          <div class="sib-label">International Scholarship Statement</div>
-          <p class="sib-text">
-            I am actively applying for <strong>fully funded international postgraduate scholarships</strong> to pursue advanced study in Artificial Intelligence and Software Engineering abroad. This page documents the leadership, community impact, and professional development record that underpins my candidacy — evidence of readiness to contribute to, and benefit from, a world-class research environment.
-          </p>
-        </div>
+      <div class="hero-eyebrow">Leadership &amp; Engagement Profile · Scholarship Candidate</div>
+      <h1 class="hero-title">Impact Beyond<br><span class="grad-word">the Classroom</span></h1>
+      <p class="hero-subtitle">Academic honours, two national competition selections, government-backed AI training, and community leadership — presented in support of a fully funded international postgraduate scholarship application.</p>
+      <div class="hero-badges">
+        <span class="hero-badge"><i class="fas fa-university"></i>Daffodil International University</span>
+        <span class="hero-badge"><i class="fas fa-map-marker-alt"></i>Dhaka, Bangladesh</span>
+        <span class="hero-badge"><i class="fas fa-brain"></i>AI · Software Engineering · Data Science</span>
       </div>
     </div>
 
+    <!-- 4 stats — no repetition of what's explained in the cards below -->
     <div class="stat-row reveal" style="transition-delay:.1s">
-      <div class="stat-item stat-item--highlight">
+      <div class="stat-item">
         <div class="stat-num stat-num--gold">1</div>
         <div class="stat-label">Dean's Award</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Leadership Roles</div>
-      </div>
-      <div class="stat-item">
         <div class="stat-num">2</div>
-        <div class="stat-label">National Events</div>
+        <div class="stat-label">Competitions Selected</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">500<span style="font-size:1rem">+</span></div>
-        <div class="stat-label">Participants Reached</div>
+        <div class="stat-num">610<span style="font-size:.9rem">+</span></div>
+        <div class="stat-label">Teams Beaten</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">6</div>
-        <div class="stat-label">Training Disciplines</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num stat-num--purple">Global</div>
-        <div class="stat-label">Study Goal</div>
+        <div class="stat-num stat-num--purple">Final</div>
+        <div class="stat-label">Round Reached</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ ACADEMIC HONORS ══ -->
-<section class="section" style="padding-top:72px; padding-bottom:56px;">
+
+<!-- ══ COMPETITION SELECTIONS ══ -->
+<section class="section" style="padding-top:68px; padding-bottom:72px;">
+  <div class="container-main">
+
+    <div class="comp-section-header reveal">
+      <div>
+        <div class="comp-section-label"><i class="fas fa-trophy" style="margin-right:6px;"></i>Competition Selections</div>
+        <div class="comp-section-title">NutriConnect — Selected<br>in Two Competitions</div>
+      </div>
+      <div class="comp-count-badge">
+        <div class="comp-count-num">2/2</div>
+        <div class="comp-count-text">Tracks<br>Advanced</div>
+      </div>
+    </div>
+
+    <!-- Shared-project context bar -->
+    <div class="same-project-bar reveal" style="transition-delay:.05s">
+      <i class="fas fa-link"></i>
+      <div class="same-project-bar-text">The same project — <strong>NutriConnect</strong> — was submitted to two separate competitions and selected in both.</div>
+    </div>
+
+    <div class="comp-grid reveal" style="transition-delay:.1s">
+
+      <!-- Card 1: DIU AI Project Competition -->
+      <div class="comp-card comp-card--purple">
+        <div class="comp-card-inner">
+          <div class="comp-track">
+            <span class="comp-org-tag comp-org-tag--purple">DIU AI Project Competition · 2026</span>
+            <span class="comp-year-tag">Internal University</span>
+          </div>
+
+          <div class="comp-achievement comp-achievement--purple">
+            <div class="comp-achievement-icon comp-achievement-icon--purple">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="comp-achievement-text">
+              <div class="comp-achievement-label">Phase Reached</div>
+              <div class="comp-achievement-value comp-achievement-value--purple">MVP Development</div>
+              <div class="comp-achievement-sub">Officially advanced · Internal selection</div>
+            </div>
+          </div>
+
+          <div class="comp-project-name">NutriConnect</div>
+          <div class="comp-role-line">Team Lead &amp; Project Architect</div>
+          <p class="comp-desc">
+            Led a four-member team through the full lifecycle of this AI-powered personalized nutrition platform at DIU's internal competition — covering concept definition, technical architecture, sprint coordination, and final submission. The team was officially selected to advance to the <strong style="color:var(--text-primary);">MVP Development Phase</strong>, validating both the project's innovation merit and the team's execution quality within the university.
+          </p>
+
+          <div class="comp-stats">
+            <div class="comp-stat comp-stat--purple"><span class="comp-stat-val comp-stat-val--purple">4</span><span class="comp-stat-key">Team Size</span></div>
+            <div class="comp-stat comp-stat--purple"><span class="comp-stat-val comp-stat-val--purple">MVP</span><span class="comp-stat-key">Phase</span></div>
+            <div class="comp-stat comp-stat--purple"><span class="comp-stat-val comp-stat-val--purple">DIU</span><span class="comp-stat-key">Venue</span></div>
+          </div>
+
+          <div class="comp-tags">
+            <span class="comp-tag">Team Leadership</span>
+            <span class="comp-tag">AI Product Design</span>
+            <span class="comp-tag">Project Architecture</span>
+            <span class="comp-tag">Agile Coordination</span>
+          </div>
+
+          <div class="comp-proof">
+            <a href="assets/NutriConnect_DIU_Selection.pdf" target="_blank" class="proof-link">
+              <i class="fas fa-file-pdf proof-link-icon--purple"></i>
+              View DIU selection letter
+              <span class="proof-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: AI BuildFest 2026 -->
+      <div class="comp-card comp-card--gold">
+        <div class="comp-card-inner">
+          <div class="comp-track">
+            <span class="comp-org-tag comp-org-tag--gold">The Infinity × AI BuildFest · 2026</span>
+            <span class="comp-year-tag">National · BRAC University</span>
+          </div>
+
+          <div class="comp-achievement comp-achievement--gold">
+            <div class="comp-achievement-icon comp-achievement-icon--gold">
+              <i class="fas fa-trophy"></i>
+            </div>
+            <div class="comp-achievement-text">
+              <div class="comp-achievement-label">Round Reached</div>
+              <div class="comp-achievement-value comp-achievement-value--gold">Final Round</div>
+              <div class="comp-achievement-sub">HealthTech track · 610+ teams · 3,300+ participants</div>
+            </div>
+          </div>
+
+          <div class="comp-project-name">NutriConnect</div>
+          <div class="comp-role-line">Team Lead &amp; Project Architect</div>
+          <p class="comp-desc">
+            Submitted to <strong style="color:var(--text-primary);">Bangladesh's largest national AI competition</strong> — organised by CloudCamp Bangladesh and co-hosted by BRAC University, with partnerships from Washington University and Technuf. NutriConnect was selected for the <strong style="color:var(--text-primary);">Final Round in the HealthTech track</strong>, placing the team in the top tier among universities across the country. Event date: 12 June 2026, BRAC University, Dhaka.
+          </p>
+
+          <div class="comp-stats">
+            <div class="comp-stat comp-stat--gold"><span class="comp-stat-val comp-stat-val--gold">Final</span><span class="comp-stat-key">Round</span></div>
+            <div class="comp-stat comp-stat--gold"><span class="comp-stat-val comp-stat-val--gold">610+</span><span class="comp-stat-key">Teams</span></div>
+            <div class="comp-stat comp-stat--gold"><span class="comp-stat-val comp-stat-val--gold">3,300+</span><span class="comp-stat-key">Participants</span></div>
+            <div class="comp-stat comp-stat--gold"><span class="comp-stat-val comp-stat-val--gold">Health</span><span class="comp-stat-key">Track</span></div>
+          </div>
+
+          <div class="comp-tags">
+            <span class="comp-tag">National Competition</span>
+            <span class="comp-tag">HealthTech AI</span>
+            <span class="comp-tag">CloudCamp / BRAC</span>
+            <span class="comp-tag">Final Round</span>
+          </div>
+
+          <div class="comp-proof">
+            <a href="assets/NutriConnect_AIBuildfest_FinalRound.pdf" target="_blank" class="proof-link">
+              <i class="fas fa-file-pdf proof-link-icon--gold"></i>
+              View AI BuildFest Final Round selection letter
+              <span class="proof-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ ACADEMIC HONOR ══ -->
+<section style="background:rgba(255,255,255,0.012); padding:60px 0 72px; position:relative;z-index:1;">
   <div class="container-main">
     <div class="sec-chrome reveal">
       <div class="sec-chrome-line"></div>
-      <div class="sec-chrome-tag"><i class="fas fa-star" style="font-size:9px;margin-right:6px;color:var(--accent-gold);"></i>Academic Honors</div>
+      <div class="sec-chrome-tag"><i class="fas fa-star" style="font-size:9px;margin-right:6px;color:var(--accent-gold);"></i>Academic Honor</div>
       <div class="sec-chrome-line"></div>
     </div>
     <div class="award-banner reveal">
       <div class="award-icon"><i class="fas fa-medal"></i></div>
       <div>
-        <div class="award-tag"><span class="award-tag-dot"></span>Institutional Award · Spring 2025</div>
+        <div class="award-tag"><span class="award-dot"></span>Institutional Award · Spring 2025</div>
         <div class="award-name">Dean's Award — Spring Semester 2025</div>
-        <div class="award-body">
-          Awarded by Daffodil International University in recognition of exceptional academic performance during the Spring 2025 semester. This distinction — conferred to a select group of students each term — acknowledges outstanding dedication to scholarly achievement across Software Engineering, AI research, and Data Science coursework. It reflects consistent high performance in a rigorous, technology-focused curriculum at one of Bangladesh's largest and most reputed universities, and demonstrates the academic discipline required to succeed in a competitive international postgraduate environment.
-        </div>
+        <p class="award-body">Awarded by Daffodil International University in recognition of exceptional academic performance during Spring 2025 — a selective distinction conferred to a small cohort of top-performing students each term, across the Software Engineering department.</p>
         <div class="award-pills">
           <span class="award-pill">Top Academic Performer</span>
           <span class="award-pill">Spring 2025 Cohort</span>
           <span class="award-pill">Software Engineering Dept.</span>
-          <span class="award-pill">Daffodil International University</span>
           <span class="award-pill">Selective Recognition</span>
         </div>
       </div>
-      <div class="award-meta-col">
-        <div class="award-meta-sup">Issuing Institution</div>
-        <div class="award-meta-val">Daffodil International<br>University</div>
-        <div class="award-distinction">
-          Competitive Award<br>— Selective Recognition<br>— Academic Excellence<br>— Spring 2025
-        </div>
+      <div class="award-aside">
+        <div class="award-aside-sup">Issuing Institution</div>
+        <div class="award-aside-val">Daffodil International<br>University</div>
+        <div class="award-aside-flag">Selective Award<br>— Spring 2025<br>— Academic Excellence</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ IMPACT AT A GLANCE ══ -->
-<section class="section-alt" style="padding:0 0 72px;">
-  <div class="container-main">
-    <div class="sec-chrome reveal" style="margin-bottom:28px;">
-      <div class="sec-chrome-line"></div>
-      <div class="sec-chrome-tag"><i class="fas fa-chart-bar" style="font-size:9px;margin-right:6px;color:var(--accent-blue);"></i>Quantified Impact</div>
-      <div class="sec-chrome-line"></div>
-    </div>
-    <div class="impact-strip reveal">
-      <div class="impact-cell">
-        <div class="impact-cell-num impact-cell-num--gold">1st</div>
-        <div class="impact-cell-label">Dean's Award</div>
-        <div class="impact-cell-sub">Academic excellence, Spring 2025</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-cell-num">4</div>
-        <div class="impact-cell-label">Team Members Led</div>
-        <div class="impact-cell-sub">NutriConnect AI project team</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-cell-num">500<span style="font-size:1.1rem">+</span></div>
-        <div class="impact-cell-label">Participants Reached</div>
-        <div class="impact-cell-sub">Across 2 national-level events</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-cell-num">6</div>
-        <div class="impact-cell-label">Tech Disciplines</div>
-        <div class="impact-cell-sub">Government-backed BDSET training</div>
-      </div>
-      <div class="impact-cell">
-        <div class="impact-cell-num impact-cell-num--purple">Intl.</div>
-        <div class="impact-cell-label">Scholarship Goal</div>
-        <div class="impact-cell-sub">Fully funded postgrad abroad</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ EXTRACURRICULAR ACTIVITIES ══ -->
-<section id="activities" class="section" style="padding-top:60px; padding-bottom:80px;">
+<!-- ══ OTHER ACTIVITIES ══ -->
+<section class="section" style="padding-top:64px; padding-bottom:72px;">
   <div class="container-main">
     <div class="sec-chrome reveal">
       <div class="sec-chrome-line"></div>
-      <div class="sec-chrome-tag"><i class="fas fa-bolt" style="font-size:9px;margin-right:6px;color:var(--accent-cyan);"></i>Extracurricular Leadership</div>
+      <div class="sec-chrome-tag"><i class="fas fa-bolt" style="font-size:9px;margin-right:6px;color:var(--accent-cyan);"></i>Leadership &amp; Community</div>
       <div class="sec-chrome-line"></div>
     </div>
 
-    <!-- Row 1 -->
-    <div class="acts-grid">
-      <div class="act-card act-card--featured reveal">
-        <div class="act-chip act-chip--gold"><span class="chip-dot"></span>AI Competition · 2026</div>
-        <div class="act-role">Team Leader &amp; Project Architect</div>
-        <div class="act-name">NutriConnect</div>
-        <div class="act-org">DIU AI Project Competition 2026 · DIU</div>
-        <div class="sel-badge"><span class="sel-badge-dot"></span>Selected — MVP Development Phase</div>
-        <div class="act-body">
-          Led a four-member cross-functional team through the full lifecycle of NutriConnect — an AI-powered personalized nutrition platform — from problem definition and architecture design through feature development, sprint coordination, and competition submission. Responsibilities spanned technical leadership, product roadmapping, and cross-member task delegation. Officially selected to advance to the MVP Development Phase, validating the project's innovation merit and team execution capacity.
-        </div>
-        <div class="act-metrics">
-          <div class="act-metric act-metric--gold"><span class="act-metric-val">4</span><span class="act-metric-key">Team Size</span></div>
-          <div class="act-metric act-metric--gold"><span class="act-metric-val">MVP</span><span class="act-metric-key">Phase Reached</span></div>
-          <div class="act-metric act-metric--gold"><span class="act-metric-val">AI</span><span class="act-metric-key">Domain</span></div>
-        </div>
-        <div class="act-skills">
-          <span class="act-skill-tag">Team Leadership</span>
-          <span class="act-skill-tag">AI Product Design</span>
-          <span class="act-skill-tag">Project Architecture</span>
-          <span class="act-skill-tag">Agile Coordination</span>
-        </div>
-        <div class="proof-sep"></div>
-        <a href="assets/NutriConnect_Selection_Letter.pdf" target="_blank" class="proof-link" aria-label="View official NutriConnect selection letter">
-          <i class="fas fa-file-pdf proof-link-icon"></i>
-          View official selection letter
-          <span class="proof-arrow">→</span>
-        </a>
-      </div>
+    <div class="acts-grid reveal">
 
-      <div class="act-card act-card--blue reveal" style="transition-delay:.07s">
-        <div class="act-chip act-chip--blue"><span class="chip-dot"></span>Club · Ongoing</div>
+      <!-- Data Science Club -->
+      <div class="act-card act-card--blue">
+        <div class="act-chip act-chip--blue"><span class="chip-dot"></span>Club · 2025–Present</div>
         <div class="act-role">Executive Member</div>
         <div class="act-name">Data Science Club</div>
         <div class="act-org">Daffodil International University</div>
-        <div class="act-body">
-          Serves as an executive member responsible for organizing academic events, workshops, and peer-learning sessions on data science and machine learning. Actively contributes to workshop curriculum design, speaker coordination, and outreach initiatives — building a data-driven learning community that spans multiple university departments and fosters applied, hands-on engagement with industry-relevant tools. This role directly reflects the commitment to knowledge-sharing and collaborative learning expected of international scholarship recipients.
-        </div>
-        <div class="act-metrics">
-          <div class="act-metric"><span class="act-metric-val">Exec</span><span class="act-metric-key">Board Member</span></div>
-          <div class="act-metric"><span class="act-metric-val">DS/ML</span><span class="act-metric-key">Focus Domain</span></div>
-        </div>
-        <div class="act-skills">
-          <span class="act-skill-tag">Community Building</span>
-          <span class="act-skill-tag">Event Planning</span>
-          <span class="act-skill-tag">Curriculum Design</span>
-          <span class="act-skill-tag">Peer Mentoring</span>
+        <p class="act-body">Organises workshops, peer-learning sessions, and academic events focused on data science and ML. Contributes to curriculum design, speaker coordination, and cross-department outreach to build a data-driven learning community within the university.</p>
+        <div class="act-tags">
+          <span class="act-tag">Community Building</span>
+          <span class="act-tag">Event Planning</span>
+          <span class="act-tag">Curriculum Design</span>
+          <span class="act-tag">Peer Mentoring</span>
         </div>
       </div>
 
-      <div class="act-card reveal" style="transition-delay:.14s">
+      <!-- DIU Data Summit -->
+      <div class="act-card" style="background:var(--bg-primary);">
         <div class="act-chip"><span class="chip-dot"></span>National Event · 2025</div>
-        <div class="act-role">Organizing Committee Member</div>
+        <div class="act-role">Organizing Committee</div>
         <div class="act-name">DIU Data Summit 2025</div>
-        <div class="act-org">National Data Science Summit · DIU</div>
-        <div class="act-body">
-          Served on the organizing committee for a national-level data science summit that drew participants from universities and institutions across Bangladesh. Responsibilities included multi-track event coordination, participant and speaker management, technical session logistics, and on-the-day operations — developing strong skills in large-scale event administration and cross-institutional collaboration essential for international academic environments.
-        </div>
-        <div class="act-metrics">
-          <div class="act-metric"><span class="act-metric-val">National</span><span class="act-metric-key">Event Scope</span></div>
-          <div class="act-metric"><span class="act-metric-val">Multi-Inst.</span><span class="act-metric-key">Collaboration</span></div>
-        </div>
-        <div class="act-skills">
-          <span class="act-skill-tag">Event Operations</span>
-          <span class="act-skill-tag">Cross-Inst. Liaison</span>
-          <span class="act-skill-tag">Logistics Management</span>
+        <div class="act-org">National Data Science Summit · Bangladesh</div>
+        <p class="act-body">Served on the organizing committee for a national summit drawing participants from universities across Bangladesh — handling multi-track session coordination, speaker management, and on-day operations.</p>
+        <div class="act-tags">
+          <span class="act-tag">Event Operations</span>
+          <span class="act-tag">Cross-Inst. Liaison</span>
+          <span class="act-tag">Logistics</span>
         </div>
       </div>
-    </div>
 
-    <!-- Row 2 -->
-    <div class="acts-grid">
-      <div class="act-card reveal" style="transition-delay:.21s">
+      <!-- Robo Spark -->
+      <div class="act-card act-card--green">
         <div class="act-chip act-chip--green"><span class="chip-dot"></span>National Competition · 2024</div>
-        <div class="act-role">Organizing Committee Member</div>
+        <div class="act-role">Organizing Committee</div>
         <div class="act-name">National Robo Spark 2024</div>
-        <div class="act-org">National Robotics Competition · Multi-University</div>
-        <div class="act-body">
-          Contributed to organizing a national multi-university robotics competition — overseeing participant registration, scheduling, faculty coordinator liaisons, and full on-site operations. The event brought together engineering and technology students from institutions across Bangladesh, providing direct experience in high-pressure event management and national-scale coordination.
-        </div>
-        <div class="act-metrics">
-          <div class="act-metric"><span class="act-metric-val">Multi-Uni</span><span class="act-metric-key">Scope</span></div>
-          <div class="act-metric"><span class="act-metric-val">2024</span><span class="act-metric-key">Year</span></div>
-        </div>
-        <div class="act-skills">
-          <span class="act-skill-tag">Event Management</span>
-          <span class="act-skill-tag">Stakeholder Coordination</span>
-          <span class="act-skill-tag">Operations</span>
+        <div class="act-org">National Multi-University Robotics Competition</div>
+        <p class="act-body">Managed participant registration, scheduling, faculty coordinator liaisons, and full on-site operations for a national multi-university robotics competition bringing together engineering students from institutions across Bangladesh.</p>
+        <div class="act-tags">
+          <span class="act-tag">Event Management</span>
+          <span class="act-tag">Stakeholder Coordination</span>
+          <span class="act-tag">Operations</span>
         </div>
       </div>
-      <div class="act-card act-card--empty"></div>
-      <div class="act-card act-card--empty"></div>
+
     </div>
   </div>
 </section>
 
-<!-- ══ LEADERSHIP TIMELINE ══ -->
-<section class="section section-alt" style="padding-top:60px; padding-bottom:72px;">
+
+<!-- ══ PROFESSIONAL DEVELOPMENT ══ -->
+<section style="background:rgba(255,255,255,0.012); padding:64px 0 88px; position:relative;z-index:1;">
   <div class="container-main">
     <div class="sec-chrome reveal">
       <div class="sec-chrome-line"></div>
-      <div class="sec-chrome-tag"><i class="fas fa-stream" style="font-size:9px;margin-right:6px;color:var(--accent-purple);"></i>Leadership Trajectory</div>
+      <div class="sec-chrome-tag"><i class="fas fa-graduation-cap" style="font-size:9px;margin-right:6px;color:var(--accent-blue);"></i>Professional Development</div>
       <div class="sec-chrome-line"></div>
     </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;">
-      <div class="timeline-wrap reveal">
-        <div class="tl-item">
-          <div class="tl-dot tl-dot--active"></div>
-          <div class="tl-year tl-year--cyan">2026 · Current</div>
-          <div class="tl-title">Team Leader — NutriConnect</div>
-          <div class="tl-org">DIU AI Project Competition 2026</div>
-          <div class="tl-desc">Leading a 4-member AI development team to MVP phase — overseeing product architecture, sprint planning, and final submission for a national university competition.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot tl-dot--active"></div>
-          <div class="tl-year tl-year--cyan">2025–Present · Ongoing</div>
-          <div class="tl-title">Executive Member — Data Science Club</div>
-          <div class="tl-org">Daffodil International University</div>
-          <div class="tl-desc">Organizing workshops, academic events, and curriculum sessions to build a data science community across departments.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot tl-dot--gold"></div>
-          <div class="tl-year tl-year--gold">2025 · Award</div>
-          <div class="tl-title">Dean's Award — Academic Excellence</div>
-          <div class="tl-org">Daffodil International University</div>
-          <div class="tl-desc">Recognised as a top academic performer in the Spring 2025 semester across Software Engineering and Data Science disciplines — one of only a select few students honoured each term.</div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-dot"></div>
-          <div class="tl-year">2025</div>
-          <div class="tl-title">Organizing Committee — DIU Data Summit 2025</div>
-          <div class="tl-org">National Data Science Summit, Bangladesh</div>
-          <div class="tl-desc">Coordinated a national-level summit drawing participants from universities across Bangladesh — managing sessions, logistics, and participant engagement.</div>
-        </div>
-        <div class="tl-item" style="padding-bottom:0">
-          <div class="tl-dot"></div>
-          <div class="tl-year">2024</div>
-          <div class="tl-title">Organizing Committee — National Robo Spark 2024</div>
-          <div class="tl-org">National Multi-University Robotics Competition</div>
-          <div class="tl-desc">Contributed to running Bangladesh's national robotics competition — managing registration, scheduling, and full on-site operations.</div>
-        </div>
-      </div>
-
-      <div class="reveal" style="transition-delay:.1s;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:0.46rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;">Core Competencies Demonstrated</div>
-        <div class="comp-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="comp-card">
-            <div class="comp-icon"><i class="fas fa-users"></i></div>
-            <div class="comp-title">Team Leadership</div>
-            <div class="comp-desc">Direct experience leading multi-person technical teams through full project cycles in competitive environments.</div>
-            <div class="comp-pills"><span class="comp-pill">Delegation</span><span class="comp-pill">Coordination</span><span class="comp-pill">Accountability</span></div>
-          </div>
-          <div class="comp-card">
-            <div class="comp-icon"><i class="fas fa-calendar-check"></i></div>
-            <div class="comp-title">Event Management</div>
-            <div class="comp-desc">Organized and operated two national-scale events spanning multiple institutions and hundreds of participants.</div>
-            <div class="comp-pills"><span class="comp-pill">Logistics</span><span class="comp-pill">Scheduling</span><span class="comp-pill">Stakeholders</span></div>
-          </div>
-          <div class="comp-card">
-            <div class="comp-icon"><i class="fas fa-brain"></i></div>
-            <div class="comp-title">AI Product Building</div>
-            <div class="comp-desc">Hands-on experience architecting and delivering an AI-powered platform from concept to MVP-ready submission.</div>
-            <div class="comp-pills"><span class="comp-pill">Architecture</span><span class="comp-pill">AI/ML</span><span class="comp-pill">Product Design</span></div>
-          </div>
-          <div class="comp-card">
-            <div class="comp-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-            <div class="comp-title">Community Building</div>
-            <div class="comp-desc">Actively grows a data science learning community through peer sessions, workshops, and cross-department outreach.</div>
-            <div class="comp-pills"><span class="comp-pill">Mentoring</span><span class="comp-pill">Curriculum</span><span class="comp-pill">Outreach</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PROFESSIONAL DEVELOPMENT ══ -->
-<section class="section" style="padding-top:60px; padding-bottom:80px;">
-  <div class="container-main">
-    <div class="fancy-divider reveal">
-      <div class="fancy-divider-label">Professional Development</div>
-    </div>
-
     <div class="training-block reveal">
       <div>
-        <div class="training-chip"><span class="training-chip-dot"></span>Government-Supported Training · In Progress</div>
-        <div class="training-name">BDSET Center — AI, Machine Learning<br>&amp; Emerging Technologies</div>
-        <p class="training-body">
-          An intensive professional development programme under the Bangladesh Digital Service and Employment Training (BDSET) Centre Project — a flagship government initiative to equip the next generation of Bangladesh's technology professionals with industry-aligned, applied expertise. The curriculum spans artificial intelligence, deep learning, immersive technologies (AR/VR/XR), and communication — directly preparing participants for international roles in AI and software. Completing this government-backed programme alongside a full undergraduate curriculum demonstrates the capacity to manage multiple demanding commitments, a quality central to success in international postgraduate study.
-        </p>
+        <div class="training-chip"><span class="training-chip-dot"></span>Government-Supported · In Progress</div>
+        <div class="training-name">BDSET Centre — AI, Machine Learning &amp; Emerging Technologies</div>
+        <p class="training-body">An intensive programme under the Bangladesh Digital Service and Employment Training (BDSET) Centre Project — a government initiative equipping Bangladesh's next generation of tech professionals with industry-aligned expertise across AI, immersive technologies, and professional English communication.</p>
         <div class="training-modules">
           <div class="training-module"><div class="training-module-dot"></div><div class="training-module-text">Artificial Intelligence &amp; Machine Learning</div></div>
           <div class="training-module"><div class="training-module-dot"></div><div class="training-module-text">Deep Learning &amp; Neural Networks</div></div>
           <div class="training-module"><div class="training-module-dot"></div><div class="training-module-text">AR / VR / MR / XR — Immersive Technologies</div></div>
           <div class="training-module"><div class="training-module-dot"></div><div class="training-module-text">Communicative English for Tech Professionals</div></div>
         </div>
-        <div class="training-tags">
-          <span class="training-tag">Artificial Intelligence</span>
-          <span class="training-tag">Machine Learning</span>
-          <span class="training-tag">Deep Learning</span>
-          <span class="training-tag">AR / VR / MR / XR</span>
-          <span class="training-tag">Emerging Technologies</span>
-          <span class="training-tag">Communicative English</span>
-        </div>
       </div>
       <div class="training-aside">
-        <div class="aside-item">
-          <div class="aside-label">Program Type</div>
+        <div>
+          <div class="aside-label">Programme Type</div>
           <div class="aside-val">Government-Supported<br>Professional Training</div>
         </div>
-        <div class="aside-item">
-          <div class="aside-label">Organizer</div>
-          <div class="aside-val">BDSET Centre,<br>Bangladesh</div>
+        <div>
+          <div class="aside-label">Organiser</div>
+          <div class="aside-val">BDSET Centre, Bangladesh</div>
         </div>
-        <div class="aside-item">
-          <div class="aside-label">Modules Covered</div>
-          <div class="aside-val">6 Disciplines</div>
+        <div>
+          <div class="aside-label">Disciplines</div>
+          <div class="aside-val">6 Modules</div>
         </div>
-        <div class="aside-item">
+        <div>
           <div class="aside-label">Status</div>
           <div class="aside-val aside-val--live">● In Progress</div>
-          <div class="aside-progress">
-            <div class="progress-bar-track">
-              <div class="progress-bar-fill" style="width:60%"></div>
-            </div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.4rem;color:var(--text-muted);margin-top:5px;letter-spacing:0.1em;">~60% COMPLETE</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ SCHOLARSHIP GOALS & GLOBAL READINESS ══ -->
-<section class="section section-alt" style="padding-top:60px; padding-bottom:90px;">
-  <div class="container-main">
-    <div class="sec-chrome reveal">
-      <div class="sec-chrome-line"></div>
-      <div class="sec-chrome-tag"><i class="fas fa-globe-asia" style="font-size:9px;margin-right:6px;color:var(--accent-purple);"></i>Scholarship Motivation &amp; Global Goals</div>
-      <div class="sec-chrome-line"></div>
-    </div>
-
-    <div class="goals-grid reveal">
-      <div class="goal-card goal-card--blue">
-        <div class="goal-eyebrow goal-eyebrow--blue"><i class="fas fa-crosshairs" style="margin-right:6px;"></i>Academic Goal</div>
-        <div class="goal-title">Advanced Research in AI &amp; Intelligent Systems</div>
-        <div class="goal-body">I aim to pursue a fully funded postgraduate degree (MSc or PhD) in Artificial Intelligence, Machine Learning, or Software Engineering at a leading international university. My undergraduate research in AI-driven nutrition systems, NLP, and applied machine learning has established a clear trajectory toward contributing original research in intelligent, human-centred computing — work I intend to deepen in an internationally competitive research environment.</div>
-        <div class="goal-tags"><span class="goal-tag">MSc / PhD AI</span><span class="goal-tag">Machine Learning Research</span><span class="goal-tag">Intelligent Systems</span></div>
-      </div>
-
-      <div class="goal-card goal-card--cyan">
-        <div class="goal-eyebrow goal-eyebrow--cyan"><i class="fas fa-handshake" style="margin-right:6px;"></i>Contribution Commitment</div>
-        <div class="goal-title">Knowledge Transfer Back to Bangladesh</div>
-        <div class="goal-body">A fully funded international scholarship is an investment in Bangladesh's AI ecosystem. I am committed to returning and applying internationally acquired expertise to strengthen local research capacity, mentor the next generation of AI practitioners, and contribute to Bangladesh's national digital transformation agenda — building on the community leadership I have already demonstrated through the Data Science Club and national event coordination.</div>
-        <div class="goal-tags"><span class="goal-tag">Knowledge Transfer</span><span class="goal-tag">Community Impact</span><span class="goal-tag">National Development</span></div>
-      </div>
-
-      <div class="goal-card goal-card--purple">
-        <div class="goal-eyebrow goal-eyebrow--purple"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>Research Vision</div>
-        <div class="goal-title">AI for Social Good &amp; Healthcare Applications</div>
-        <div class="goal-body">My leadership of NutriConnect — an AI-powered personalized nutrition platform — reflects a core research interest in deploying machine learning to solve real-world public health and well-being problems. Internationally, I seek to deepen this work through rigorous methods, cross-disciplinary collaboration, and exposure to state-of-the-art research infrastructure that does not yet exist at scale in Bangladesh.</div>
-        <div class="goal-tags"><span class="goal-tag">AI for Health</span><span class="goal-tag">Applied ML</span><span class="goal-tag">Human-Centred AI</span></div>
-      </div>
-
-      <div class="goal-card goal-card--gold">
-        <div class="goal-eyebrow goal-eyebrow--gold"><i class="fas fa-users-cog" style="margin-right:6px;"></i>Leadership &amp; Cultural Readiness</div>
-        <div class="goal-title">Ready for an International Academic Community</div>
-        <div class="goal-body">My record — leading teams across disciplines, coordinating national events with 500+ participants, working within a government professional training programme, and serving on an executive board — demonstrates that I am operating at a level of cross-functional, multi-stakeholder complexity that prepares me to thrive in diverse, international cohorts. Communicative English training at BDSET further reinforces my readiness for full immersion in an English-medium research environment.</div>
-        <div class="goal-tags"><span class="goal-tag">Cross-Cultural Collaboration</span><span class="goal-tag">English Proficiency</span><span class="goal-tag">International Readiness</span></div>
-      </div>
-    </div>
-
-    <div class="global-panel reveal" style="transition-delay:.1s">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;">
-        <i class="fas fa-check-circle" style="color:var(--accent-purple);font-size:1.1rem;flex-shrink:0;"></i>
-        <div class="global-panel-title">International Scholarship Readiness — At a Glance</div>
-      </div>
-      <p class="global-panel-sub">
-        The following indicators collectively demonstrate readiness for a world-class, fully funded postgraduate programme — each pillar mapping directly to criteria prioritised by major international scholarship bodies.
-      </p>
-      <div class="readiness-row">
-        <div class="readiness-item">
-          <div class="readiness-icon"><i class="fas fa-graduation-cap"></i></div>
-          <div class="readiness-label">Academic Excellence</div>
-          <div class="readiness-sub">Dean's Award · Spring 2025</div>
-        </div>
-        <div class="readiness-item">
-          <div class="readiness-icon"><i class="fas fa-users"></i></div>
-          <div class="readiness-label">Proven Leadership</div>
-          <div class="readiness-sub">4 Roles · Team Lead · Exec Board</div>
-        </div>
-        <div class="readiness-item">
-          <div class="readiness-icon"><i class="fas fa-flask"></i></div>
-          <div class="readiness-label">Research Experience</div>
-          <div class="readiness-sub">AI Projects · NLP · Applied ML</div>
-        </div>
-        <div class="readiness-item">
-          <div class="readiness-icon"><i class="fas fa-comments"></i></div>
-          <div class="readiness-label">English Proficiency</div>
-          <div class="readiness-sub">BDSET Communicative English Training</div>
+          <div class="progress-track"><div class="progress-fill" style="width:60%"></div></div>
+          <div class="progress-label">~60% Complete</div>
         </div>
       </div>
     </div>

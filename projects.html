@@ -6,10 +6,63 @@
 <title>Projects — Tamanna Jarin Tima</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-<!-- Fonts loaded via variables.css: Outfit, DM Serif Display, JetBrains Mono -->
-<!-- FIXED: removed redundant DM Sans + DM Serif Display + JetBrains Mono Google Fonts link -->
 <link rel="stylesheet" href="variables.css"/>
 <style>
+
+/* ── HERO ── */
+.hero-section {
+  padding: 130px 0 72px;
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.012);
+}
+.hero-section::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border) 30%, var(--border) 70%, transparent 100%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent-blue); margin-bottom: 20px;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent-blue); }
+.hero-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 3.9rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.06;
+  color: var(--text-primary); margin-bottom: 0;
+}
+.hero-title .grad-word {
+  background: var(--grad-1); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-subtitle {
+  font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  color: var(--text-secondary); line-height: 1.9; max-width: 520px;
+  margin-top: 20px; padding-left: 16px;
+  border-left: 2px solid rgba(79,142,247,0.4);
+}
+.hero-meta-row {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 28px;
+}
+.hero-meta-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.57rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-secondary); padding: 6px 14px;
+  border: 1px solid var(--border); border-radius: 30px;
+}
+.hero-meta-badge i { color: var(--accent-cyan); font-size: 9px; }
+.hero-meta-badge--highlight {
+  color: #fcd34d;
+  border-color: rgba(251,191,36,0.45);
+  background: rgba(251,191,36,0.1);
+  box-shadow: 0 0 16px rgba(251,191,36,0.15);
+  text-shadow: 0 0 10px rgba(251,191,36,0.4);
+}
+.hero-meta-badge--highlight i { color: #f59e0b; }
+
 /* ── PROJECT GRID ── */
 .proj-grid {
   display: grid;
@@ -29,24 +82,124 @@
   backdrop-filter: blur(20px);
   position: relative;
   min-width: 0;
-  background: rgba(10, 18, 38, 0.82);
+  background: var(--bg-card);
 }
 .proj-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 0 40px rgba(79,142,247,0.12);
-  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.45), 0 0 40px rgba(79,142,247,0.1);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
 }
-[data-theme="light"] .proj-card {
-  background: rgba(255,255,255,0.94);
-  border-color: rgba(79,142,247,0.13);
-  box-shadow: 0 4px 24px rgba(79,142,247,0.07);
+
+/* ── COMPETITION WINNER BADGE ── */
+@keyframes goldShimmer {
+  0%   { background-position: -250% center; }
+  100% { background-position: 250% center; }
 }
-[data-theme="light"] .proj-card:hover {
-  background: #fff;
-  border-color: rgba(79,142,247,0.35);
-  box-shadow: 0 16px 48px rgba(79,142,247,0.15);
-  transform: translateY(-8px);
+@keyframes trophyPulse {
+  0%, 100% { transform: scale(1);   filter: drop-shadow(0 0 0px #f59e0b); }
+  50%       { transform: scale(1.2); filter: drop-shadow(0 0 6px #fbbf24); }
 }
+
+.proj-card--featured {
+  border-color: rgba(251,191,36,0.42);
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.15),
+              0 8px 40px rgba(251,191,36,0.14),
+              0 2px 12px rgba(251,191,36,0.1);
+}
+.proj-card--featured:hover {
+  border-color: rgba(251,191,36,0.72);
+  box-shadow: 0 28px 70px rgba(0,0,0,0.4),
+              0 0 60px rgba(251,191,36,0.22),
+              0 0 0 1px rgba(251,191,36,0.3);
+}
+/* Glowing top accent line */
+.proj-card--featured::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #f59e0b 30%, #fbbf24 50%, #f59e0b 70%, transparent 100%);
+  z-index: 10;
+  box-shadow: 0 0 14px rgba(251,191,36,0.7), 0 0 28px rgba(251,191,36,0.35);
+}
+
+.comp-winner-strip {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 16px; margin: 0;
+  position: relative; overflow: hidden;
+  background: linear-gradient(
+    105deg,
+    rgba(180,120,0,0.18) 0%,
+    rgba(251,191,36,0.22) 45%,
+    rgba(180,120,0,0.18) 100%
+  );
+  background-size: 300% 100%;
+  animation: goldShimmer 4s ease-in-out infinite;
+  border-bottom: 1px solid rgba(251,191,36,0.3);
+  flex-shrink: 0;
+}
+/* Frosted inner glow */
+.comp-winner-strip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,220,80,0.07), transparent);
+  pointer-events: none;
+}
+.comp-winner-strip i {
+  font-size: 0.72rem; color: #f59e0b;
+  animation: trophyPulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.comp-winner-strip-text {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.5rem;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: #fcd34d; font-weight: 600;
+  text-shadow: 0 0 12px rgba(251,191,36,0.5);
+}
+.comp-winner-strip-sep {
+  width: 1px; height: 11px; background: rgba(251,191,36,0.4); flex-shrink: 0;
+}
+
+/* ── LIGHT MODE: competition strip ── */
+[data-theme="light"] .proj-card--featured {
+  border-color: rgba(161,110,0,0.5);
+  box-shadow: 0 0 0 1px rgba(161,110,0,0.18),
+              0 8px 40px rgba(161,110,0,0.12),
+              0 2px 12px rgba(161,110,0,0.08);
+}
+[data-theme="light"] .proj-card--featured:hover {
+  border-color: rgba(161,110,0,0.75);
+  box-shadow: 0 28px 60px rgba(120,80,0,0.18),
+              0 0 50px rgba(161,110,0,0.15),
+              0 0 0 1px rgba(161,110,0,0.35);
+}
+[data-theme="light"] .proj-card--featured::after {
+  background: linear-gradient(90deg, transparent 0%, #b45309 30%, #d97706 50%, #b45309 70%, transparent 100%);
+  box-shadow: 0 0 10px rgba(180,83,9,0.45), 0 0 20px rgba(180,83,9,0.2);
+}
+[data-theme="light"] .comp-winner-strip {
+  background: linear-gradient(
+    105deg,
+    rgba(254,243,199,0.9)  0%,
+    rgba(253,230,138,0.95) 45%,
+    rgba(254,243,199,0.9)  100%
+  );
+  background-size: 300% 100%;
+  border-bottom: 1px solid rgba(161,110,0,0.28);
+}
+[data-theme="light"] .comp-winner-strip::before {
+  background: linear-gradient(180deg, rgba(161,110,0,0.06), transparent);
+}
+[data-theme="light"] .comp-winner-strip i      { color: #b45309; }
+[data-theme="light"] .comp-winner-strip-text   { color: #78350f; text-shadow: none; }
+[data-theme="light"] .comp-winner-strip-sep    { background: rgba(161,110,0,0.32); }
+[data-theme="light"] .hero-meta-badge--highlight {
+  color: #78350f;
+  border-color: rgba(161,110,0,0.42);
+  background: rgba(254,243,199,0.85);
+  box-shadow: 0 0 12px rgba(161,110,0,0.08);
+  text-shadow: none;
+}
+[data-theme="light"] .hero-meta-badge--highlight i { color: #b45309; }
 
 /* ── IMAGE ── */
 .proj-image { position: relative; height: 210px; overflow: hidden; flex-shrink: 0; }
@@ -59,6 +212,9 @@
 .proj-img-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(6,10,22,0.97) 0%, rgba(6,10,22,0.35) 55%, transparent 100%);
+}
+[data-theme="light"] .proj-img-overlay {
+  background: linear-gradient(to top, rgba(6,10,22,0.85) 0%, rgba(6,10,22,0.2) 55%, transparent 100%);
 }
 
 /* ── HOVER QUICK LINKS ── */
@@ -73,13 +229,12 @@
   display: inline-flex; align-items: center; gap: 5px;
   padding: 5px 10px; border-radius: 7px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;       /* FIXED: was 0.55rem (~8.8px) → now 9.6px */
-  font-weight: 600;
+  font-size: 0.6rem; font-weight: 600;
   letter-spacing: 0.06em; text-decoration: none; border: 1px solid;
   transition: all 0.2s ease; white-space: nowrap;
   backdrop-filter: blur(14px);
 }
-.proj-quick-link i { font-size: 0.68rem; } /* FIXED: was 0.65rem — minor nudge */
+.proj-quick-link i { font-size: 0.68rem; }
 .proj-quick-link:hover { transform: translateY(-2px); }
 .ql-github  { background: rgba(15,15,20,0.75); border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.88); }
 .ql-github:hover  { background: rgba(40,40,55,0.9); color: #fff; }
@@ -95,15 +250,14 @@
 }
 .proj-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;       /* FIXED: was 0.52rem (~8.3px) → now 9.6px */
-  font-weight: 600;
+  font-size: 0.6rem; font-weight: 600;
   color: rgba(255,255,255,0.65); background: rgba(0,0,0,0.5);
   backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12);
   padding: 4px 10px; border-radius: 6px; letter-spacing: 0.1em;
 }
 .proj-cat {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;       /* FIXED: was 0.5rem (~8px) → now 9.6px */
+  font-size: 0.6rem;
   letter-spacing: 0.1em; padding: 4px 10px; border-radius: 6px; font-weight: 600;
 }
 .cat-fs { color: var(--accent-gold);   background: rgba(251,191,36,0.18);  border: 1px solid rgba(251,191,36,0.35); }
@@ -119,30 +273,23 @@
   min-width: 0;
 }
 .proj-title {
-  font-family: 'Outfit', sans-serif; /* FIXED: was DM Sans (not loaded) → Outfit from variables.css */
+  font-family: 'Outfit', sans-serif;
   font-size: 0.97rem; font-weight: 700;
   color: var(--text-primary); margin-bottom: 9px; line-height: 1.4;
 }
-/* FIXED: redundant [data-theme] overrides removed — var(--text-primary) already handles both modes correctly */
-
 .proj-desc {
-  font-size: 0.8rem;       /* FIXED: was 0.78rem — nudged up; weight 300 → 400 below */
-  color: var(--text-secondary); /* FIXED: hardcoded #94a3b8 dark / #334155 light removed —
-                                   var(--text-secondary) from variables.css already has correct
-                                   contrast-fixed values for both modes (#cbd5e1 dark / #334155 light) */
+  font-size: 0.8rem;
+  color: var(--text-secondary);
   line-height: 1.9;
   margin-bottom: 13px; flex: 1;
-  font-weight: 400;        /* FIXED: was 300 — thin weight compounds contrast issues */
+  font-weight: 400;
 }
-
 .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
 .proj-stack span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;       /* FIXED: was 0.52rem (~8.3px) → now 9.6px */
+  font-size: 0.6rem;
   padding: 3px 9px; border-radius: 4px; font-weight: 500;
 }
-/* FIXED: kept theme-specific colors here since these use non-token hex values
-   that intentionally differ from the standard text tokens */
 [data-theme="dark"] .proj-stack span {
   color: #7ab3fa;
   background: rgba(79,142,247,0.1);
@@ -153,21 +300,16 @@
   background: rgba(79,142,247,0.07);
   border: 1px solid rgba(79,142,247,0.2);
 }
-
 .proj-bullets { list-style: none; margin-bottom: 0; padding: 0; }
 .proj-bullets li {
-  font-size: 0.78rem;      /* FIXED: was 0.74rem (~11.8px) → now 12.5px; weight 300 → 400 */
+  font-size: 0.78rem;
   padding: 3px 0 3px 14px;
   position: relative; line-height: 1.65; font-weight: 400;
-  /* FIXED: hardcoded #64748b dark / #475569 light removed — use var(--text-muted) which has
-     correct contrast-fixed values for both modes from variables.css */
   color: var(--text-muted);
 }
 .proj-bullets li::before {
   content: '▸'; position: absolute; left: 0;
-  color: var(--accent-blue);
-  font-size: 0.65rem;      /* FIXED: was 0.62rem → nudged up */
-  top: 6px;
+  color: var(--accent-blue); font-size: 0.65rem; top: 6px;
 }
 
 /* ── BOTTOM LINK ROW ── */
@@ -191,120 +333,54 @@
 .proj-links-top .proj-link-btn { flex: 1; justify-content: center; }
 .proj-links-bottom .proj-link-btn { width: 100%; justify-content: center; }
 
-/* ── Base button ── */
+/* Base button */
 .proj-link-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 9px;
-  font-family: 'Outfit', sans-serif; /* FIXED: was DM Sans (not loaded) → Outfit */
-  font-size: 0.8rem;       /* FIXED: was 0.72rem (~11.5px) → now 12.8px */
-  font-weight: 600;
-  text-decoration: none;
-  border: 1.5px solid;
-  cursor: pointer;
-  transition: all 0.22s ease;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px; border-radius: 9px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem; font-weight: 600;
+  text-decoration: none; border: 1.5px solid;
+  cursor: pointer; transition: all 0.22s ease;
+  letter-spacing: 0.01em; white-space: nowrap;
 }
 .proj-link-btn i { font-size: 0.85rem; line-height: 1; }
 .proj-link-btn:hover { transform: translateY(-2px); }
 
 /* GitHub */
-[data-theme="dark"] .plb-github {
-  color: #c8d6f0;
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.12);
-}
-[data-theme="dark"] .plb-github:hover {
-  background: rgba(79,142,247,0.1);
-  border-color: rgba(79,142,247,0.4);
-  color: #7ab3fa;
-}
-[data-theme="light"] .plb-github {
-  color: #1e293b;
-  background: #fff;
-  border-color: rgba(79,142,247,0.2);
-}
-[data-theme="light"] .plb-github:hover {
-  background: rgba(79,142,247,0.06);
-  border-color: rgba(79,142,247,0.42);
-  color: #185fa5;
-}
+[data-theme="dark"] .plb-github { color: #c8d6f0; background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+[data-theme="dark"] .plb-github:hover { background: rgba(79,142,247,0.1); border-color: rgba(79,142,247,0.4); color: #7ab3fa; }
+[data-theme="light"] .plb-github { color: #1e293b; background: #fff; border-color: rgba(79,142,247,0.2); }
+[data-theme="light"] .plb-github:hover { background: rgba(79,142,247,0.06); border-color: rgba(79,142,247,0.42); color: #185fa5; }
 
 /* Live App */
-[data-theme="dark"] .plb-live {
-  color: #22d3ee;
-  background: rgba(34,211,238,0.07);
-  border-color: rgba(34,211,238,0.28);
-}
-[data-theme="dark"] .plb-live:hover {
-  background: rgba(34,211,238,0.15);
-  border-color: rgba(34,211,238,0.55);
-  color: #67e8f9;
-}
-[data-theme="light"] .plb-live {
-  color: #0891b2;
-  background: rgba(8,145,178,0.06);
-  border-color: rgba(8,145,178,0.28);
-}
-[data-theme="light"] .plb-live:hover {
-  background: rgba(8,145,178,0.13);
-  border-color: rgba(8,145,178,0.5);
-  color: #0e7490;
-}
+[data-theme="dark"] .plb-live { color: #22d3ee; background: rgba(34,211,238,0.07); border-color: rgba(34,211,238,0.28); }
+[data-theme="dark"] .plb-live:hover { background: rgba(34,211,238,0.15); border-color: rgba(34,211,238,0.55); color: #67e8f9; }
+[data-theme="light"] .plb-live { color: #0891b2; background: rgba(8,145,178,0.06); border-color: rgba(8,145,178,0.28); }
+[data-theme="light"] .plb-live:hover { background: rgba(8,145,178,0.13); border-color: rgba(8,145,178,0.5); color: #0e7490; }
 
 /* Demo Video */
-[data-theme="dark"] .plb-youtube {
-  color: #f87171;
-  background: rgba(248,113,113,0.07);
-  border-color: rgba(248,113,113,0.26);
-}
-[data-theme="dark"] .plb-youtube:hover {
-  background: rgba(248,113,113,0.15);
-  border-color: rgba(248,113,113,0.5);
-  color: #fca5a5;
-}
-[data-theme="light"] .plb-youtube {
-  color: #dc2626;
-  background: rgba(220,38,38,0.06);
-  border-color: rgba(220,38,38,0.24);
-}
-[data-theme="light"] .plb-youtube:hover {
-  background: rgba(220,38,38,0.12);
-  border-color: rgba(220,38,38,0.48);
-  color: #b91c1c;
-}
+[data-theme="dark"] .plb-youtube { color: #f87171; background: rgba(248,113,113,0.07); border-color: rgba(248,113,113,0.26); }
+[data-theme="dark"] .plb-youtube:hover { background: rgba(248,113,113,0.15); border-color: rgba(248,113,113,0.5); color: #fca5a5; }
+[data-theme="light"] .plb-youtube { color: #dc2626; background: rgba(220,38,38,0.06); border-color: rgba(220,38,38,0.24); }
+[data-theme="light"] .plb-youtube:hover { background: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.48); color: #b91c1c; }
 
-/* Ghost (disabled) */
+/* Ghost / disabled */
 .plb-ghost {
   display: inline-flex !important;
-  flex: 1 !important;
-  opacity: 0.32;
-  cursor: not-allowed;
+  opacity: 0.3;
+  cursor: not-allowed !important;
   pointer-events: none;
 }
-[data-theme="dark"] .plb-ghost {
-  color: #475569;
-  background: transparent;
-  border-color: rgba(255,255,255,0.07);
-}
-[data-theme="light"] .plb-ghost {
-  color: #94a3b8;
-  background: transparent;
-  border-color: rgba(79,142,247,0.1);
-}
-.proj-links-bottom .plb-ghost { width: 100% !important; flex: unset !important; }
+[data-theme="dark"] .plb-ghost { color: #475569; background: transparent; border-color: rgba(255,255,255,0.07); }
+[data-theme="light"] .plb-ghost { color: #94a3b8; background: transparent; border-color: rgba(79,142,247,0.1); }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1060px) {
-  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+@media (max-width: 1060px) { .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 620px) {
   .proj-grid { grid-template-columns: minmax(0, 1fr); }
   .proj-image { height: 180px; }
   .proj-quick-links { display: none; }
+  .hero-section { padding: 100px 0 52px; }
 }
 </style>
 </head>
@@ -314,8 +390,8 @@
   <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 </div>
 <div class="bg-dots" aria-hidden="true"></div>
-
 <div id="scroll-progress"></div>
+
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">T.J. Tima</a>
@@ -348,17 +424,36 @@
   <a href="contact.html"><i class="fas fa-envelope" style="width:16px;color:var(--accent-blue)"></i>Contact</a>
 </div>
 
-<section id="projects" class="section">
+<!-- ══ HERO ══ -->
+<section class="hero-section">
   <div class="container-main">
     <div class="reveal">
-      <div class="kicker">Projects</div>
-      <h2 class="section-title">Selected <em>Work</em> &amp; <span class="pu">Applications</span></h2>
+      <div class="hero-eyebrow">Portfolio · Full-Stack · AI · Machine Learning</div>
+      <h1 class="hero-title">Selected <span class="grad-word">Projects</span></h1>
+      <p class="hero-subtitle">Three applied systems spanning full-stack AI platforms, NLP classifiers, and vision–language models — each built end-to-end and deployed or competition-validated.</p>
+      <div class="hero-meta-row">
+        <span class="hero-meta-badge hero-meta-badge--highlight"><i class="fas fa-trophy"></i>NutriConnect — Final Round · AI BuildFest 2026</span>
+        <span class="hero-meta-badge"><i class="fas fa-code-branch"></i>GitHub · All projects open source</span>
+        <span class="hero-meta-badge"><i class="fas fa-globe"></i>2 Live deployments</span>
+      </div>
     </div>
+  </div>
+</section>
 
+<!-- ══ PROJECT GRID ══ -->
+<section class="section" style="padding-top:64px; padding-bottom:100px;">
+  <div class="container-main">
     <div class="proj-grid">
 
-      <!-- PROJECT 1 -->
-      <div class="proj-card reveal">
+      <!-- PROJECT 1: NutriConnect (competition winner) -->
+      <div class="proj-card proj-card--featured reveal">
+        <!-- Competition strip — appears above the image -->
+        <div class="comp-winner-strip">
+          <i class="fas fa-trophy"></i>
+          <span class="comp-winner-strip-text">AI BuildFest 2026 — Final Round</span>
+          <span class="comp-winner-strip-sep"></span>
+          <span class="comp-winner-strip-text">DIU MVP Phase</span>
+        </div>
         <div class="proj-image">
           <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&auto=format&fit=crop&q=80" alt="NutriConnect" loading="lazy"/>
           <div class="proj-img-overlay"></div>
@@ -374,7 +469,7 @@
         </div>
         <div class="proj-body">
           <div class="proj-title">NutriConnect — AI-Driven Nutrition System</div>
-          <p class="proj-desc">A full-stack AI-enabled platform for personalized nutrition tracking, dietary analytics, and intelligent meal management with an XAI-driven recommendation engine that explains dietary suggestions transparently.</p>
+          <p class="proj-desc">A full-stack AI platform for personalized nutrition tracking, dietary analytics, and intelligent meal management — featuring an XAI-driven recommendation engine that explains dietary suggestions transparently.</p>
           <div class="proj-stack"><span>Python</span><span>Flask</span><span>SQLAlchemy</span><span>PostgreSQL</span><span>Groq API</span></div>
           <ul class="proj-bullets">
             <li>Led 4-member team · RBAC auth · RESTful backend services</li>
@@ -393,10 +488,10 @@
         </div>
       </div>
 
-      <!-- PROJECT 2 -->
+      <!-- PROJECT 2: SMS Phishing Detection -->
       <div class="proj-card reveal" style="transition-delay:.08s">
         <div class="proj-image">
-          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80" alt="SMS Phishing" loading="lazy"/>
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80" alt="SMS Phishing Detection" loading="lazy"/>
           <div class="proj-img-overlay"></div>
           <div class="proj-badges">
             <span class="proj-num">02 / 03</span>
@@ -409,7 +504,7 @@
         </div>
         <div class="proj-body">
           <div class="proj-title">SMS Phishing Detection via NLP &amp; ML</div>
-          <p class="proj-desc">An NLP-powered web app for real-time SMS threat classification. Multiple classifiers benchmarked before deploying the optimized SVM model with TF-IDF vectorization and a clean prediction interface.</p>
+          <p class="proj-desc">An NLP-powered web app for real-time SMS threat classification. Multiple classifiers benchmarked before deploying the optimised SVM model with TF-IDF vectorization and a clean prediction interface.</p>
           <div class="proj-stack"><span>Python</span><span>Scikit-learn</span><span>TF-IDF</span><span>SVM</span><span>Flask</span></div>
           <ul class="proj-bullets">
             <li>Benchmarked Naïve Bayes, Logistic Regression &amp; SVM classifiers</li>
@@ -423,12 +518,12 @@
             <a href="https://smishguard-ai.onrender.com/" target="_blank" rel="noopener" class="proj-link-btn plb-live"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
           </div>
           <div class="proj-links-bottom">
-            <a class="proj-link-btn plb-youtube plb-ghost" tabindex="-1" aria-disabled="true" title="Demo video coming soon"><i class="fab fa-youtube"></i> Demo Video</a>
+            <span class="proj-link-btn plb-youtube plb-ghost" title="Demo video coming soon"><i class="fab fa-youtube"></i> Demo Video</span>
           </div>
         </div>
       </div>
 
-      <!-- PROJECT 3 -->
+      <!-- PROJECT 3: AuroraLeaf -->
       <div class="proj-card reveal" style="transition-delay:.16s">
         <div class="proj-image">
           <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&auto=format&fit=crop&q=80" alt="AuroraLeaf" loading="lazy"/>
@@ -439,7 +534,6 @@
           </div>
           <div class="proj-quick-links">
             <a href="https://github.com/tamannajarin04/AuroraLeaf-Rice-Disease-Vision-Language-AI" target="_blank" rel="noopener" class="proj-quick-link ql-github"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://youtube.com/watch?v=YOUR_ID" target="_blank" rel="noopener" class="proj-quick-link ql-youtube"><i class="fab fa-youtube"></i> Demo</a>
           </div>
         </div>
         <div class="proj-body">
@@ -455,10 +549,10 @@
         <div class="proj-links-row">
           <div class="proj-links-top">
             <a href="https://github.com/tamannajarin04/AuroraLeaf-Rice-Disease-Vision-Language-AI" target="_blank" rel="noopener" class="proj-link-btn plb-github"><i class="fab fa-github"></i> GitHub</a>
-            <a class="proj-link-btn plb-live plb-ghost" tabindex="-1" aria-disabled="true" title="Live app coming soon"><i class="fas fa-arrow-up-right-from-square"></i> Live App</a>
+            <span class="proj-link-btn plb-live plb-ghost" title="Live app coming soon"><i class="fas fa-arrow-up-right-from-square"></i> Live App</span>
           </div>
           <div class="proj-links-bottom">
-            <a href="https://youtube.com/watch?v=YOUR_ID" target="_blank" rel="noopener" class="proj-link-btn plb-youtube"><i class="fab fa-youtube"></i> Demo Video</a>
+            <span class="proj-link-btn plb-youtube plb-ghost" title="Demo video coming soon"><i class="fab fa-youtube"></i> Demo Video</span>
           </div>
         </div>
       </div>
@@ -471,8 +565,7 @@
   <div class="container-main">
     <div class="footer-name">Tamanna Jarin Tima</div>
     <div class="footer-meta">BSc Software Engineering · AI Researcher · Dhaka, Bangladesh</div>
-    <!-- FIXED: removed opacity:0.5 — stacks on --text-muted, near-invisible in light mode -->
-    <div class="footer-meta" style="margin-top:4px;">© 2025–2026 · All Rights Reserved</div>
+    <div class="footer-meta" style="margin-top:4px;opacity:0.55;">© 2025–2026 · All Rights Reserved</div>
   </div>
 </footer>
 
