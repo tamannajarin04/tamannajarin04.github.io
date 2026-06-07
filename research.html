@@ -47,7 +47,7 @@
   border-left: 2px solid rgba(34,211,238,0.35);
 }
 
-/* Stat row (same pattern as activities) */
+/* Stat row */
 .stat-row {
   display: flex; align-items: center; gap: 0;
   margin-top: 44px; border: 1px solid var(--border);
@@ -67,7 +67,7 @@
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted);
 }
 
-/* ── SECTION CHROME (same as activities) ── */
+/* ── SECTION CHROME ── */
 .sec-chrome { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
 .sec-chrome-line { flex: 1; height: 1px; background: var(--border); }
 .sec-chrome-tag {
@@ -168,7 +168,6 @@
 [data-theme="light"] .pipe-step { background: #f5f7ff; }
 .pipe-step:hover { background: rgba(79,142,247,0.07); }
 
-/* connector arrow between steps */
 .pipe-step::after {
   content: '›'; position: absolute; right: -9px; top: 50%;
   transform: translateY(-50%);
@@ -356,23 +355,23 @@
     <div class="reveal">
       <div class="hero-eyebrow">Undergraduate Research</div>
       <h1 class="hero-title">Thesis &amp;<br><span class="grad-word">Research</span></h1>
-      <p class="hero-subtitle">An XAI-driven framework integrating multi-sequence MRI with structured clinical data — building diagnostic AI that clinicians can understand, audit, and trust.</p>
+      <p class="hero-subtitle">A DenseNet121-based XAI framework that fuses GradCAM++, SmoothGrad, and Integrated Gradients via agreement-based attribution — producing explanations that are faithful, sparse, and stable for brain tumor MRI classification.</p>
     </div>
     <div class="stat-row reveal" style="transition-delay:.1s">
-      <div class="stat-item">
-        <div class="stat-num">4</div>
-        <div class="stat-label">MRI Sequences</div>
-      </div>
       <div class="stat-item">
         <div class="stat-num">3</div>
         <div class="stat-label">XAI Methods</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Fusion Strategies</div>
+        <div class="stat-num">STAF</div>
+        <div class="stat-label">Proposed Model</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">2026</div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Eval Metrics</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2025</div>
         <div class="stat-label">In Progress</div>
       </div>
     </div>
@@ -394,20 +393,21 @@
       <div class="thesis-card-top-bar"></div>
       <div class="thesis-card-inner">
         <div class="tc-head">
-          <h2 class="tc-title">A Trustworthy Multimodal Deep Learning Framework Integrating Multi-Sequence MRI and Clinical Data with Explainable AI for Brain Tumor Classification</h2>
-          <div class="tc-status"><span class="tc-status-dot"></span>Ongoing · 2026 – Present</div>
+          <h2 class="tc-title">Agreement-Based Attribution Fusion for Explainable Brain Tumor MRI Classification: A Geometric-Mean Ensemble for Faithful, Sparse, and Stable Explanations</h2>
+          <div class="tc-status"><span class="tc-status-dot"></span>Ongoing · 2025 – Present</div>
         </div>
         <div class="tc-abstract-label">Abstract</div>
-        <p class="tc-abstract">Combines T1, T1-contrast, T2, and FLAIR MRI modalities with structured clinical metadata. Feature-level and decision-level fusion strategies are evaluated alongside Grad-CAM spatial heatmaps, SHAP attributions, and counterfactual reasoning — producing predictions that are not only accurate but transparent and clinically auditable. Bayesian deep learning and Monte Carlo Dropout further provide calibrated uncertainty estimates, ensuring low-confidence cases are flagged for human review.</p>
+        <p class="tc-abstract">Develops and evaluates a DenseNet121-based classification framework for brain tumor MRI that goes beyond predictive accuracy. Three attribution methods — GradCAM++, SmoothGrad, and Integrated Gradients — are applied independently and then fused via a proposed agreement-based strategy (STAF) using geometric-mean ensembling. Explanation quality is evaluated quantitatively using AOPC, Point-Biserial Correlation, Gini Index, and Max-Sensitivity, targeting explanations that are simultaneously faithful to model behaviour, sparse in their highlighted regions, and stable across input perturbations.</p>
         <div class="tc-tags">
           <span class="tc-tag">Python</span>
-          <span class="tc-tag">TensorFlow</span>
           <span class="tc-tag">PyTorch</span>
-          <span class="tc-tag">Grad-CAM</span>
-          <span class="tc-tag">SHAP</span>
-          <span class="tc-tag">Bayesian Deep Learning</span>
-          <span class="tc-tag">Multimodal Fusion</span>
-          <span class="tc-tag">Uncertainty Quantification</span>
+          <span class="tc-tag">DenseNet121</span>
+          <span class="tc-tag">GradCAM++</span>
+          <span class="tc-tag">SmoothGrad</span>
+          <span class="tc-tag">Integrated Gradients</span>
+          <span class="tc-tag">STAF</span>
+          <span class="tc-tag">Deep Learning</span>
+          <span class="tc-tag">Medical Imaging</span>
           <span class="tc-tag">XAI</span>
         </div>
       </div>
@@ -419,33 +419,33 @@
       <div class="pipeline">
         <div class="pipe-step">
           <div class="ps-num">01</div>
-          <div class="ps-icon-wrap"><i class="fas fa-magnet"></i></div>
+          <div class="ps-icon-wrap"><i class="fas fa-x-ray"></i></div>
           <div class="ps-label">Input</div>
-          <div class="ps-name">Multi-Seq MRI</div>
+          <div class="ps-name">Brain MRI</div>
         </div>
         <div class="pipe-step">
           <div class="ps-num">02</div>
-          <div class="ps-icon-wrap"><i class="fas fa-code-branch"></i></div>
-          <div class="ps-label">Fusion</div>
-          <div class="ps-name">Feature Merging</div>
+          <div class="ps-icon-wrap"><i class="fas fa-brain"></i></div>
+          <div class="ps-label">Backbone</div>
+          <div class="ps-name">DenseNet121</div>
         </div>
         <div class="pipe-step">
           <div class="ps-num">03</div>
-          <div class="ps-icon-wrap"><i class="fas fa-brain"></i></div>
-          <div class="ps-label">Model</div>
-          <div class="ps-name">Deep Learning</div>
+          <div class="ps-icon-wrap"><i class="fas fa-eye"></i></div>
+          <div class="ps-label">Attribute</div>
+          <div class="ps-name">GradCAM++ / SG / IG</div>
         </div>
         <div class="pipe-step">
           <div class="ps-num">04</div>
-          <div class="ps-icon-wrap"><i class="fas fa-eye"></i></div>
-          <div class="ps-label">Explain</div>
-          <div class="ps-name">Grad-CAM / SHAP</div>
+          <div class="ps-icon-wrap"><i class="fas fa-code-branch"></i></div>
+          <div class="ps-label">Fuse</div>
+          <div class="ps-name">STAF (Geo-Mean)</div>
         </div>
         <div class="pipe-step">
           <div class="ps-num">05</div>
-          <div class="ps-icon-wrap"><i class="fas fa-user-md"></i></div>
-          <div class="ps-label">Output</div>
-          <div class="ps-name">Clinical Decision</div>
+          <div class="ps-icon-wrap"><i class="fas fa-chart-bar"></i></div>
+          <div class="ps-label">Evaluate</div>
+          <div class="ps-name">AOPC / Gini / PBS</div>
         </div>
       </div>
     </div>
@@ -467,55 +467,55 @@
 
       <div class="detail-card detail-card--blue">
         <div class="dc-icon-row">
-          <div class="dc-icon-box"><i class="fas fa-layer-group"></i></div>
-          <div class="dc-title">Multimodal MRI Fusion</div>
+          <div class="dc-icon-box"><i class="fas fa-brain"></i></div>
+          <div class="dc-title">DenseNet121 Classifier</div>
         </div>
-        <p class="dc-body">Integrates four MRI sequences — T1, T1-contrast, T2, and FLAIR — alongside structured clinical metadata. Feature-level and decision-level fusion strategies are evaluated to determine which combination yields the richest diagnostic signal for tumor classification.</p>
+        <p class="dc-body">A DenseNet121 backbone is fine-tuned for brain tumor MRI classification. Dense connectivity between layers promotes feature reuse, enabling strong performance with fewer parameters — a practical advantage for medical imaging datasets where labeled data is scarce.</p>
         <div class="dc-footer">
-          <span class="dc-footer-chip">T1</span>
-          <span class="dc-footer-chip">T1c</span>
-          <span class="dc-footer-chip">T2</span>
-          <span class="dc-footer-chip">FLAIR</span>
-          <span class="dc-footer-chip">Clinical Metadata</span>
+          <span class="dc-footer-chip">DenseNet121</span>
+          <span class="dc-footer-chip">PyTorch</span>
+          <span class="dc-footer-chip">Transfer Learning</span>
+          <span class="dc-footer-chip">Medical Imaging</span>
         </div>
       </div>
 
       <div class="detail-card detail-card--cyan">
         <div class="dc-icon-row">
-          <div class="dc-icon-box"><i class="fas fa-search"></i></div>
-          <div class="dc-title">Explainable AI Integration</div>
+          <div class="dc-icon-box"><i class="fas fa-eye"></i></div>
+          <div class="dc-title">Attribution Methods</div>
         </div>
-        <p class="dc-body">Deploys Grad-CAM for spatial attention heatmaps, SHAP for feature-level attribution, and counterfactual reasoning to answer "what-if" clinical questions. Every prediction is paired with visual and quantitative explanations reviewable by clinicians.</p>
+        <p class="dc-body">Three complementary XAI techniques are applied independently: GradCAM++ for improved gradient-weighted class activation maps, SmoothGrad for noise-reduced gradient attribution, and Integrated Gradients for axiomatic path-based feature importance — each capturing different aspects of model behaviour.</p>
         <div class="dc-footer">
-          <span class="dc-footer-chip">Grad-CAM</span>
-          <span class="dc-footer-chip">SHAP</span>
-          <span class="dc-footer-chip">Counterfactuals</span>
+          <span class="dc-footer-chip">GradCAM++</span>
+          <span class="dc-footer-chip">SmoothGrad</span>
+          <span class="dc-footer-chip">Integrated Gradients</span>
         </div>
       </div>
 
       <div class="detail-card detail-card--purple">
         <div class="dc-icon-row">
-          <div class="dc-icon-box"><i class="fas fa-chart-bar"></i></div>
-          <div class="dc-title">Uncertainty Quantification</div>
+          <div class="dc-icon-box"><i class="fas fa-code-branch"></i></div>
+          <div class="dc-title">STAF — Attribution Fusion</div>
         </div>
-        <p class="dc-body">Incorporates Bayesian deep learning and Monte Carlo Dropout to estimate model confidence per prediction. Low-confidence cases trigger mandatory human review — a critical safety mechanism for responsible clinical deployment.</p>
+        <p class="dc-body">The proposed Stable-and-Faithful Attribution Fusion (STAF) method combines the three attribution maps via geometric-mean ensembling, retaining only regions of cross-method agreement. This agreement-based approach suppresses noise and spurious activations, yielding explanations that are sparser and more reliable than any single method alone.</p>
         <div class="dc-footer">
-          <span class="dc-footer-chip">Bayesian DL</span>
-          <span class="dc-footer-chip">MC Dropout</span>
-          <span class="dc-footer-chip">Calibration</span>
+          <span class="dc-footer-chip">Geometric Mean</span>
+          <span class="dc-footer-chip">Agreement-Based</span>
+          <span class="dc-footer-chip">Ensemble XAI</span>
         </div>
       </div>
 
       <div class="detail-card detail-card--gold">
         <div class="dc-icon-row">
-          <div class="dc-icon-box"><i class="fas fa-hospital"></i></div>
-          <div class="dc-title">Clinical Trustworthiness</div>
+          <div class="dc-icon-box"><i class="fas fa-ruler-combined"></i></div>
+          <div class="dc-title">Explainability Evaluation</div>
         </div>
-        <p class="dc-body">Beyond accuracy metrics, this work rigorously evaluates whether explanations highlight diagnostically meaningful regions and whether predictions remain calibrated under data shift — the transparency and robustness bar required for real-world healthcare deployment.</p>
+        <p class="dc-body">Explanation quality is assessed with four quantitative metrics: AOPC (faithfulness via pixel perturbation), Point-Biserial Correlation (alignment with ground-truth lesion regions), Gini Index (sparsity of attribution maps), and Max-Sensitivity (stability under input perturbations) — moving beyond accuracy to rigorous XAI benchmarking.</p>
         <div class="dc-footer">
-          <span class="dc-footer-chip">Calibration</span>
-          <span class="dc-footer-chip">Robustness</span>
-          <span class="dc-footer-chip">Clinical Safety</span>
+          <span class="dc-footer-chip">AOPC</span>
+          <span class="dc-footer-chip">Point-Biserial Corr.</span>
+          <span class="dc-footer-chip">Gini Index</span>
+          <span class="dc-footer-chip">Max-Sensitivity</span>
         </div>
       </div>
 
@@ -523,24 +523,24 @@
 
     <!-- Impact row -->
     <div class="fancy-divider reveal">
-      <div class="fancy-divider-label">Research Impact</div>
+      <div class="fancy-divider-label">Explanation Quality Goals</div>
     </div>
 
     <div class="impact-row reveal">
       <div class="impact-cell">
-        <div class="impact-icon"><i class="fas fa-shield-alt" style="color:var(--accent-blue);font-size:1.1rem;"></i></div>
-        <div class="impact-val">Safe</div>
-        <div class="impact-desc">Uncertainty-aware predictions flag low-confidence cases for mandatory clinical review</div>
+        <div class="impact-icon"><i class="fas fa-check-circle" style="color:var(--accent-blue);font-size:1.1rem;"></i></div>
+        <div class="impact-val">Faithful</div>
+        <div class="impact-desc">Explanations reflect true model reasoning, verified by AOPC and Point-Biserial Correlation</div>
       </div>
       <div class="impact-cell">
-        <div class="impact-icon"><i class="fas fa-glasses" style="color:var(--accent-cyan);font-size:1.1rem;"></i></div>
-        <div class="impact-val">Transparent</div>
-        <div class="impact-desc">Every classification explained via spatial heatmaps and feature attributions</div>
+        <div class="impact-icon"><i class="fas fa-compress-alt" style="color:var(--accent-cyan);font-size:1.1rem;"></i></div>
+        <div class="impact-val">Sparse</div>
+        <div class="impact-desc">Agreement-based fusion highlights only the most diagnostically relevant regions via Gini Index</div>
       </div>
       <div class="impact-cell">
-        <div class="impact-icon"><i class="fas fa-check-double" style="color:var(--accent-purple);font-size:1.1rem;"></i></div>
-        <div class="impact-val">Auditable</div>
-        <div class="impact-desc">Structured XAI outputs enable clinician review, audit, and regulatory compliance</div>
+        <div class="impact-icon"><i class="fas fa-shield-alt" style="color:var(--accent-purple);font-size:1.1rem;"></i></div>
+        <div class="impact-val">Stable</div>
+        <div class="impact-desc">STAF explanations remain consistent under input perturbations, measured by Max-Sensitivity</div>
       </div>
     </div>
 
